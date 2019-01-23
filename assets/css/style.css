@@ -45,6 +45,14 @@ body {
   overflow: hidden;
   text-align: center;
 }
+
+.red-envelope .front-face img {
+  width: 100px;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%);
+}
 .red-envelope .back-face {
   z-index: 1;
   transform: rotateY(180deg);
