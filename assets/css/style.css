@@ -1,0 +1,81 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #ebebee;
+}
+
+.container {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+}
+
+.red-envelope {
+  width: 250px;
+  height: 400px;
+  position: absolute;
+  bottom: 50px;
+  left: 5%;
+}
+.red-envelope:hover .front-face {
+  transform: rotateY(180deg);
+}
+.red-envelope:hover .back-face {
+  transform: rotateY(360deg);
+}
+.red-envelope > div {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  backface-visibility: hidden;
+  display: block;
+  transition: all 0.3s;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+.red-envelope .front-face {
+  z-index: 2;
+  background-color: #9e0811;
+  border-radius: 3px 3px 0 0;
+  overflow: hidden;
+  text-align: center;
+}
+.red-envelope .back-face {
+  z-index: 1;
+  transform: rotateY(180deg);
+  background-color: #e8132d;
+  border-radius: 3px 3px 0 0;
+  overflow: hidden;
+  text-align: center;
+}
+.red-envelope .back-face .cover {
+  width: 125px;
+  height: 125px;
+  border-radius: 100%;
+  background-color: #fff;
+  display: inline-block;
+  position: relative;
+  top: -30px;
+}
+.red-envelope .back-face .cover:after, .red-envelope .back-face .cover:before {
+  content: '';
+  width: 125px;
+  height: 125px;
+  border-radius: 100%;
+  background-color: #fff;
+  display: inline-block;
+  position: absolute;
+}
+.red-envelope .back-face .cover:after {
+  top: -40px;
+  left: -51%;
+}
+.red-envelope .back-face .cover:before {
+  top: -40px;
+  right: -51%;
+}
