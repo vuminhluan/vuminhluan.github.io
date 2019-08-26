@@ -1,3 +1,3 @@
 
 # vuminhluan.github.io
-permalink: /index.html
+permalink: /resume_vi.html
