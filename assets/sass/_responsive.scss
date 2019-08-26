@@ -1,0 +1,50 @@
+// main: style.scss
+
+$lg: 1199px;
+$md: 991px;
+$sm: 767px;
+$xs: 575px;
+
+@media screen and (max-width: 1368px) {
+
+}
+
+@media screen and (max-width: 1279px) {
+
+}
+
+@media screen and (max-width: $lg) {
+	
+	
+}
+
+@media screen and (max-width: $md) {
+	// .main {
+  //   &.active {
+  //     width: 100vw;
+  //     height: 100vh;
+  //     overflow-x: hidden;
+  //     position: fixed;
+  //     top: 0;
+  //     left: 0;
+  //   }
+  // }
+}
+
+@media screen and (max-width: $sm) {
+	
+
+}
+
+@media screen and (max-width: $xs) {
+
+}
+
+@media screen and (max-width: 480px) {
+
+}
+
+
+@media (max-width: 320px) {
+
+}

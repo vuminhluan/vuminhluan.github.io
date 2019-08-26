@@ -1,0 +1,19 @@
+body {
+  -webkit-print-color-adjust: exact;
+}
+
+@media print {
+  .resume {
+    height: 100% !important;
+    width: 100% !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .full-sidebar {
+    .sidebar-toggle {
+      display: none;
+    }
+  }
+}

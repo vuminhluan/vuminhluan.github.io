@@ -1,0 +1,12 @@
+.resume {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  // height: 100vh;
+  background-color: $light-gray;
+}
+
+@import "sidebar";
+
+@import "main_resume";

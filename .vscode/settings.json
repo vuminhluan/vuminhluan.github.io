@@ -1,0 +1,14 @@
+{
+	"liveSassCompile.settings.formats": [
+		{
+			"format": "nested",
+			"extensionName": ".css",
+			"savePath": "/assets/css"
+		}
+	],
+	"liveSassCompile.settings.generateMap": true,
+	"liveSassCompile.settings.autoprefix": [
+		"> 1%",
+		"last 2 versions"
+	]
+}

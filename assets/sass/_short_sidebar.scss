@@ -1,0 +1,68 @@
+.short-sidebar {
+  width: $short-sidebar-width;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 1px 1px 3px rgba(#000, 0.3);
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(-100px);
+  transition: all 0.3s;
+  &.active {
+    transform: translateX(0);
+  }
+}
+
+.short-sidebar {
+  background-color: $light-dark;
+  .short-sidebar-toggle {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    cursor: pointer;
+    border-bottom: 1px solid rgba($light-gray, 0.3);
+    &:hover {
+      background-color: $light-red;
+      border-bottom-color: $light-red;
+    }
+    .bar {
+      width: 40px;
+      display: block;
+      height: 2px;
+      margin: 10px auto;
+      background-color: #fff;
+      transition: all 0.3s;
+      &:first-child {
+        margin-top: 8px;
+      }
+      &:last-child {
+        margin-bottom: 8px;
+      }
+    }
+  }
+
+  .name-n-career {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-transform: uppercase;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    margin: 30px 0;
+    font-weight: 600;
+    letter-spacing: 2px;
+    
+    .name {
+      color: #fff;
+    }
+    .career {
+      color: $light-red
+    }
+  }
+}

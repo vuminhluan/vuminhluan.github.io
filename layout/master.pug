@@ -1,0 +1,27 @@
+//- /angelzmedia_project/realestate.dev.vn
+//- pug layout/pages --pretty  --out D:\Luan\CVOnline
+//- pug layout/pages --pretty --watch --out D:\Luan\CVOnline
+<!DOCTYPE html>
+html(lang="en")
+	head
+		meta(charset="UTF-8")
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		meta(http-equiv="X-UA-Compatible", content="ie=edge")
+		title Vu Minh Luan | Web Developer
+		
+		include includes/_head.pug
+		
+	body
+
+		.resume
+
+			.sidebar
+				include parts/_sidebar.pug
+			// .active
+			.main.active
+				//- MAIN VIEW
+				// MAIN VIEW HERE
+				block main_view
+				// END MAIN VIEW HERE
+				//- MAIN VIEW
+		include includes/_javascript.pug

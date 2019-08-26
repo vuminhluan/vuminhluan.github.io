@@ -1,0 +1,137 @@
+.full-sidebar {
+  width: $sidebar-width;
+  // min-height: 100vh;
+  height: 100%;
+  background-color: #fff;
+  box-shadow: 1px 1px 3px rgba(#000, 0.3);
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(-400px);
+  transition: all 0.3s;
+  &.active {
+    transform: translateX(0);
+  }
+}
+
+.full-sidebar {
+  background-color: $light-dark;
+  .sidebar-toggle {
+    width: 40px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    cursor: pointer;
+    &:hover {
+      .bar:nth-of-type(2) {
+        opacity: 0;
+      }
+      .bar:nth-of-type(1) {
+        transform: translateY(10px) rotate(45deg);
+      }
+      .bar:nth-of-type(3) {
+        transform: translateY(-10px) rotate(-45deg);
+      }
+    }
+    .bar {
+      width: 30px;
+      display: block;
+      height: 2px;
+      margin: 8px auto;
+      background-color: #fff;
+      transition: all 0.3s;
+      &:first-child {
+        margin-top: 8px;
+      }
+      &:last-child {
+        margin-bottom: 8px;
+      }
+    }
+  }
+}
+
+.sidebar-container {
+  width: 100%;
+  height: 100%;
+  // &:hover {
+  //   overflow: auto;
+  // }
+}
+
+.sidebar-container {
+  .me {
+    text-align: center;
+    margin: 50px 0;
+    .avatar {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid $light-green;
+      position: relative;
+      a.avatar-link {
+        display: block;
+        transition: all 0.3s;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          // border-radius: 50%;
+        }
+      }
+    }
+
+    .name-n-career {
+      .name {
+        font-weight: 600;
+        font-size: 30px;
+        margin: 10px 0 2px 0;
+        display: block;
+        color: #fff;
+      }
+      .career {
+        color: $light-red;
+        font-style: italic;
+        display: block;
+      }
+      .birthday {
+        color: #fff;
+        display: block;
+      }
+    }
+
+    .me-block {
+      text-align: left;
+      margin-left: 30px;
+      margin-right: 10px;
+      margin-top: 40px;
+      .title {
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #fff;
+      }
+    }
+
+    .goal,
+    .contact {
+      .content {
+        color: #fff;
+      }
+    }
+
+    .contact {
+      .content {
+        .icon {
+          vertical-align: middle;
+          display: inline-block;
+          width: 20px;
+          font-size: 16px;
+          margin-right: 4px;
+        }
+      }
+    }
+    
+  }
+}
