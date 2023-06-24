@@ -1,7 +1,7 @@
 {
 	"liveSassCompile.settings.formats": [
 		{
-			"format": "nested",
+			"format": "expanded",
 			"extensionName": ".css",
 			"savePath": "/assets/css"
 		}
@@ -10,5 +10,9 @@
 	"liveSassCompile.settings.autoprefix": [
 		"> 1%",
 		"last 2 versions"
-	]
+	],
+	"pug2html.compileOptions": {
+		"doctype": "html",
+		"pretty": true,
+	}
 }
