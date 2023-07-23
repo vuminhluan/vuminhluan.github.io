@@ -1,17 +1,17 @@
 .main-block.education
   .title
     i.main-block-title-icon.mdi.mdi-lightbulb-on
-    | Học vấn
+    span&attributes({"data-i18n": "content.knowgeledge.title"}) Học vấn
   .content
     ul
       li
         p
-          span.item-title Cử nhân Cao đẳng CNTT
-          span Tốt nghiệp trường Cao đẳng Kỹ thuật Cao Thắng (2015 - 2018)
+          span.item-title&attributes({"data-i18n": "content.knowgeledge.graduation.degree"}) Cử nhân Cao đẳng CNTT
+          span(data-i18n="content.knowgeledge.graduation.school") Tốt nghiệp trường Cao đẳng Kỹ thuật Cao Thắng (2015 - 2018)
           br
-          span Chuyên ngành: Công nghệ thông tin
+          span(data-i18n="content.knowgeledge.majority") Chuyên ngành: Công nghệ thông tin
           br
-          span Loại Khá. Điểm trung bình 7.48
+          span(data-i18n="content.knowgeledge.graduation.avgScore") Loại Khá. Điểm trung bình 7.48
 .main-block.experience
   .title
     i.main-block-title-icon.mdi.mdi-briefcase
@@ -31,14 +31,35 @@
       li
         p
           span.item-title Công ty TNHH Truyền Thông ANGEL
-          span Nhân viên lập trình web: Tháng 10/2018 - Tháng 07/2019
+          span Lập trình viên web: Tháng 10/2018 - Tháng 07/2019
           br
           span Công việc:
           br
           span &nbsp; Thiết kế web (HTML/CSS, Javascript)
           br
           span &nbsp; Lập trình website bán hàng PHP (framework Codeigniter)
-.main-block
+        p
+          span.item-title Công ty Cổ phần Mạng xã hội du lịch Hahalolo
+          span Lập trình viên web (ReactJS): Tháng 10/2019 - Tháng 10/2021
+          br
+          span Công việc:
+          br
+          span &nbsp; Thiết kế web (HTML/CSS, Javascript)
+          br
+          span &nbsp; Lập trình website bán hàng PHP (framework Codeigniter)
+          br
+          span Lập trình viên API (Java): Tháng 10/2021
+          br
+          span Công việc:
+          br
+          span &nbsp; Viết API cung cấp dữ liệu cho các service khác (framework Springboot, MongoDB, Elasticsearch)
+          br
+          span &nbsp; Lập trình bất đồng bộ giữa các service; đồng bộ dữ liệu giữa các nơi lưu trữ (framework Springboot, Apache Kafka)
+          br
+          span &nbsp; Tham gia phát triển hệ thống
+          br
+          span &nbsp; Phân công công việc cho các bạn fresher
+.main-block.skill
   .title
     i.main-block-title-icon.mdi.mdi-cogs
     | Kỹ năng
@@ -48,11 +69,11 @@
         p
           span.item-title
             | Chuyên môn
-          span HTML/CSS, Javascript, PHP
+          span Java, Springboot
           br
-          span Bootstrap
+          span MongoDB, Elasticsearch
           br
-          span Codeigniter
+          span Apache Kafka
       li
         p
           span.item-title Ngoại ngữ
@@ -61,7 +82,7 @@
         p
           span.item-title Kỹ năng mềm
           span Làm việc nhóm, làm việc độc lập
-.main-block.experience
+.main-block.activity
   .title
     i.main-block-title-icon.mdi.mdi-run
     | Hoạt động
@@ -79,7 +100,7 @@
           span Lập trình Python căn bản
           br
           span Học và làm việc nhóm
-.main-block.experience
+.main-block.interest
   .title
     i.main-block-title-icon.mdi.mdi-thumb-up
     | Sở thích

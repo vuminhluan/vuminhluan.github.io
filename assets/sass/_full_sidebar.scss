@@ -112,6 +112,11 @@
         text-transform: uppercase;
         color: #fff;
       }
+      .link {
+        > a {
+          color: #fff;
+        }
+      }
     }
 
     .goal,

@@ -14,5 +14,7 @@
 	"pug2html.compileOptions": {
 		"doctype": "html",
 		"pretty": true,
-	}
+	},
+	"i18nJsonEditor.forceKeyUPPERCASE": false,
+	"i18nJsonEditor.keySeparator": false
 }
