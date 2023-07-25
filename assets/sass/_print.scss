@@ -3,15 +3,16 @@ body {
 }
 
 @media print {
-  .resume {
-    height: 100% !important;
-    width: 100% !important;
-    position: fixed;
-    top: 0;
-    left: 0;
-  }
+  // .resume {
+  //   // height: 100% !important;
+  //   // width: 100% !important;
+  //   // position: fixed;
+  //   // top: 0;
+  //   // left: 0;
+  // }
 
   .full-sidebar {
+    height: 10000px;
     .sidebar-toggle {
       display: none;
     }

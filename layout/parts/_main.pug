@@ -2,110 +2,111 @@
   .title
     i.main-block-title-icon.mdi.mdi-lightbulb-on
     span&attributes({"data-i18n": "content.knowgeledge.title"}) Học vấn
-  .content
-    ul
-      li
-        p
-          span.item-title&attributes({"data-i18n": "content.knowgeledge.graduation.degree"}) Cử nhân Cao đẳng CNTT
-          span(data-i18n="content.knowgeledge.graduation.school") Tốt nghiệp trường Cao đẳng Kỹ thuật Cao Thắng (2015 - 2018)
-          br
-          span(data-i18n="content.knowgeledge.majority") Chuyên ngành: Công nghệ thông tin
-          br
-          span(data-i18n="content.knowgeledge.graduation.avgScore") Loại Khá. Điểm trung bình 7.48
+  
+  ul.content
+    li.content-group
+      div.content-group-title&attributes({"data-i18n": "content.knowgeledge.graduation.degree"}) Cử nhân Cao đẳng CNTT
+      div.content-group-item
+        span(data-i18n="content.knowgeledge.graduation.school") Tốt nghiệp trường Cao đẳng Kỹ thuật Cao Thắng (2015 - 2018)
+        br
+        span(data-i18n="content.knowgeledge.majority") Chuyên ngành: Công nghệ thông tin
+        br
+        span(data-i18n="content.knowgeledge.graduation.avgScore") Loại Khá. Điểm trung bình 7.48
 .main-block.experience
   .title
     i.main-block-title-icon.mdi.mdi-briefcase
     | Kinh nghiệm làm việc
-  .content
-    ul
-      li
-        p
-          span.item-title công ty cổ phần giải pháp công nghệ SIGNIN
-          span Thực tập sinh: Tháng 01/2018 - Tháng 03/2018
-          br
-          span Công việc:
-          br
-          span &nbsp; Thiết kế web (HTML/CSS, Javascript)
-          br
-          span &nbsp; Lập trình web PHP
-      li
-        p
-          span.item-title Công ty TNHH Truyền Thông ANGEL
-          span Lập trình viên web: Tháng 10/2018 - Tháng 07/2019
-          br
-          span Công việc:
-          br
-          span &nbsp; Thiết kế web (HTML/CSS, Javascript)
-          br
-          span &nbsp; Lập trình website bán hàng PHP (framework Codeigniter)
-        p
-          span.item-title Công ty Cổ phần Mạng xã hội du lịch Hahalolo
-          span Lập trình viên web (ReactJS): Tháng 10/2019 - Tháng 10/2021
-          br
-          span Công việc:
-          br
-          span &nbsp; Thiết kế web (HTML/CSS, Javascript)
-          br
-          span &nbsp; Lập trình website bán hàng PHP (framework Codeigniter)
-          br
-          span Lập trình viên API (Java): Tháng 10/2021
-          br
-          span Công việc:
-          br
-          span &nbsp; Viết API cung cấp dữ liệu cho các service khác (framework Springboot, MongoDB, Elasticsearch)
-          br
-          span &nbsp; Lập trình bất đồng bộ giữa các service; đồng bộ dữ liệu giữa các nơi lưu trữ (framework Springboot, Apache Kafka)
-          br
-          span &nbsp; Tham gia phát triển hệ thống
-          br
-          span &nbsp; Phân công công việc cho các bạn fresher
+  ul.content
+    li.content-group
+      div.content-group-title Công ty cổ phần giải pháp công nghệ SIGNIN
+      div.content-group-item
+        span.job-title Thực tập sinh:
+        span.job-duration Tháng 01/2018 - Tháng 03/2018
+        br
+        | &nbsp;&nbsp;
+        span Thiết kế web (HTML/CSS, Javascript)
+        br
+        | &nbsp;&nbsp;
+        span Lập trình web PHP
+    li.content-group
+      div.content-group-title Công ty TNHH Truyền Thông ANGEL
+      div.content-group-item
+        span.job-title Lập trình viên web:
+        span.job-duration Tháng 10/2018 - Tháng 07/2019
+        br
+        | &nbsp;&nbsp;
+        span Thiết kế web (HTML/CSS, Javascript)
+        br
+        | &nbsp;&nbsp;
+        span Lập trình website bán hàng PHP (framework Codeigniter)
+    li.content-group
+      div.content-group-title Công ty Cổ phần Mạng xã hội du lịch Hahalolo
+      div.content-group-item
+        span.job-title Lập trình viên web (ReactJS):
+        span.job-duration Tháng 10/2019 - Tháng 10/2021
+        br
+        | &nbsp;&nbsp;
+        span Phối hợp với team Thiết kế web xây dựng cấu trúc component
+        br
+        | &nbsp;&nbsp;
+        span Phối hợp với team API để lấy dữ liệu và hiển thị cho người dùng
+      div.content-group-item
+        span.job-title Lập trình viên API (Java):
+        span.job-duration Tháng 10/2021 - Hiện tại
+        br
+        | &nbsp;&nbsp;&nbsp;&nbsp;
+        span Viết API cung cấp dữ liệu cho các service khác (framework Springboot, MongoDB, Elasticsearch)
+        br
+        | &nbsp;&nbsp;&nbsp;&nbsp;
+        span Lập trình bất đồng bộ giữa các service; đồng bộ dữ liệu giữa các hệ thống lưu trữ (framework Springboot, Apache Kafka, MongoDB, Elasticsearch)
+        br
+        | &nbsp;&nbsp;&nbsp;&nbsp;
+        span Tiếp nhận, làm rõ yêu cầu chức năng với BA; phân chia công việc cho các thành viên trong team (team 3 - 4 người)
 .main-block.skill
   .title
     i.main-block-title-icon.mdi.mdi-cogs
     | Kỹ năng
-  .content
-    ul
-      li
-        p
-          span.item-title
-            | Chuyên môn
-          span Java, Springboot
-          br
-          span MongoDB, Elasticsearch
-          br
-          span Apache Kafka
-      li
-        p
-          span.item-title Ngoại ngữ
-          span Tiếng Anh (Đọc, Viết)
-      li
-        p
-          span.item-title Kỹ năng mềm
-          span Làm việc nhóm, làm việc độc lập
+  ul.content
+    li.content-group
+      div.content-group-title Chuyên môn
+      div.content-group-item
+        span Java, Springboot
+        br
+        span MongoDB, Elasticsearch
+        br
+        span Apache Kafka
+    li.content-group
+      div.content-group-title Ngoại ngữ
+      div.content-group-item
+        span Tiếng Anh (Đọc, Viết)
+    li.content-group
+      div.content-group-title Kỹ năng mềm
+      div.content-group-item
+        span Làm việc nhóm, làm việc độc lập
+        br
+        span Quản lý team (<= 4 người)
 .main-block.activity
   .title
     i.main-block-title-icon.mdi.mdi-run
     | Hoạt động
-  .content
-    ul
-      li
-        p
-          span.item-title Tham gia cuộc thi olympic tin học cao thắng lần II
-          //- span Tham gia cuộc thi Olympic tin học Cao Thắng lần II
-      li
-        p
-          span.item-title Tham gia hyperspace Python Bootcamp Intek
-          span Tham gia khóa học miễn phí Hyperspace Python Bootcamp Intek
-          br
-          span Lập trình Python căn bản
-          br
-          span Học và làm việc nhóm
+  ul.content
+    li.content-group
+      div.content-group-title Tham gia cuộc thi olympic tin học cao thắng lần II
+      div.content-group-item
+        //- span Tham gia cuộc thi Olympic tin học Cao Thắng lần II
+    li.content-group
+      div.content-group-title Tham gia hyperspace Python Bootcamp Intek
+      div.content-group-item
+        span Tham gia khóa học miễn phí Hyperspace Python Bootcamp Intek
+        br
+        span Lập trình Python căn bản
+        br
+        span Học và làm việc nhóm
 .main-block.interest
   .title
     i.main-block-title-icon.mdi.mdi-thumb-up
     | Sở thích
-  .content
-    ul
-      li
-        p
-          span Nghe nhạc, chơi game
+  ul.content
+    li.content-group
+      div.content-group-item
+        span Nghe nhạc, chơi game

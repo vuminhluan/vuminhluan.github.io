@@ -234,7 +234,7 @@ body {
 
 .main {
   margin-left: 50px;
-  padding: 50px 20px 0 20px;
+  padding: 20px 20px 0 20px;
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   height: auto;
@@ -257,7 +257,7 @@ body {
 .main-block .title {
   font-weight: 600;
   text-transform: uppercase;
-  font-size: 20px;
+  font-size: 25px;
 }
 .main-block .title .main-block-title-icon {
   display: inline-block;
@@ -267,15 +267,35 @@ body {
   vertical-align: middle;
   margin-right: 4px;
 }
-.main-block .content p {
-  margin-top: 8px;
+.main-block .content > .content-group:nth-of-type(1) {
+  margin-top: 10px;
+}
+.main-block .content .content-group {
+  margin-top: 25px;
   margin-bottom: 0;
 }
-.main-block .content p span.item-title {
+.main-block .content .content-group div.content-group-title {
   display: block;
   font-weight: 600;
+  font-size: 18px;
   text-transform: uppercase;
   color: rgba(0, 0, 0, 0.7);
+}
+.main-block .content .content-group > div:nth-of-type(2) {
+  margin-top: 5px;
+}
+.main-block .content .content-group .content-group-item {
+  margin-top: 10px;
+}
+.main-block .content .content-group .content-group-item span.job-title {
+  display: inline-block;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.7);
+}
+.main-block .content .content-group .content-group-item span.job-duration {
+  display: inline-block;
+  margin-left: 4px;
 }
 
 body {
@@ -283,12 +303,8 @@ body {
 }
 
 @media print {
-  .resume {
-    height: 100% !important;
-    width: 100% !important;
-    position: fixed;
-    top: 0;
-    left: 0;
+  .full-sidebar {
+    height: 10000px;
   }
   .full-sidebar .sidebar-toggle {
     display: none;
