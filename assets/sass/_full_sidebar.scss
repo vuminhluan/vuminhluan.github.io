@@ -103,8 +103,10 @@
 
     .me-block {
       text-align: left;
-      margin-left: 30px;
-      margin-right: 10px;
+      // margin-left: 30px;
+      // margin-right: 10px;
+      margin-left: 15px;
+      margin-right: 15px;
       margin-top: 40px;
       .title {
         font-size: 20px;
@@ -120,9 +122,20 @@
     }
 
     .goal,
-    .contact {
+    .contact,
+    .skills {
       .content {
         color: #fff;
+      }
+    }
+
+    .skills {
+      .content {
+        p {
+          span {
+            display: block;
+          }
+        }
       }
     }
 

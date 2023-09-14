@@ -207,8 +207,8 @@ body {
 }
 .sidebar-container .me .me-block {
   text-align: left;
-  margin-left: 30px;
-  margin-right: 10px;
+  margin-left: 15px;
+  margin-right: 15px;
   margin-top: 40px;
 }
 .sidebar-container .me .me-block .title {
@@ -221,8 +221,12 @@ body {
   color: #fff;
 }
 .sidebar-container .me .goal .content,
-.sidebar-container .me .contact .content {
+.sidebar-container .me .contact .content,
+.sidebar-container .me .skills .content {
   color: #fff;
+}
+.sidebar-container .me .skills .content p span {
+  display: block;
 }
 .sidebar-container .me .contact .content .icon {
   vertical-align: middle;
