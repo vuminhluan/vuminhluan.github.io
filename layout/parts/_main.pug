@@ -1,84 +1,55 @@
-.main-block.education
-  .title
-    i.main-block-title-icon.mdi.mdi-lightbulb-on
-    = t('education.title')
-  .content
-    ul
-      li
-        p
-          span.item-title= t('education.degree')
-          span= `${t('education.school')} (${profile.education.period})`
-          br
-          span= t('education.major')
-          br
-          span= `${t('education.grade')} ${profile.education.gpa}`
-.main-block.experience
-  .title
-    i.main-block-title-icon.mdi.mdi-briefcase
-    = t('experience.title')
-  .content
-    ul
-      li
-        p
-          span.item-title= t('experience.signinCompany')
-          span= `${t('experience.signinRole')}: ${profile.experience.signinPeriod}`
-          br
-          span= t('experience.workLabel')
-          br
-          span= t('experience.signinTaskOne')
-          br
-          span= t('experience.signinTaskTwo')
-      li
-        p
-          span.item-title= t('experience.angelCompany')
-          span= `${t('experience.angelRole')}: ${profile.experience.angelPeriod}`
-          br
-          span= t('experience.workLabel')
-          br
-          span= t('experience.angelTaskOne')
-          br
-          span= t('experience.angelTaskTwo')
-.main-block
-  .title
-    i.main-block-title-icon.mdi.mdi-cogs
-    = t('skills.title')
-  .content
-    ul
-      li
-        p
-          span.item-title= t('skills.specializedTitle')
+mixin block(icon, title)
+  .main-block.mb-10
+    .title.text-xl.font-semibold.uppercase
+      i.main-block-title-icon.mdi.mr-1.inline-block.align-middle.text-center(class=`${icon} w-[30px] text-[25px]`)
+      = t(title)
+    .content
+      ul.list-none.p-0
+        block
+
++block('mdi-lightbulb-on', 'education.title')
+  li
+    p.mt-2.mb-0
+      span.item-title.block.font-semibold.uppercase(class="text-black/70")= t('education.degree')
+      span= `${t('education.school')} (${profile.education.period})`
+      br
+      span= t('education.major')
+      br
+      span= `${t('education.grade')} ${profile.education.gpa}`
++block('mdi-briefcase', 'experience.title')
+  each employer in ['signin', 'angel']
+    li
+      p.mt-2.mb-0
+        span.item-title.block.font-semibold.uppercase(class="text-black/70")= t(`experience.${employer}Company`)
+        span= `${t(`experience.${employer}Role`)}: ${profile.experience[`${employer}Period`]}`
+        br
+        span= t('experience.workLabel')
+        br
+        span= t(`experience.${employer}TaskOne`)
+        br
+        span= t(`experience.${employer}TaskTwo`)
++block('mdi-cogs', 'skills.title')
+  each skill in ['specialized', 'language', 'soft']
+    li
+      p.mt-2.mb-0
+        span.item-title.block.font-semibold.uppercase(class="text-black/70")= t(`skills.${skill}Title`)
+        if skill === 'specialized'
           span= t('skills.specializedOne')
           br
           span= t('skills.specializedTwo')
-      li
-        p
-          span.item-title= t('skills.languageTitle')
-          span= t('skills.languageValue')
-      li
-        p
-          span.item-title= t('skills.softTitle')
-          span= t('skills.softValue')
-.main-block.experience
-  .title
-    i.main-block-title-icon.mdi.mdi-run
-    = t('activities.title')
-  .content
-    ul
-      li
-        p
-          span.item-title= t('activities.olympic')
-      li
-        p
-          span.item-title= t('activities.bootcampTitle')
-          span= t('activities.bootcampOne')
-          br
-          span= t('activities.bootcampTwo')
-.main-block.experience
-  .title
-    i.main-block-title-icon.mdi.mdi-thumb-up
-    = t('interests.title')
-  .content
-    ul
-      li
-        p
-          span= t('interests.value')
+        else
+          span= t(`skills.${skill}Value`)
++block('mdi-run', 'activities.title')
+  li
+    p.mt-2.mb-0
+      span.item-title.block.font-semibold.uppercase(class="text-black/70")= t('activities.olympic')
+  li
+    p.mt-2.mb-0
+      span.item-title.block.font-semibold.uppercase(class="text-black/70")= t('activities.bootcampTitle')
+      span= t('activities.bootcampOne')
+      br
+      span= t('activities.bootcampTwo')
++block('mdi-thumb-up', 'interests.title')
+  li
+    p.mt-2.mb-0
+      span= t('interests.value')

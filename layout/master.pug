@@ -6,11 +6,11 @@ html(lang=lang)
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
     title= t('meta.title')
     include includes/_head.pug
-  body
-    .resume.min-h-screen
+  body(class="m-0 bg-resume-surface font-sans text-black")
+    .resume(class="relative mx-auto min-h-screen max-w-[900px] overflow-hidden bg-resume-surface")
       include parts/_language_switcher.pug
       .sidebar
         include parts/_sidebar.pug
-      .main.active
+      .main.active(class="ml-[50px] min-h-screen overflow-auto px-5 pt-[50px] pr-2 transition-[margin,width] duration-300")
         block main_view
     include includes/_javascript.pug

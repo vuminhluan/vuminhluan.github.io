@@ -1,9 +1,9 @@
-.short-sidebar
-  span.short-sidebar-toggle.js-sidebar-toggle
-    span.bar
-    span.bar
-    span.bar
-  .name-n-career
-    span.name= profile.name
+div.short-sidebar(class="absolute left-0 top-0 z-10 h-full w-[50px] -translate-x-[100px] bg-resume-sidebar shadow-[1px_1px_3px_rgb(0_0_0_/_0.3)] transition-transform duration-300")
+  span.short-sidebar-toggle.js-sidebar-toggle(class="absolute right-0 top-0 w-full cursor-pointer border-b border-white/30 text-center hover:border-resume-accent hover:bg-resume-accent")
+    span.bar(class="mx-auto my-2 block h-0.5 w-10 bg-white transition")
+    span.bar(class="mx-auto my-2 block h-0.5 w-10 bg-white transition")
+    span.bar(class="mx-auto my-2 block h-0.5 w-10 bg-white transition")
+  div.name-n-career(class="absolute bottom-0 left-0 my-[30px] flex w-full rotate-180 items-center justify-center [writing-mode:vertical-lr] font-semibold uppercase tracking-[2px]")
+    span.name.text-white= profile.name
     |  &nbsp; &nbsp;
-    span.career= t('identity.career')
+    span.career.text-resume-accent= t('identity.career')

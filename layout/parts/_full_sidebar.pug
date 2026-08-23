@@ -1,34 +1,34 @@
-.full-sidebar.active
-  span.sidebar-toggle.js-sidebar-toggle
-    span.bar
-    span.bar
-    span.bar
-  .sidebar-container
-    .me
-      .avatar
-        a.avatar-link(href="/")
-          img(src=profile.avatar, alt=profile.name)
+div.full-sidebar.active(class="absolute left-0 top-0 z-10 h-full w-[260px] -translate-x-[400px] bg-resume-sidebar shadow-[1px_1px_3px_rgb(0_0_0_/_0.3)] transition-transform duration-300")
+  span.sidebar-toggle.js-sidebar-toggle(class="absolute right-0 top-0 w-10 cursor-pointer p-1 hover:[&_.bar:nth-child(2)]:opacity-0 hover:[&_.bar:first-child]:translate-y-2.5 hover:[&_.bar:first-child]:rotate-45 hover:[&_.bar:last-child]:-translate-y-2.5 hover:[&_.bar:last-child]:-rotate-45")
+    span.bar(class="mx-auto my-2 block h-0.5 w-[30px] bg-white transition")
+    span.bar(class="mx-auto my-2 block h-0.5 w-[30px] bg-white transition")
+    span.bar(class="mx-auto my-2 block h-0.5 w-[30px] bg-white transition")
+  .sidebar-container.h-full
+    div.me(class="my-[50px] text-center")
+      div.avatar(class="relative mx-auto h-[140px] w-[140px] overflow-hidden rounded-full border-2 border-resume-avatar")
+        a.avatar-link.block(href="/")
+          img.h-full.w-full.object-cover(src=profile.avatar, alt=profile.name)
       .name-n-career
-        span.name= profile.name
-        span.career= t('identity.career')
-        span.birthday= profile.birthday
-      .goal.me-block
-        .title= t('objective.title')
-        .content
-          p= t('objective.paragraphOne')
-          p= t('objective.paragraphTwo')
-      .contact.me-block
-        .title= t('contact.title')
-        .content
-          p
-            i.mdi.mdi-phone.icon
+        span.name(class="my-[10px] mb-0.5 block text-[30px] font-semibold text-white")= profile.name
+        span.career.block.italic.text-resume-accent= t('identity.career')
+        span.birthday.block.text-white= profile.birthday
+      div.goal.me-block(class="mx-[30px] mr-[10px] mt-10 text-left")
+        .title.text-xl.font-semibold.uppercase.text-white= t('objective.title')
+        .content.text-white
+          p.mt-2.mb-0= t('objective.paragraphOne')
+          p.mt-2.mb-0= t('objective.paragraphTwo')
+      div.contact.me-block(class="mx-[30px] mr-[10px] mt-10 text-left")
+        .title.text-xl.font-semibold.uppercase.text-white= t('contact.title')
+        .content.text-white
+          p.mt-2.mb-0
+            i.mdi.mdi-phone.icon.inline-block.w-5.align-middle.text-base
             = profile.phone
-          p
-            i.mdi.mdi-email.icon
+          p.mt-2.mb-0
+            i.mdi.mdi-email.icon.inline-block.w-5.align-middle.text-base
             = profile.email
-          p
-            i.mdi.mdi-web.icon
+          p.mt-2.mb-0
+            i.mdi.mdi-web.icon.inline-block.w-5.align-middle.text-base
             = profile.website
-          p
-            i.mdi.mdi-map-marker.icon
+          p.mt-2.mb-0
+            i.mdi.mdi-map-marker.icon.inline-block.w-5.align-middle.text-base
             = t('contact.address')
