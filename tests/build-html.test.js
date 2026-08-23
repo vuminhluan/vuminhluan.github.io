@@ -69,3 +69,14 @@ test('Tailwind CSS output is generated for utilities used in Pug', () => {
   assert.doesNotMatch(css, /bootstrap/i);
   assert.doesNotMatch(css, /sourceMappingURL/i);
 });
+
+test('legacy Sass and runtime translation artifacts are absent', () => {
+  assert.equal(fs.existsSync(path.join(projectRoot, 'assets', 'sass')), false);
+  assert.equal(fs.existsSync(path.join(projectRoot, 'assets', 'css', 'style.css.map')), false);
+  assert.equal(fs.existsSync(path.join(projectRoot, 'assets', 'js', 'dict.js')), false);
+
+  for (const outputFile of ['index.html', 'en.html']) {
+    const html = fs.readFileSync(path.join(projectRoot, outputFile), 'utf8');
+    assert.doesNotMatch(html, /\.scss|dict\.js|assets\/plugins\/(css|js)\/bootstrap/i);
+  }
+});
