@@ -8,16 +8,14 @@
   --color-resume-avatar: #a2ccb6;
 }
 
-@layer components {
-  .full-sidebar.active,
-  .short-sidebar.active {
-    transform: translateX(0);
-  }
+.full-sidebar.active,
+.short-sidebar.active {
+  translate: 0 !important;
+}
 
-  .main.active {
-    margin-left: 260px;
-    width: calc(100% - 260px);
-  }
+.main.active {
+  margin-left: 260px !important;
+  width: calc(100% - 260px) !important;
 }
 
 @media print {
