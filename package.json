@@ -1,0 +1,19 @@
+{
+  "name": "vu-minh-luan-resume",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build:html": "node scripts/build-html.js",
+    "test": "node --test tests/*.test.js"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "browser-sync": "^3.0.4",
+    "concurrently": "^10.0.5",
+    "nodemon": "^3.1.14",
+    "pug": "^3.0.4",
+    "tailwindcss": "^4.3.3"
+  }
+}
