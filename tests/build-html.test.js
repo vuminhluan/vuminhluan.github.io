@@ -4,6 +4,15 @@ const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
 
+const projectRoot = path.resolve(__dirname, '..');
+
+function findFiles(directory) {
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const filePath = path.join(directory, entry.name);
+    return entry.isDirectory() ? findFiles(filePath) : [filePath];
+  });
+}
+
 test('buildAll renders the stable Vietnamese and English outputs', () => {
   const outputDir = fs.mkdtempSync(path.join(os.tmpdir(), 'resume-build-'));
   const { buildAll } = require('../scripts/build-html');
@@ -19,5 +28,30 @@ test('buildAll renders the stable Vietnamese and English outputs', () => {
   assert.match(en, /<html lang="en">/);
   assert.match(vi, /assets\/css\/style\.css/);
   assert.match(en, /assets\/css\/style\.css/);
-  assert.doesNotMatch(`${vi}\n${en}`, /bootstrap/i);
+  assert.doesNotMatch(`${vi}\n${en}`, /assets\/plugins\/(css|js)\/bootstrap/i);
+
+  for (const [html, currentLocale] of [[vi, 'vi'], [en, 'en']]) {
+    assert.match(html, /href="\/"[^>]*>VI</);
+    assert.match(html, /href="\/en\.html"[^>]*>EN</);
+    assert.equal((html.match(/aria-current="page"/g) || []).length, 1);
+    assert.match(
+      html,
+      currentLocale === 'vi'
+        ? /href="\/"[^>]*aria-current="page"/
+        : /href="\/en\.html"[^>]*aria-current="page"/,
+    );
+  }
+});
+
+test('Pug sources and vendored assets contain no Bootstrap dependency', () => {
+  const pugFiles = findFiles(path.join(projectRoot, 'layout'));
+  const pluginFiles = findFiles(path.join(projectRoot, 'assets', 'plugins'));
+
+  for (const filePath of pugFiles) {
+    assert.doesNotMatch(fs.readFileSync(filePath, 'utf8'), /bootstrap/i, filePath);
+  }
+
+  for (const filePath of pluginFiles) {
+    assert.doesNotMatch(path.basename(filePath), /bootstrap/i, filePath);
+  }
 });

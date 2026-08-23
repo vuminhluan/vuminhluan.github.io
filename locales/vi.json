@@ -1,0 +1,60 @@
+{
+  "meta": {
+    "title": "Vũ Minh Luân | Lập trình viên web"
+  },
+  "languageSwitcher": {
+    "label": "Chọn ngôn ngữ"
+  },
+  "identity": {
+    "career": "Lập trình viên web"
+  },
+  "objective": {
+    "title": "Mục tiêu nghề nghiệp",
+    "paragraphOne": "Mong muốn có một nơi làm việc năng động, tích cực để chia sẻ đam mê, phát triển bản thân toàn diện. Tạo ra những sản phẩm tốt nhất cho người dùng, đóng góp cho công ty và tập thể nơi mình làm việc.",
+    "paragraphTwo": "Với sự học hỏi và phấn đấu, tôi tin mình sẽ là nhân viên tốt của công ty và công ty sẽ là nơi tôi thực hiện hóa mục tiêu của mình."
+  },
+  "contact": {
+    "title": "Liên hệ",
+    "address": "150/4b Chế Lan Viên, Tây Thạnh, Tân Phú, TP.HCM"
+  },
+  "education": {
+    "title": "Học vấn",
+    "degree": "Cử nhân Cao đẳng CNTT",
+    "school": "Tốt nghiệp trường Cao đẳng Kỹ thuật Cao Thắng",
+    "major": "Chuyên ngành: Công nghệ thông tin",
+    "grade": "Loại Khá. Điểm trung bình"
+  },
+  "experience": {
+    "title": "Kinh nghiệm làm việc",
+    "signinCompany": "Công ty Cổ phần Giải pháp Công nghệ SIGNIN",
+    "signinRole": "Thực tập sinh",
+    "angelCompany": "Công ty TNHH Truyền Thông ANGEL",
+    "angelRole": "Nhân viên lập trình web",
+    "workLabel": "Công việc:",
+    "signinTaskOne": "Thiết kế web (HTML/CSS, Javascript)",
+    "signinTaskTwo": "Lập trình web PHP",
+    "angelTaskOne": "Thiết kế web (HTML/CSS, Javascript)",
+    "angelTaskTwo": "Lập trình website bán hàng PHP (framework Codeigniter)"
+  },
+  "skills": {
+    "title": "Kỹ năng",
+    "specializedTitle": "Chuyên môn",
+    "specializedOne": "HTML/CSS, Javascript, PHP",
+    "specializedTwo": "Bootstrap",
+    "languageTitle": "Ngoại ngữ",
+    "languageValue": "Tiếng Anh (Đọc, Viết)",
+    "softTitle": "Kỹ năng mềm",
+    "softValue": "Làm việc nhóm, làm việc độc lập"
+  },
+  "activities": {
+    "title": "Hoạt động",
+    "olympic": "Tham gia cuộc thi Olympic Tin học Cao Thắng lần II",
+    "bootcampTitle": "Tham gia Hyperspace Python Bootcamp Intek",
+    "bootcampOne": "Lập trình Python căn bản",
+    "bootcampTwo": "Học và làm việc nhóm"
+  },
+  "interests": {
+    "title": "Sở thích",
+    "value": "Nghe nhạc, chơi game"
+  }
+}

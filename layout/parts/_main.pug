@@ -1,90 +1,84 @@
 .main-block.education
   .title
     i.main-block-title-icon.mdi.mdi-lightbulb-on
-    | Học vấn
+    = t('education.title')
   .content
     ul
       li
         p
-          span.item-title Cử nhân Cao đẳng CNTT
-          span Tốt nghiệp trường Cao đẳng Kỹ thuật Cao Thắng (2015 - 2018)
+          span.item-title= t('education.degree')
+          span= `${t('education.school')} (${profile.education.period})`
           br
-          span Chuyên ngành: Công nghệ thông tin
+          span= t('education.major')
           br
-          span Loại Khá. Điểm trung bình 7.48
+          span= `${t('education.grade')} ${profile.education.gpa}`
 .main-block.experience
   .title
     i.main-block-title-icon.mdi.mdi-briefcase
-    | Kinh nghiệm làm việc
+    = t('experience.title')
   .content
     ul
       li
         p
-          span.item-title công ty cổ phần giải pháp công nghệ SIGNIN
-          span Thực tập sinh: Tháng 01/2018 - Tháng 03/2018
+          span.item-title= t('experience.signinCompany')
+          span= `${t('experience.signinRole')}: ${profile.experience.signinPeriod}`
           br
-          span Công việc:
+          span= t('experience.workLabel')
           br
-          span &nbsp; Thiết kế web (HTML/CSS, Javascript)
+          span= t('experience.signinTaskOne')
           br
-          span &nbsp; Lập trình web PHP
+          span= t('experience.signinTaskTwo')
       li
         p
-          span.item-title Công ty TNHH Truyền Thông ANGEL
-          span Nhân viên lập trình web: Tháng 10/2018 - Tháng 07/2019
+          span.item-title= t('experience.angelCompany')
+          span= `${t('experience.angelRole')}: ${profile.experience.angelPeriod}`
           br
-          span Công việc:
+          span= t('experience.workLabel')
           br
-          span &nbsp; Thiết kế web (HTML/CSS, Javascript)
+          span= t('experience.angelTaskOne')
           br
-          span &nbsp; Lập trình website bán hàng PHP (framework Codeigniter)
+          span= t('experience.angelTaskTwo')
 .main-block
   .title
     i.main-block-title-icon.mdi.mdi-cogs
-    | Kỹ năng
+    = t('skills.title')
   .content
     ul
       li
         p
-          span.item-title
-            | Chuyên môn
-          span HTML/CSS, Javascript, PHP
+          span.item-title= t('skills.specializedTitle')
+          span= t('skills.specializedOne')
           br
-          span Bootstrap
-          br
-          span Codeigniter
+          span= t('skills.specializedTwo')
       li
         p
-          span.item-title Ngoại ngữ
-          span Tiếng Anh (Đọc, Viết)
+          span.item-title= t('skills.languageTitle')
+          span= t('skills.languageValue')
       li
         p
-          span.item-title Kỹ năng mềm
-          span Làm việc nhóm, làm việc độc lập
+          span.item-title= t('skills.softTitle')
+          span= t('skills.softValue')
 .main-block.experience
   .title
     i.main-block-title-icon.mdi.mdi-run
-    | Hoạt động
+    = t('activities.title')
   .content
     ul
       li
         p
-          span.item-title Tham gia cuộc thi olympic tin học cao thắng lần II
-          //- span Tham gia cuộc thi Olympic tin học Cao Thắng lần II
+          span.item-title= t('activities.olympic')
       li
         p
-          span.item-title Tham gia hyperspace Python Bootcamp Intek
-          span Tham gia khóa học miễn phí Hyperspace Python Bootcamp Intek
+          span.item-title= t('activities.bootcampTitle')
+          span= t('activities.bootcampOne')
           br
-          span Lập trình Python căn bản
-          br
-          span Học và làm việc nhóm
+          span= t('activities.bootcampTwo')
 .main-block.experience
   .title
     i.main-block-title-icon.mdi.mdi-thumb-up
-    | Sở thích
+    = t('interests.title')
   .content
     ul
       li
         p
-          span Nghe nhạc, chơi game
+          span= t('interests.value')

@@ -1,4 +1,3 @@
-// .active
 .full-sidebar.active
   span.sidebar-toggle.js-sidebar-toggle
     span.bar
@@ -7,33 +6,29 @@
   .sidebar-container
     .me
       .avatar
-        a(href="/").avatar-link
-          //- img(src="https://fakeimg.pl/150x150/?text=Luan")
-          img(src="assets/img/resume/anhthe.jpeg")
+        a.avatar-link(href="/")
+          img(src=profile.avatar, alt=profile.name)
       .name-n-career
-        span.name Vũ Minh Luân
-        span.career Lập trình viên web
-        span.birthday 14/07/1997
-
+        span.name= profile.name
+        span.career= t('identity.career')
+        span.birthday= profile.birthday
       .goal.me-block
-        .title Mục tiêu nghề nghiệp
+        .title= t('objective.title')
         .content
-          p Mong muốn có một nơi làm việc năng động, tích cực để chia sẻ đam mê, phát triển bản thân toàn diện. Tạo ra những sản phẩm tốt nhất cho người dùng, đóng góp cho công ty và tập thể nơi mình làm việc.
-          p Với sự học hỏi và phấn đấu, tôi tin mình sẽ là nhân viên tốt của công ty và công ty sẽ là nơi tôi thực hiện hóa mục tiêu của mình.
-      |
-      |
+          p= t('objective.paragraphOne')
+          p= t('objective.paragraphTwo')
       .contact.me-block
-        .title Liên hệ
+        .title= t('contact.title')
         .content
           p
             i.mdi.mdi-phone.icon
-            | 098 177 0642
+            = profile.phone
           p
             i.mdi.mdi-email.icon
-            | vuminhluan97@gmail.com
+            = profile.email
           p
             i.mdi.mdi-web.icon
-            | vuminhluan.github.io
+            = profile.website
           p
             i.mdi.mdi-map-marker.icon
-            | 150/4b Chế Lan Viên, Tây Thạnh, Tân Phú, TP.HCM
+            = t('contact.address')

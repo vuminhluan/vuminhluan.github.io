@@ -1,0 +1,60 @@
+{
+  "meta": {
+    "title": "Vu Minh Luan | Web Developer"
+  },
+  "languageSwitcher": {
+    "label": "Choose language"
+  },
+  "identity": {
+    "career": "Web Developer"
+  },
+  "objective": {
+    "title": "Objective",
+    "paragraphOne": "Finding a positive and energetic work place to learn and improve myself. Building great products for customers, contributing to the success of the company.",
+    "paragraphTwo": "With the efforts, I belive I will be a good employee and your company will be a place for me to make my goals happen"
+  },
+  "contact": {
+    "title": "Contact",
+    "address": "150/4b Che Lan Vien Street, Tay Thanh Ward, Tan Phu District, HCM City"
+  },
+  "education": {
+    "title": "Education",
+    "degree": "Bachelor of Information Technology",
+    "school": "Graduated from Cao Thang Technical College",
+    "major": "Major: Information Technology",
+    "grade": "GPA"
+  },
+  "experience": {
+    "title": "Work experience",
+    "signinCompany": "Signin technical solution corp",
+    "signinRole": "Intern",
+    "angelCompany": "Angel media co,. ltd",
+    "angelRole": "PHP Web Developer (framework Codeigniter)",
+    "workLabel": "Work:",
+    "signinTaskOne": "PHP Web Developer",
+    "signinTaskTwo": "Web design (HTML/CSS, Javascript)",
+    "angelTaskOne": "Web design (HTML/CSS, Javascript)",
+    "angelTaskTwo": "PHP Web Developer (framework Codeigniter)"
+  },
+  "skills": {
+    "title": "Skills",
+    "specializedTitle": "Specialized Skills",
+    "specializedOne": "HTML/CSS, Javascript, PHP",
+    "specializedTwo": "Codeigniter, Laravel",
+    "languageTitle": "Foreign language",
+    "languageValue": "English (Reading, Writing)",
+    "softTitle": "Soft Skills",
+    "softValue": "Teamworking, independent working"
+  },
+  "activities": {
+    "title": "Activities",
+    "olympic": "Attend the Cao Thang Olympic season II",
+    "bootcampTitle": "Attend the Hyperspace Python Bootcamp Intek",
+    "bootcampOne": "Learning Python (basic)",
+    "bootcampTwo": "Learning how to work in a team"
+  },
+  "interests": {
+    "title": "Interests",
+    "value": "Listening to music, playing video game"
+  }
+}
