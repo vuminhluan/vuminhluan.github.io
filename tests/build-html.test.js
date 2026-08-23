@@ -1,5 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const childProcess = require('node:child_process');
 const fs = require('node:fs');
 const os = require('node:os');
 const path = require('node:path');
@@ -54,4 +55,17 @@ test('Pug sources and vendored assets contain no Bootstrap dependency', () => {
   for (const filePath of pluginFiles) {
     assert.doesNotMatch(path.basename(filePath), /bootstrap/i, filePath);
   }
+});
+
+test('Tailwind CSS output is generated for utilities used in Pug', () => {
+  childProcess.execFileSync('npm', ['run', 'build:css'], {
+    cwd: projectRoot,
+    stdio: 'pipe',
+  });
+
+  const css = fs.readFileSync(path.join(projectRoot, 'assets', 'css', 'style.css'), 'utf8');
+  assert.notEqual(css.trim(), '');
+  assert.match(css, /\.min-h-screen\{min-height:100vh\}/);
+  assert.doesNotMatch(css, /bootstrap/i);
+  assert.doesNotMatch(css, /sourceMappingURL/i);
 });

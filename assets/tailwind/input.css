@@ -1,0 +1,41 @@
+@import "tailwindcss" source("../../layout");
+
+@theme {
+  --font-sans: "Arsenal", sans-serif;
+  --color-resume-surface: #ebebee;
+  --color-resume-sidebar: #252328;
+  --color-resume-accent: #ee786e;
+  --color-resume-avatar: #a2ccb6;
+}
+
+@layer components {
+  .full-sidebar.active,
+  .short-sidebar.active {
+    transform: translateX(0);
+  }
+
+  .main.active {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+  }
+}
+
+@media print {
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .resume {
+    height: 100% !important;
+    width: 100% !important;
+    position: fixed;
+    inset: 0;
+  }
+
+  .sidebar-toggle,
+  .short-sidebar-toggle,
+  .language-switcher {
+    display: none;
+  }
+}
