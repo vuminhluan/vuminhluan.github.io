@@ -13,7 +13,7 @@ Four questions were open while drafting. All four are closed.
 | # | Question | Answer | Consequence |
 | --- | --- | --- | --- |
 | D1 | Stripe, or only Plaid? | Stripe was integrated at a basic level: the Plaid processor token is exchanged for a bank account on the company's Stripe account. | Stripe stays in the Stack row. The mechanism is not written out anywhere, in the doc or on the page. |
-| D2 | Did Haloki launch? | Launched. No customer figures available. | The Scale row is qualitative. No numbers appear anywhere on the page. |
+| D2 | Did Haloki launch? | **Corrected.** It had not launched at the point the author left the team. | Scale drops the launch clause entirely and states scope only. Naming the pre-launch status on the page invites a conversation the author would rather have in person, and a scope line makes no claim either way. Outcome was reworded from `Funds collected ... and paid out` to `Designed so funds ...`, because the original tense claimed a shipped result for a product that never shipped. No numbers appear anywhere on the page. |
 | D3 | What to call the banks? | Names that announce themselves as fake: Sample, Demo, Simulation. | Zero trademark surface, and no need to verify anything against a register. |
 | D4 | FX rate? | Rounded, `1 USD = 26,000 ₫`. | A round rate also reads less like a live quote, which suits the `indicative demo rate` label. |
 
@@ -137,26 +137,46 @@ Not full bleed. The section stays inside the existing `max-w-6xl` content column
 
 ```
 Desktop (lg and up)                    Below lg
-┌──────────┬──────────────────┐        ┌──────────┐
-│  PHONE   │  Role            │        │  PHONE   │
-│  390px   │  Stack           │        │  390px   │
-│          │  Scale           │        └──────────┘
-│          │  Outcome         │        ┌──────────┐
-│          │  (730px)         │        │ simAside │
-└──────────┴──────────────────┘        └──────────┘
+┌──────────┬──────────────────┐        ┌──────────────┐
+│          │  Haloki · badge  │        │ Haloki·badge │
+│  PHONE   ├──────────────────┤        ├──────────────┤
+│  390px   │  Role            │        │    PHONE     │
+│  702px   │  Stack           │        │              │
+│          │  Scale           │        ├──────────────┤
+│          │  Outcome         │        │   simAside   │
+│          │  (520px)         │        └──────────────┘
+└──────────┴──────────────────┘
 ```
 
-`grid gap-x-8 lg:grid-cols-[390px_1fr] lg:items-start`, the frame left and `simAside`
-right. At 1152px that gives 390px and 730px, so the frame takes almost exactly one third
-of the row. Below `lg` the grid collapses to one column, frame then role block.
+`grid gap-x-8 lg:grid-cols-[390px_minmax(0,520px)] lg:grid-rows-[auto_1fr] lg:items-start`.
+The frame is placed at `lg:col-start-1 lg:row-start-1 lg:row-span-2`, the header at
+`lg:col-start-2 lg:row-start-1`, and `simAside` at `lg:col-start-2 lg:row-start-2`.
 
-`simAside` carries `mt-4` for the stacked case, so Haloki passes `lg:mt-0` through the
-mixin's optional second argument to sit flush with the top of the frame on desktop. The
+**Placement, not flex order.** Source order is header, frame, role block, which is
+exactly the mobile order. Explicit grid placement rearranges it on `lg` without touching
+source order, so the role block never floats above the artefact it describes. An earlier
+attempt used `order-1` / `order-2` on two wrappers and put the role block first on
+mobile.
+
+**Why the header sits inside the right column.** Learning and Meeting head their sections
+full width because their frames are full-width browser windows. Haloki's frame is a 390px
+phone, so the space beside it becomes the write-up column: title, product line, badge,
+then the role block. Left is the artefact, right is the text about it. That divergence is
+driven by the frame's shape, not by inconsistency for its own sake.
+
+**Why the right column is capped at 520px and its rows stack.** A four-row role block can
+never match a 702px phone for height, so height parity is the wrong goal. Two earlier
+shapes both failed on it: the role block full width beneath a centred frame left roughly
+380px of dead space either side of the phone; the role block in a 730px right column left
+478px of dead space below it, and stretched four short lines across a measure far too
+wide. Capping the column at 520px and stacking each row label-over-value
+(`.h-aside-stacked` in `input.css`) grows the block from 225px to 378px, wraps the values
+to a readable measure, and cuts the residual gap to 280px. What is left reads as column
+whitespace rather than a hole.
+
+`simAside` carries `mt-4` for the stacked case, so Haloki passes `lg:mt-0` plus its grid
+placement and `h-aside-stacked` through the mixin's optional second argument. The
 argument defaults to nothing, so the Learning and Meeting call sites are unaffected.
-
-An earlier version centred the frame on its own with the role block full width beneath.
-The frame is 390px in a 1152px column, so that left roughly 380px of empty space on each
-side. Putting the role block in that space fills the row and reads as one unit.
 
 **Why the rails panel is gone.** It read the same state object as the phone, so it never
 told the visitor anything the Activity list and the two transaction detail screens do not
@@ -675,8 +695,8 @@ file's style: `var`, `function`, no arrow functions, no template literals.
 | --- | --- |
 | Role | Initial product and technical design · database schema design · APIs integrating Plaid for bank-account connectivity and financial workflows |
 | Stack | Java, Spring, MongoDB, Plaid, Stripe |
-| Scale | Launched product · US bank funding by ACH, domestic payout in the recipient's country |
-| Outcome | Funds collected in the US and paid out from local VND liquidity, so the recipient is paid without waiting for the ACH debit to settle |
+| Scale | US bank funding by ACH, domestic payout in the recipient's country |
+| Outcome | Designed so funds collected in the US are paid out from local VND liquidity, leaving the recipient nothing to wait on while the ACH debit settles |
 
 No UI/UX claim. The interface in the frame is an abstraction built for this page, and the
 role block should not imply otherwise.

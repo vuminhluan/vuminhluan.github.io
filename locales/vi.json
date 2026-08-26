@@ -304,8 +304,8 @@
       "productType": "Ứng dụng chuyển tiền xuyên biên giới",
       "role": "Thiết kế sản phẩm và kỹ thuật ban đầu · thiết kế lược đồ cơ sở dữ liệu · API tích hợp Plaid cho kết nối tài khoản ngân hàng và các luồng tài chính",
       "stack": "Java, Spring, MongoDB, Plaid, Stripe",
-      "scale": "Sản phẩm đã ra mắt · nạp tiền từ ngân hàng Mỹ qua ACH, chi trả nội địa tại nước người nhận",
-      "outcome": "Tiền được thu tại Mỹ và chi trả từ nguồn VND nội địa, nên người nhận được trả mà không phải chờ lệnh ghi nợ ACH tất toán",
+      "scale": "Nạp tiền từ ngân hàng Mỹ qua ACH, chi trả nội địa tại nước người nhận",
+      "outcome": "Thiết kế để tiền thu tại Mỹ được chi trả từ nguồn VND nội địa, nên người nhận không phải chờ lệnh ghi nợ ACH tất toán",
       "ui": {
         "appName": "Haloki",
         "back": "Quay lại",

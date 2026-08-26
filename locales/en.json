@@ -304,8 +304,8 @@
       "productType": "Cross-border money transfer app",
       "role": "Initial product and technical design · database schema design · APIs integrating Plaid for bank-account connectivity and financial workflows",
       "stack": "Java, Spring, MongoDB, Plaid, Stripe",
-      "scale": "Launched product · US bank funding by ACH, domestic payout in the recipient's country",
-      "outcome": "Funds collected in the US and paid out from local VND liquidity, so the recipient is paid without waiting for the ACH debit to settle",
+      "scale": "US bank funding by ACH, domestic payout in the recipient's country",
+      "outcome": "Designed so funds collected in the US are paid out from local VND liquidity, leaving the recipient nothing to wait on while the ACH debit settles",
       "ui": {
         "appName": "Haloki",
         "back": "Back",

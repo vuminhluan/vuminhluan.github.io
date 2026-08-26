@@ -34,13 +34,21 @@ article#sim-haloki(
   data-reference=hk.reference,
   class="mt-20"
 )
-  header(class="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1")
-    h3(class="text-xl font-extrabold tracking-tight text-resume-ink")= t('sims.haloki.name')
-    span(class="text-sm text-resume-muted")= t('sims.haloki.productType')
-    span(class="rounded-full border border-resume-line bg-white px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-resume-muted")= t('sims.common.simTag')
+  //- Unlike the other two simulations, the header sits inside the right column
+  //- rather than spanning the section. The frame here is a 390px phone, not a
+  //- full-width browser, so the space beside it becomes the write-up column:
+  //- title, product line, then the role block. Left is the artefact, right is
+  //- the text about it.
+  //- Explicit grid placement rather than flex order, so the source order is the
+  //- mobile order: header, phone, role block. On lg the phone spans both rows in
+  //- the left column while the header and role block stack in the right one.
+  div(class="grid gap-x-8 lg:grid-cols-[390px_minmax(0,520px)] lg:grid-rows-[auto_1fr] lg:items-start")
+    header(class="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1 lg:col-start-2 lg:row-start-1")
+      h3(class="text-xl font-extrabold tracking-tight text-resume-ink")= t('sims.haloki.name')
+      span(class="text-sm text-resume-muted")= t('sims.haloki.productType')
+      span(class="rounded-full border border-resume-line bg-white px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-resume-muted")= t('sims.common.simTag')
 
-  div(class="grid gap-x-8 lg:grid-cols-[390px_1fr] lg:items-start")
-    div(class="sim-frame relative mx-auto flex h-[720px] max-h-[78vh] w-full max-w-[390px] flex-col overflow-hidden rounded-[20px] border border-resume-line bg-white text-[13px] shadow-lg")
+    div(class="sim-frame relative mx-auto flex h-[720px] max-h-[78vh] w-full max-w-[390px] flex-col overflow-hidden rounded-[20px] border border-resume-line bg-white text-[13px] shadow-lg lg:col-start-1 lg:row-start-1 lg:row-span-2")
       //- Status bar
       div(class="flex h-8 shrink-0 items-center justify-between px-4 text-[11px] font-semibold text-resume-muted")
         span 10:24
@@ -369,4 +377,4 @@ article#sim-haloki(
               span(data-h="fee-ach", class="text-[13px] font-bold text-resume-ink")
             p(class="mt-0.5 text-[11px] leading-snug text-resume-muted")= t('sims.haloki.ui.feeAchNote')
 
-    +simAside('haloki', 'lg:mt-0')
+    +simAside('haloki', 'h-aside-stacked lg:col-start-2 lg:row-start-2 lg:mt-0')

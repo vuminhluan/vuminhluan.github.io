@@ -636,6 +636,23 @@ li[data-sum]:not([hidden]) { display: flex; }
 
 /* --- simulation 03: Haloki ------------------------------------------------ */
 
+/* Haloki's role block lives in a narrow column beside the phone rather than
+   full width beneath it, so its rows stack label-over-value instead of running
+   side by side. Four short rows can never match a 702px phone frame for
+   height, so the column earns its height from rhythm and a wrapped measure
+   rather than from padding. */
+.h-aside-stacked dl > div {
+  flex-direction: column;
+  gap: 0.3rem;
+  padding-block: 0.95rem;
+}
+
+.h-aside-stacked dl > div:first-child { padding-top: 0; }
+.h-aside-stacked dl > div:last-child { padding-bottom: 0; }
+.h-aside-stacked dt { width: auto; }
+.h-aside-stacked dd { max-width: 46ch; }
+
+
 @keyframes h-sheet-up {
   from { transform: translateY(16px); opacity: 0; }
   to { transform: none; opacity: 1; }
