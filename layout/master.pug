@@ -6,11 +6,25 @@ html(lang=lang)
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
     title= t('meta.title')
     include includes/_head.pug
-  body(class="m-0 bg-resume-surface font-sans text-black")
-    .resume(class="relative mx-auto min-h-screen max-w-[900px] overflow-hidden bg-resume-surface")
-      include parts/_language_switcher.pug
-      .sidebar
-        include parts/_sidebar.pug
-      .main.active(class="ml-[50px] min-h-screen overflow-auto px-5 pt-[50px] pr-2 transition-[margin,width] duration-300")
-        block main_view
+  body(class="bg-resume-surface font-sans text-resume-body antialiased print:bg-white")
+    header.site-header(class="sticky top-0 z-30 border-b border-resume-line bg-resume-surface/90 backdrop-blur print:hidden")
+      div(class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6")
+        a(href="#top", class="text-sm font-extrabold tracking-tight text-resume-ink")= profile.name
+        nav(class="flex items-center gap-4 text-xs font-semibold uppercase tracking-wide sm:gap-6")
+          a(href="#projects", class="text-resume-muted transition hover:text-resume-ink")= t('nav.projects')
+          a(href="#cv", class="text-resume-muted transition hover:text-resume-ink")= t('nav.cv')
+          include parts/_language_switcher.pug
+    main#top
+      include parts/_projects.pug
+      section#cv(class="scroll-mt-20 px-4 pb-20 sm:px-6 print:p-0")
+        div(class="mx-auto max-w-[860px] print:max-w-none")
+          div(class="mb-6 flex flex-wrap items-end justify-between gap-4 print:hidden")
+            div
+              p(class="text-xs font-bold uppercase tracking-widest text-resume-muted")= t('cvSection.kicker')
+              h2(class="mt-1 text-3xl font-extrabold tracking-tight text-resume-ink")= t('cvSection.title')
+              p(class="mt-1 text-xs text-resume-muted")= t('cvSection.hint')
+            button.js-print-button(type="button", class="rounded-full bg-resume-ink px-5 py-2.5 text-xs font-semibold uppercase tracking-wide text-white shadow-lg transition hover:opacity-90")= t('cvSection.download')
+          .resume(class="relative mx-auto min-h-screen max-w-[860px] bg-white px-8 py-12 shadow-sm sm:px-14 sm:py-16 print:min-h-0 print:max-w-none print:p-0 print:shadow-none")
+            block main_view
+    script#sim-config(type="application/json")!= JSON.stringify({ locale: locale })
     include includes/_javascript.pug

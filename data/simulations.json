@@ -1,0 +1,81 @@
+{
+  "learning": {
+    "lessons": [
+      { "id": "intro", "type": "video", "duration": "6:24" },
+      { "id": "quiz", "type": "quiz" },
+      { "id": "fix", "type": "handson" }
+    ],
+    "quiz": {
+      "answers": ["Main", "WriteLine"],
+      "chips": ["Program", "Main", "using", "WriteLine"],
+      "points": 25
+    },
+    "code": [
+      { "ind": 0, "tokens": [["cmt", "// Fix the errors in this program"]] },
+      {
+        "ind": 0,
+        "fix": "using-semi",
+        "tokens": [["kw", "using"], ["pln", " "], ["type", "System"]],
+        "fixedTokens": [["kw", "using"], ["pln", " "], ["type", "System"], ["pln", ";"]]
+      },
+      { "ind": 0, "tokens": [] },
+      { "ind": 0, "tokens": [["kw", "namespace"], ["pln", " "], ["type", "HelloApp"]] },
+      { "ind": 0, "tokens": [["pln", "{"]] },
+      { "ind": 4, "tokens": [["kw", "class"], ["pln", " "], ["type", "Program"]] },
+      { "ind": 4, "tokens": [["pln", "{"]] },
+      {
+        "ind": 8,
+        "tokens": [["kw", "static"], ["pln", " "], ["kw", "void"], ["pln", " "], ["meth", "Main"], ["pln", "("], ["kw", "string"], ["pln", "[] "], ["var", "args"], ["pln", ")"]]
+      },
+      { "ind": 8, "tokens": [["pln", "{"]] },
+      {
+        "ind": 12,
+        "fix": "decl-semi",
+        "tokens": [["kw", "string"], ["pln", " "], ["var", "role"], ["pln", " = "], ["str", "\"Software Developer\""]],
+        "fixedTokens": [["kw", "string"], ["pln", " "], ["var", "role"], ["pln", " = "], ["str", "\"Software Developer\""], ["pln", ";"]]
+      },
+      {
+        "ind": 12,
+        "fix": "interp",
+        "tokens": [["type", "Console"], ["pln", "."], ["meth", "WriteLine"], ["pln", "("], ["str", "\"Hello, {role}!\""], ["pln", ");"]],
+        "fixedTokens": [["type", "Console"], ["pln", "."], ["meth", "WriteLine"], ["pln", "("], ["str", "$\"Hello, {role}!\""], ["pln", ");"]]
+      },
+      { "ind": 8, "tokens": [["pln", "}"]] },
+      { "ind": 4, "tokens": [["pln", "}"]] },
+      { "ind": 0, "tokens": [["pln", "}"]] }
+    ]
+  },
+  "meeting": {
+    "roomCode": "mtg-kzt-482",
+    "dialogue": [
+      { "line": "l1", "tile": 0 },
+      { "line": "l2", "tile": 2 },
+      { "line": "l3", "tile": 1 },
+      { "line": "l4", "tile": 3 }
+    ]
+  },
+  "haloki": {
+    "minTransfer": 100,
+    "maxTransfer": 5000,
+    "minSend": 100,
+    "achFeeFlat": 1.5,
+    "halokiFeePct": 0.005,
+    "halokiFeeCap": 3.5,
+    "balanceCheckMs": 3000,
+    "fxRate": 26000,
+    "achSettleDays": 3,
+    "rateLockSeconds": 1800,
+    "reference": "HLK-8F2K-4T19",
+    "presets": [100, 500, 1000],
+    "usBanks": [
+      { "id": "sampleBank", "name": "Sample Bank", "mask": "4321", "subtype": "checking", "availableBalance": 2480.15 },
+      { "id": "demoCu", "name": "Demo Credit Union", "mask": "9088", "subtype": "checking", "availableBalance": 612.4 }
+    ],
+    "recipient": {
+      "name": "NGUYEN VAN B",
+      "bank": "Simulation Bank",
+      "account": "1903 6688 7412",
+      "mask": "7412"
+    }
+  }
+}

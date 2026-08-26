@@ -1,16 +1,6 @@
 {
-  "name": "Vũ Minh Luân",
-  "birthday": "14/07/1997",
-  "phone": "098 177 0642",
+  "name": "Luan Vu Minh",
+  "phone": "+84 981 770 642",
   "email": "vuminhluan97@gmail.com",
-  "website": "vuminhluan.github.io",
-  "avatar": "assets/img/resume/anhthe.jpeg",
-  "education": {
-    "period": "2015 - 2018",
-    "gpa": "7.48"
-  },
-  "experience": {
-    "signinPeriod": "01/2018 - 03/2018",
-    "angelPeriod": "10/2018 - 07/2019"
-  }
+  "website": "vuminhluan.github.io"
 }

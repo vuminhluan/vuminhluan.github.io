@@ -8,10 +8,10 @@ This is the static resume website of **Vu Minh Luan**. It presents personal info
 
 - Vietnamese page: `/` (the `index.html` file).
 - English page: `/en.html` (the `en.html` file).
-- Both pages use one shared template and provide a `VI / EN` language control in the upper-right corner.
+- Both pages use one shared template: a Projects section (interactive product simulations — see [`docs/ui-simulation-concept.md`](ui-simulation-concept.md)) followed by a single-column, print-style resume (name, contact line, then Professional Summary, Work Experience, Education, Technical Skills, and Soft Skills sections), with a `VI / EN` language control in the upper-right corner.
 - The language control uses static links, marks the current page with `aria-current="page"`, and does not rely on cookies or automatic language detection.
-- The sidebar can be expanded or collapsed with the menu control. JavaScript preserves this behavior through the `.js-sidebar-toggle` hook.
-- The print layout hides the sidebar toggle and language control.
+- A floating "Print / Save as PDF" button triggers `window.print()`; the page relies on `@media print` rules (including an `@page` size/margin) rather than a pre-rendered PDF file, so visitors export the résumé straight from the browser's print dialog.
+- The print layout hides the language control and the print button.
 
 ## Content and Data
 
@@ -19,7 +19,8 @@ Content is separated from templates so both languages always follow the same str
 
 | Source | Responsibility |
 | --- | --- |
-| `data/profile.json` | Language-neutral resume details: name, contact information, avatar, education, and employment dates. |
+| `data/profile.json` | Language-neutral resume details: name, phone, email, and website. |
+| `data/simulations.json` | Language-neutral structural data for the Projects simulations (lessons, dialogue, code snippets). |
 | `locales/vi.json` | Vietnamese copy. |
 | `locales/en.json` | English copy. |
 | `layout/` | The shared Pug template tree for both pages. |

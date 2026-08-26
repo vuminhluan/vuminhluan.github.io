@@ -3,3 +3,5 @@ npm-debug.log*
 browser-sync.log
 
 docs/superpowers
+.vscode
+.claude
