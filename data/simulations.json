@@ -77,5 +77,19 @@
       "account": "1903 6688 7412",
       "mask": "7412"
     }
+  },
+  "fanout": {
+    "engagement": {
+      "likes": 186,
+      "comments": 12,
+      "ms": 5600,
+      "delayMs": 1000
+    },
+    "followerCount": 1200,
+    "batchSize": 500,
+    "cloudDots": 30,
+    "waves": [12, 12, 6],
+    "timings": { "stageMs": 320, "pulseMs": 620, "batchMs": 1100, "deleteMs": 1100 },
+    "reading": { "baseMs": 800, "perCharMs": 24, "minMs": 1400, "maxMs": 3800 }
   }
 }

@@ -24,7 +24,7 @@ improvement rather than a preference.
 
 | # | Change | Why |
 | --- | --- | --- |
-| R1 | The Money rails panel is gone | It rendered from the same state object as the phone, so it repeated what the Activity list and the transaction details already say, and it pushed the frame off the centre of the column. The two-speed story survives it, on the funding transaction detail. |
+| R1 | The Money rails panel is gone | It rendered from the same state object as the phone, so it repeated what the Activity list and the transaction details already say, and it pushed the frame off the centre of the column. The two-speed story survives it, on the funding transaction detail. **Superseded by R12** — the first objection was answered, the second was inverted by the new layout. |
 | R2 | The funding row lands on `Pending` with a spinner, then resolves to `Completed` after 3 seconds | A row that sits at `Pending` forever reads as a stuck simulation. The wallet credit really is complete. The ACH leg is a different fact, so it moved down to the detail timeline, whose last step stays pending at `in 3 business days`. The middle step is now `Balance credited`, so `Completed` on the row and `3 business days` in the detail are not contradicting each other. |
 | R3 | Connect lands on Transfer Money with a success toast | Returning to Home after linking left the visitor to work out what to do next. A freshly linked account has exactly one useful next action. The toast names the account (`Linked Sample Bank ••••4321`), so nothing is lost by skipping a confirmation screen. |
 | R4 | Send Money is Recipient → Amount → Review | Who is being paid decides how much, not the other way round. It also puts the read-only payout account in front of the visitor before any number is entered. |
@@ -35,6 +35,7 @@ improvement rather than a preference.
 | R9 | Inputs lost their focus ring and gained a focus border | A ring around a field that already has a border is noise. The border going to `--color-resume-ink` is the same signal with less ink, and keyboard users keep an indicator. |
 | R10 | The Transfer screen runs a real-time Plaid balance check under the `From` dropdown, and `Add money` is disabled while it runs | Balance is the thing Plaid is actually integrated for, and the CV bullet says so. A row that spins for three seconds and then resolves to that account's own number, re-running whenever the account changes, is the only part of the Plaid integration that can be shown rather than asserted. It also produces a fourth validation with a real dependency: the amount is checked against a balance the app had to go and fetch, not against a constant. |
 | R11 | The single `Service fee` row splits into `Haloki fee` and `ACH fee` behind an info control | One number hides the fact that funding has two costs with two different shapes. Splitting it makes the pricing legible without adding a permanent second row to a screen that is already dense, and the total on the screen is unchanged, so nothing downstream of it moves. |
+| R12 | A money-flow rail returns to the right column, above the role block, and the section header goes back to full width | R1 removed a rails panel for two reasons. The first — that it only repeated the phone — is answered by narrowing what the rail says: it is the one view where both legs are visible **at the same moment**, `ACH debit · in flight` sitting directly above `VND payout · paid`. No single screen can show that pair, because they belong to two different transactions. The second reason has inverted. The old panel sat beside a phone that was already centred, so it cost the frame its place; the current right column was half empty, and the rail is what fills it. Measured at 1440px: the two columns now end level, against a 280px shortfall before. |
 
 Nothing in this document is pending.
 
@@ -136,54 +137,82 @@ charges nothing.
 Not full bleed. The section stays inside the existing `max-w-6xl` content column.
 
 ```
-Desktop (lg and up)                    Below lg
-┌──────────┬──────────────────┐        ┌──────────────┐
-│          │  Haloki · badge  │        │ Haloki·badge │
-│  PHONE   ├──────────────────┤        ├──────────────┤
-│  390px   │  Role            │        │    PHONE     │
-│  702px   │  Stack           │        │              │
-│          │  Scale           │        ├──────────────┤
-│          │  Outcome         │        │   simAside   │
-│          │  (520px)         │        └──────────────┘
-└──────────┴──────────────────┘
+Desktop (lg and up)                       Below lg
+┌──────────┬─────────────────────┐        ┌──────────────┐
+│  Haloki · productType · badge  │        │ Haloki·badge │
+├──────────┬─────────────────────┤        ├──────────────┤
+│          │  MONEY FLOW         │        │    PHONE     │
+│  PHONE   │   US bank           │        │              │
+│  360px   │   ACH debit         │        ├──────────────┤
+│  640px   │   Haloki balance    │        │  MONEY FLOW  │
+│          │   VND payout        │        ├──────────────┤
+│          ├─────────────────────┤        │   simAside   │
+│          │  Role · Stack ·     │        └──────────────┘
+│          │  Scale · Outcome    │
+└──────────┴─────────────────────┘
 ```
 
-`grid gap-x-8 lg:grid-cols-[390px_minmax(0,520px)] lg:grid-rows-[auto_1fr] lg:items-start`.
-The frame is placed at `lg:col-start-1 lg:row-start-1 lg:row-span-2`, the header at
-`lg:col-start-2 lg:row-start-1`, and `simAside` at `lg:col-start-2 lg:row-start-2`.
+`grid gap-x-8 gap-y-6 lg:grid-cols-[minmax(0,360px)_minmax(0,1fr)]`. Two children in
+source order: the frame, then a right column that is `flex flex-col` holding the rail and
+`simAside`. Source order is already the mobile order, so no explicit grid placement is
+needed and nothing has to be re-ordered per breakpoint.
 
-**Placement, not flex order.** Source order is header, frame, role block, which is
-exactly the mobile order. Explicit grid placement rearranges it on `lg` without touching
-source order, so the role block never floats above the artefact it describes. An earlier
-attempt used `order-1` / `order-2` on two wrappers and put the role block first on
-mobile.
+**The header is full width, like the other three.** An earlier revision put it inside the
+right column, on the reasoning that a 390px phone makes the space beside it a write-up
+column. That was true when the right column held only text. It stopped being true once
+the column acquired a rail: the column is now an artefact of its own, not a caption, and
+heading it as though it were one broke the section's rhythm at exactly the point where a
+reader is comparing this simulation to the three around it.
 
-**Why the header sits inside the right column.** Learning and Meeting head their sections
-full width because their frames are full-width browser windows. Haloki's frame is a 390px
-phone, so the space beside it becomes the write-up column: title, product line, badge,
-then the role block. Left is the artefact, right is the text about it. That divergence is
-driven by the frame's shape, not by inconsistency for its own sake.
+**Why the columns end level now.** Height parity used to be unreachable — a four-row role
+block cannot match a phone, and R1's notes record two failed attempts and a residual
+280px shortfall even after stacking the rows. The rail closes it from the other side. The
+right column carries roughly 400px of rail above 225px of role block, and the rail is
+`flex-1` with its closing note on `margin-top: auto`, so any remaining slack is absorbed
+by the rail rather than left under the block. Measured at 1440px and 1280px the two
+columns' bottom edges differ by 0px; at 1024px they are still level at 640px each.
 
-**Why the right column is capped at 520px and its rows stack.** A four-row role block can
-never match a 702px phone for height, so height parity is the wrong goal. Two earlier
-shapes both failed on it: the role block full width beneath a centred frame left roughly
-380px of dead space either side of the phone; the role block in a 730px right column left
-478px of dead space below it, and stretched four short lines across a measure far too
-wide. Capping the column at 520px and stacking each row label-over-value
-(`.h-aside-stacked` in `input.css`) grows the block from 225px to 378px, wraps the values
-to a readable measure, and cuts the residual gap to 280px. What is left reads as column
-whitespace rather than a hole.
+**What the left column gave up.** The phone track went from a rigid `390px` to
+`minmax(0,360px)` and the right from a capped `520px` to `1fr`. The old pair summed to
+942px inside a 1152px container, leaving 210px of the content column unused; the new pair
+fills it. The frame keeps `max-w-[390px] mx-auto`, so below `lg` it is unchanged.
 
-`simAside` carries `mt-4` for the stacked case, so Haloki passes `lg:mt-0` plus its grid
-placement and `h-aside-stacked` through the mixin's optional second argument. The
-argument defaults to nothing, so the Learning and Meeting call sites are unaffected.
+**The frame is 640px, not 720px.** 720px was taller than the tallest screen's content,
+which put a run of white inside the phone on Home. 640px clears Transaction status, the
+densest screen, and sits between Fan-out's 600px and nothing — the four frames now read
+as one family rather than three plus an outlier.
 
-**Why the rails panel is gone.** It read the same state object as the phone, so it never
-told the visitor anything the Activity list and the two transaction detail screens do not
-already say, and it cost the frame its place in the middle of the column. The two-speed
-story it existed to tell now sits where a reader actually looks for it: on the funding
-transaction, whose last timeline step stays pending at `ACH settles · in 3 business days`
-while the row above it reads `Completed`.
+**`simAside` is called plainly.** With the aside back in a normal flow column, the mixin
+needs no second argument: the `h-aside-stacked` override and the grid-placement classes
+are both gone, and the rows run `dt | dd` side by side exactly as they do in Learning,
+Meeting and Fan-out. `.h-aside-stacked` was deleted from `input.css` with its last call
+site.
+
+### The money-flow rail
+
+Four nodes in a `<ol>`, rendered by `renderFlow()` from the same state object as every
+screen — `US bank → ACH debit → Haloki balance → VND payout` — plus a closing note.
+
+| Node | idle | live | done |
+| --- | --- | --- | --- |
+| US bank | no account linked | — | account label |
+| ACH debit | no debit raised | total funded, `settles in 3 business days` | — |
+| Haloki balance | not funded | credit pending | current balance |
+| VND payout | nothing sent | paying out | total paid in ₫ |
+
+Dot colours are the ones the phone already uses on its timeline steps: `#059669` done,
+`#d97706` in flight, `#d8d8dd` idle. The rail is a second reading of the phone's state,
+not a second source of it.
+
+**ACH never reaches done.** Once a debit exists the node stays `live` for the rest of the
+session. The sim does not run for three days, and settling it early would delete the one
+fact the rail is here to carry.
+
+**The closing note is the payoff.** It reads as a prompt until a payout completes while a
+debit is still in flight, then switches to the outcome line — *the recipient has been paid
+from local VND liquidity, the ACH debit still has 3 business days to settle* — and its
+colour goes from muted to ink. That pair of states is the only thing in the simulation
+that states the design's point outright rather than implying it.
 
 ### The phone frame
 
@@ -192,7 +221,7 @@ as generated filler. What the frame is:
 
 | Part | Spec |
 | --- | --- |
-| Shell | `w-full max-w-[390px] mx-auto h-[720px] max-h-[78vh] rounded-[20px] border border-resume-line bg-white overflow-hidden flex flex-col` |
+| Shell | `w-full max-w-[390px] mx-auto h-[640px] max-h-[80vh] rounded-[20px] border border-resume-line bg-white overflow-hidden flex flex-col` |
 | Status bar | `h-8`, time on the left (`10:24`, not Apple's `9:41`), three abstract glyphs on the right as inline SVG, `text-resume-muted` |
 | App header | `h-12`, matching the header height convention the Learning simulation already uses. Back chevron when not on Home, title centred |
 | Body | `flex-1 overflow-y-auto` |

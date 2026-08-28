@@ -2,8 +2,15 @@
 //- A native app, so no simChrome: the frame is the phone itself, with no
 //- bezel, no notch and no home indicator. Every number on every screen is
 //- recomputed by initHaloki from one state object, so there is no second
-//- source of truth. On desktop the frame sits in a 390px left column with
-//- the role block beside it, so the frame is not stranded in white space.
+//- source of truth.
+//-
+//- A phone is narrow where the other three simulations are wide, so the
+//- column beside it has to carry real weight or the row reads lopsided.
+//- It carries two blocks: the money-flow rail on top, the role block under
+//- it. The rail is the same state object rendered a second way — where the
+//- money physically is, leg by leg — and it is the only place the outcome
+//- claim becomes visible: the VND payout completes while the ACH debit is
+//- still days from settling. Nothing in the phone can show both at once.
 
 - const hk = sims.haloki
 
@@ -17,6 +24,16 @@ mixin hkFixedRow(label, value)
   div(class="flex items-baseline justify-between gap-3 py-1.5")
     span(class="text-[11px] text-resume-muted")= label
     span(class="text-[13px] text-resume-ink")= value
+
+//- One leg of the money-flow rail. Every node is rendered idle; initHaloki
+//- writes the state, the value and the meta line from the same state object
+//- that drives the phone, so the rail can never drift from the screens.
+mixin hkFlowNode(key, label, idle)
+  li.h-flow-node(data-hflow=key, data-fstate="idle")
+    span.h-flow-dot(aria-hidden="true")
+    span.h-flow-label= label
+    span.h-flow-value(data-hflow-value=key)= idle
+    span.h-flow-meta(data-hflow-meta=key)
 
 article#sim-haloki(
   data-sim="haloki",
@@ -34,38 +51,19 @@ article#sim-haloki(
   data-reference=hk.reference,
   class="mt-20"
 )
-  //- Unlike the other two simulations, the header sits inside the right column
-  //- rather than spanning the section. The frame here is a 390px phone, not a
-  //- full-width browser, so the space beside it becomes the write-up column:
-  //- title, product line, then the role block. Left is the artefact, right is
-  //- the text about it.
-  //- Explicit grid placement rather than flex order, so the source order is the
-  //- mobile order: header, phone, role block. On lg the phone spans both rows in
-  //- the left column while the header and role block stack in the right one.
-  div(class="grid gap-x-8 lg:grid-cols-[390px_minmax(0,520px)] lg:grid-rows-[auto_1fr] lg:items-start")
-    header(class="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1 lg:col-start-2 lg:row-start-1")
-      h3(class="text-xl font-extrabold tracking-tight text-resume-ink")= t('sims.haloki.name')
-      span(class="text-sm text-resume-muted")= t('sims.haloki.productType')
-      span(class="rounded-full border border-resume-line bg-white px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-resume-muted")= t('sims.common.simTag')
+  //- The header spans the article, the same as the other three simulations.
+  header(class="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1")
+    h3(class="text-xl font-extrabold tracking-tight text-resume-ink")= t('sims.haloki.name')
+    span(class="text-sm text-resume-muted")= t('sims.haloki.productType')
+    span(class="rounded-full border border-resume-line bg-white px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-resume-muted")= t('sims.common.simTag')
 
-    div(class="sim-frame relative mx-auto flex h-[720px] max-h-[78vh] w-full max-w-[390px] flex-col overflow-hidden rounded-[20px] border border-resume-line bg-white text-[13px] shadow-lg lg:col-start-1 lg:row-start-1 lg:row-span-2")
-      //- Status bar
-      div(class="flex h-8 shrink-0 items-center justify-between px-4 text-[11px] font-semibold text-resume-muted")
-        span 10:24
-        span(class="flex items-center gap-1.5", aria-hidden="true")
-          svg(viewBox="0 0 16 10", width="14", height="9", fill="currentColor")
-            rect(x="0", y="6", width="2.6", height="4", rx="0.6")
-            rect(x="4.2", y="4", width="2.6", height="6", rx="0.6")
-            rect(x="8.4", y="2", width="2.6", height="8", rx="0.6")
-            rect(x="12.6", y="0", width="2.6", height="10", rx="0.6")
-          svg(viewBox="0 0 16 12", width="14", height="10", fill="none", stroke="currentColor", stroke-width="1.3")
-            path(d="M1 4.2a10 10 0 0 1 14 0")
-            path(d="M3.6 6.9a6.3 6.3 0 0 1 8.8 0")
-            circle(cx="8", cy="9.9", r="1.1", fill="currentColor", stroke="none")
-          svg(viewBox="0 0 18 10", width="16", height="9", fill="none", stroke="currentColor", stroke-width="1.1")
-            rect(x="0.6", y="0.6", width="14", height="8.8", rx="2.2")
-            rect(x="2.2", y="2.2", width="9", height="5.6", rx="1.2", fill="currentColor", stroke="none")
-            path(d="M16.4 3.6v2.8", stroke-width="2", stroke-linecap="round")
+  //- Source order is the mobile order: phone, rail, role block. The grid rows
+  //- stretch rather than start, and the rail inside the right column takes the
+  //- slack, so the two columns end level instead of leaving the phone beside a
+  //- run of white space.
+  div(class="grid gap-x-8 gap-y-6 lg:grid-cols-[minmax(0,360px)_minmax(0,1fr)]")
+    div(class="sim-frame relative mx-auto flex h-[640px] max-h-[80vh] w-full max-w-[390px] flex-col overflow-hidden rounded-[20px] border border-resume-line bg-white text-[13px] shadow-lg")
+      +simPhoneStatus()
 
       //- App header
       div(class="flex h-12 shrink-0 items-center border-b border-resume-line px-2")
@@ -301,7 +299,18 @@ article#sim-haloki(
         data-err-balance=t('sims.haloki.ui.errBalance'),
         data-err-bank-balance=t('sims.haloki.ui.errBankBalance'),
         data-balance-checking=t('sims.haloki.ui.balanceChecking'),
-        data-balance-available=t('sims.haloki.ui.balanceAvailable'))
+        data-balance-available=t('sims.haloki.ui.balanceAvailable'),
+        data-flow-bank-idle=t('sims.haloki.ui.flowBankIdle'),
+        data-flow-bank-meta=t('sims.haloki.ui.flowBankMeta'),
+        data-flow-ach-idle=t('sims.haloki.ui.flowAchIdle'),
+        data-flow-ach-meta=t('sims.haloki.ui.flowAchMeta'),
+        data-flow-wallet-idle=t('sims.haloki.ui.flowWalletIdle'),
+        data-flow-wallet-meta=t('sims.haloki.ui.flowWalletMeta'),
+        data-flow-payout-idle=t('sims.haloki.ui.flowPayoutIdle'),
+        data-flow-payout-meta=t('sims.haloki.ui.flowPayoutMeta'),
+        data-flow-payout-meta-sending=t('sims.haloki.ui.flowPayoutMetaSending'),
+        data-flow-note-idle=t('sims.haloki.ui.flowNoteIdle'),
+        data-flow-note-settling=t('sims.haloki.ui.flowNoteSettling'))
 
       //- --- Toast: inside the frame, never over the page ----------------
       div.h-toast(data-h="toast", hidden, role="status", aria-live="polite")
@@ -377,4 +386,15 @@ article#sim-haloki(
               span(data-h="fee-ach", class="text-[13px] font-bold text-resume-ink")
             p(class="mt-0.5 text-[11px] leading-snug text-resume-muted")= t('sims.haloki.ui.feeAchNote')
 
-    +simAside('haloki', 'h-aside-stacked lg:col-start-2 lg:row-start-2 lg:mt-0')
+    //- Right column: where the money is, then who built it.
+    div(class="flex min-w-0 flex-col")
+      section(class="h-flow flex flex-1 flex-col rounded-xl border border-resume-line bg-white p-4", aria-labelledby="hk-flow-title")
+        h4#hk-flow-title(class="text-[10px] font-bold uppercase tracking-widest text-resume-muted")= t('sims.haloki.ui.flowTitle')
+        ol(class="mt-4")
+          +hkFlowNode('bank', t('sims.haloki.ui.flowBankLabel'), t('sims.haloki.ui.flowBankIdle'))
+          +hkFlowNode('ach', t('sims.haloki.ui.flowAchLabel'), t('sims.haloki.ui.flowAchIdle'))
+          +hkFlowNode('wallet', t('sims.haloki.ui.flowWalletLabel'), t('sims.haloki.ui.flowWalletIdle'))
+          +hkFlowNode('payout', t('sims.haloki.ui.flowPayoutLabel'), t('sims.haloki.ui.flowPayoutIdle'))
+        p.h-flow-note(data-h="flow-note", role="status", aria-live="polite")= t('sims.haloki.ui.flowNoteIdle')
+
+      +simAside('haloki')

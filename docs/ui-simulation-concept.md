@@ -3,9 +3,13 @@
 ## What This Document Is
 
 This document defines a presentation format used in the **Projects** section of this
-resume site: **UI Simulation**. It documents the two simulations built with it —
+resume site: **UI Simulation**. It documents the first two simulations built with it —
 **Interactive Learning** and **Meeting** — as they actually ship today, and it closes
-with a playbook for building the next one.
+with a playbook for building the next one. The two later simulations have their own
+implementation briefs rather than sections here:
+
+- **Haloki** (simulation 03) — [`docs/haloki-simulation-brief.md`](haloki-simulation-brief.md)
+- **Fan-out on write** (simulation 04) — [`docs/fanout-simulation-brief.md`](fanout-simulation-brief.md)
 
 This is now both **as-built documentation** and an **implementation guide**. Earlier
 drafts of this document described an auto-playing, scripted-demo format; that format was
@@ -473,7 +477,7 @@ decorative default:
 | A desktop / native app | A minimal title-bar chrome with no URL pill, or no chrome at all if the real app usually runs full-screen |
 | A CLI / terminal tool | A terminal-style chrome — a prompt line instead of a URL bar |
 | A mobile app | No hand-drawn phone bezel — that's a banned pattern generally (fake device frames read as AI-generated slop). Constrain the frame's own aspect ratio instead, and let the mobile-breakpoint CSS demonstrate the real responsive behaviour. |
-| An API / backend-only project with no UI | A UI Simulation probably doesn't fit. Consider a different presentation — a diagram, a request/response example — rather than inventing a UI the product doesn't have. |
+| An API / backend-only project with no UI | Do not invent a UI the product doesn't have. Use a **hybrid frame**: a small product surface on one side for the action that triggers the mechanism, and a system view on the other for the mechanism itself. Simulation 04 is built this way and is the reference — see [`docs/fanout-simulation-brief.md`](fanout-simulation-brief.md). Earlier guidance here said the format probably doesn't fit at all; that turned out to be too strong, because the trigger is still a real product action and the visitor still drives everything. |
 
 ### 2. No auto-play
 
@@ -565,8 +569,12 @@ It should not require changes to how the existing simulations behave.
 
 ## Open Questions
 
-1. **How many simulations in total?** Two are built. Three is the recommended ceiling —
-   beyond that the section dilutes and the page gets heavy.
+1. **How many simulations in total?** Four are built: Interactive Learning, Meeting,
+   Haloki, and Fan-out on write. Four is the ceiling. The earlier recommendation was
+   three; the fourth earned its place because it is the only one that shows a backend
+   mechanism rather than a screen, so it does not compete with the other three for the
+   same kind of attention. A fifth would dilute the section and make the page heavy,
+   so the next project belongs in the resume text, not here.
 2. **Ordering** — which simulation opens the Projects section. Meeting hands control to
    the visitor from its very first frame (Join now), which makes a case for it as the
    stronger opener.

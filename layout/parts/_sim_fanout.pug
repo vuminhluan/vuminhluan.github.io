@@ -1,0 +1,166 @@
+//- Simulation 04: Hahalolo · fan-out-on-write.
+//- Same shape as Haloki: the phone is its own frame in the left column, the
+//- write-up column on the right carries the console above the role block. Both
+//- simulations are native apps, so both use simPhoneStatus and neither draws a
+//- bezel, a notch or a home indicator.
+//- Deliberately high level. The phone is what a user sees; the dark console is
+//- the mechanism, cut down to the four things that matter: the post, the feed
+//- record made from it, the event stream, and the consumer that expands one
+//- record into one per follower. Nothing is on the board until the visitor
+//- publishes: every node is created by the run and destroyed by the delete,
+//- which is what makes it read as something happening rather than a diagram
+//- being coloured in. Nodes are placed by CSS grid and the edges between them
+//- are measured from the DOM at runtime, so the narrower console costs a
+//- redraw rather than a second copy of this markup.
+//-
+//- Two columns rather than two tabs. The panes used to share one frame and
+//- swap on a mobile tab bar; as separate columns they simply stack, which is
+//- how the other three simulations already behave and one fewer control for a
+//- visitor to discover.
+
+- const fo = sims.fanout
+- const numLocale = locale === 'vi' ? 'vi-VN' : 'en-US'
+- const num = (n) => Number(n).toLocaleString(numLocale)
+
+mixin foNode(id, delTag)
+  div.f-node(data-node=id, data-life="1")
+    span.f-node-tag= t(`sims.fanout.ui.board.${id}Tag`)
+    if delTag
+      span.f-node-tag.f-node-tag-del= t(`sims.fanout.ui.board.${id}TagDel`)
+    span.f-node-label= t(`sims.fanout.ui.board.${id}`)
+    if block
+      block
+
+article#sim-fanout(
+  data-sim="fanout",
+  data-phase="idle",
+  data-cap="idle",
+  data-hasrows="0",
+  data-running="0",
+  data-followers=fo.followerCount,
+  data-batch-size=fo.batchSize,
+  data-waves=fo.waves.join(','),
+  data-stage-ms=fo.timings.stageMs,
+  data-pulse-ms=fo.timings.pulseMs,
+  data-batch-ms=fo.timings.batchMs,
+  data-delete-ms=fo.timings.deleteMs,
+  data-likes=fo.engagement.likes,
+  data-comments=fo.engagement.comments,
+  data-engage-ms=fo.engagement.ms,
+  data-engage-delay=fo.engagement.delayMs,
+  data-read-base=fo.reading.baseMs,
+  data-read-per-char=fo.reading.perCharMs,
+  data-read-min=fo.reading.minMs,
+  data-read-max=fo.reading.maxMs,
+  class="mt-20"
+)
+  header(class="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1")
+    h3(class="text-xl font-extrabold tracking-tight text-resume-ink")= t('sims.fanout.name')
+    span(class="text-sm text-resume-muted")= t('sims.fanout.productType')
+    span(class="rounded-full border border-resume-line bg-white px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-resume-muted")= t('sims.common.simTag')
+  //- Left is the artefact, right is the mechanism and then the write-up. The
+  //- grid rows stretch and the console is flex-1, so the console absorbs the
+  //- slack and the two columns end level.
+  div(class="grid gap-x-8 gap-y-6 lg:grid-cols-[minmax(0,360px)_minmax(0,1fr)]")
+
+    //- ── Phone ────────────────────────────────────────────────────────────
+    div(class="sim-frame relative mx-auto flex h-[640px] max-h-[80vh] w-full max-w-[390px] flex-col overflow-hidden rounded-[20px] border border-resume-line bg-white text-[13px] shadow-lg")
+      +simPhoneStatus()
+
+      div(class="flex h-12 shrink-0 items-center justify-center border-b border-resume-line px-2")
+        span(class="text-[13px] font-extrabold tracking-tight text-resume-ink")= t('sims.fanout.ui.appName')
+
+      div(class="min-h-0 flex-1 overflow-y-auto p-3")
+        div.f-composer
+          div(class="flex items-center gap-2")
+            span.f-avatar D
+            div(class="min-w-0")
+              p(class="truncate text-[12px] font-bold text-resume-ink")= t('sims.fanout.ui.ownerName')
+              p(class="text-[10px] text-resume-muted")= `${num(fo.followerCount)} ${t('sims.fanout.ui.followersLabel')}`
+          textarea.f-input(
+            data-f="composer",
+            rows="4",
+            aria-label=t('sims.fanout.ui.composerLabel'),
+            placeholder=t('sims.fanout.ui.composerLabel')
+          )= t('sims.fanout.ui.defaultPost')
+          button.f-primary(type="button", data-f="publish", class="mt-2 w-full")= t('sims.fanout.ui.publishBtn')
+
+        article.f-post
+          div(class="flex items-center gap-2")
+            span.f-avatar D
+            div(class="min-w-0 flex-1")
+              p(class="truncate text-[12px] font-bold text-resume-ink")= t('sims.fanout.ui.ownerName')
+              p(class="text-[10px] text-resume-muted")
+                span= t('sims.fanout.ui.ownerHandle')
+                |  ·
+                |
+                span= t('sims.fanout.ui.timeJustNow')
+            span.f-tag
+              span.f-tag-live= t('sims.fanout.ui.liveTag')
+              span.f-tag-run= t('sims.fanout.ui.distributingTag')
+              span.f-tag-del= t('sims.fanout.ui.clearingTag')
+          p.f-post-body(data-f="owner-content")
+          button.f-danger(type="button", data-f="delete", class="mt-3 w-full")= t('sims.fanout.ui.deleteBtn')
+
+    //- Right column: the mechanism, then who built it.
+    div(class="flex min-w-0 flex-col")
+      section.f-sys(class="flex h-[520px] flex-col overflow-hidden rounded-xl border border-resume-line shadow-lg lg:h-auto lg:flex-1")
+        div.f-sys-top
+          span.f-sys-title= t('sims.fanout.ui.boardTitle')
+          span.f-summary
+            span= t('sims.fanout.ui.summaryFeed')
+            |  ·
+            |
+            span.f-summary-n(data-f="uf-count") 0
+            |
+            |
+            span= t('sims.fanout.ui.summaryRows')
+
+        div.f-boards
+          div.f-board
+            svg.f-edges(aria-hidden="true")
+            div.f-pulses(aria-hidden="true")
+            div.f-nodes
+              +foNode('post', true)
+              //- The counters are the point the Outcome line makes in words:
+              //- engagement lands on this one record, and the distribution
+              //- records underneath are never rewritten for it.
+              +foNode('feed')
+                span.f-node-meta
+                  span.f-meta
+                    svg(viewBox="0 0 14 14", width="10", height="10", fill="none", stroke="currentColor", stroke-width="1.5", aria-hidden="true")
+                      path(d="M7 12S1.6 8.7 1.6 5.3A2.9 2.9 0 0 1 7 3.8a2.9 2.9 0 0 1 5.4 1.5C12.4 8.7 7 12 7 12Z")
+                    span(data-f="likes", aria-label=t('sims.fanout.ui.board.feedLikes')) 0
+                  span.f-meta
+                    svg(viewBox="0 0 14 14", width="10", height="10", fill="none", stroke="currentColor", stroke-width="1.5", aria-hidden="true")
+                      path(d="M12 8.2a1.6 1.6 0 0 1-1.6 1.6H5l-3 2.2V3.4A1.6 1.6 0 0 1 3.6 1.8h6.8A1.6 1.6 0 0 1 12 3.4Z")
+                    span(data-f="comments", aria-label=t('sims.fanout.ui.board.feedComments')) 0
+              +foNode('kafka')
+              +foNode('consumer')
+              div.f-cloud(data-node="cloud", data-life="1")
+                div.f-dots
+                  each d in Array.from({ length: fo.cloudDots }, (v, i) => i)
+                    span.f-dot(data-dot=d)
+                span.f-cloud-label
+                  span= t('sims.fanout.ui.board.cloud')
+                  |  ·
+                  |
+                  span= num(fo.followerCount)
+
+        //- The caption is paced to be read, but a visitor who wants a second
+        //- look should not have to run the whole thing again. The stepper
+        //- walks the notes this run actually passed and touches nothing else:
+        //- the board keeps the state the run left it in.
+        div.f-caption
+          div.f-caption-text
+            each key in ['idle', 'p1', 'p2', 'p3', 'p4', 'p5', 'p6', 'd1', 'd2', 'd3', 'd4']
+              span.f-cap(data-cap=key)= t(`sims.fanout.ui.caps.${key}`)
+          div.f-capnav(data-f="capnav", hidden)
+            button.f-capbtn(type="button", data-f="cap-prev", aria-label=t('sims.fanout.ui.capPrev'))
+              svg(viewBox="0 0 14 14", width="11", height="11", fill="none", stroke="currentColor", stroke-width="1.8", aria-hidden="true")
+                path(d="M3.5 8.5 7 5l3.5 3.5", stroke-linecap="round", stroke-linejoin="round")
+            button.f-capbtn(type="button", data-f="cap-next", aria-label=t('sims.fanout.ui.capNext'))
+              svg(viewBox="0 0 14 14", width="11", height="11", fill="none", stroke="currentColor", stroke-width="1.8", aria-hidden="true")
+                path(d="M3.5 5.5 7 9l3.5-3.5", stroke-linecap="round", stroke-linejoin="round")
+
+      +simAside('fanout')

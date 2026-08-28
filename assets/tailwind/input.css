@@ -636,21 +636,101 @@ li[data-sum]:not([hidden]) { display: flex; }
 
 /* --- simulation 03: Haloki ------------------------------------------------ */
 
-/* Haloki's role block lives in a narrow column beside the phone rather than
-   full width beneath it, so its rows stack label-over-value instead of running
-   side by side. Four short rows can never match a 702px phone frame for
-   height, so the column earns its height from rhythm and a wrapped measure
-   rather than from padding. */
-.h-aside-stacked dl > div {
-  flex-direction: column;
-  gap: 0.3rem;
-  padding-block: 0.95rem;
+/* The money-flow rail: the column beside the phone, and the only view that
+   shows the two legs running at once. Node colours are the ones already used
+   inside the frame — #059669 settled, #d97706 in flight, #d8d8dd idle — so the
+   rail and the screens read as one system rather than two.
+
+   The run between two nodes is drawn on the node itself, spanning its full
+   height, so a node that wraps to three lines keeps its connector joined. */
+.h-flow-node {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: baseline;
+  column-gap: 0.75rem;
+  padding-left: 1.5rem;
+  padding-bottom: 1.15rem;
 }
 
-.h-aside-stacked dl > div:first-child { padding-top: 0; }
-.h-aside-stacked dl > div:last-child { padding-bottom: 0; }
-.h-aside-stacked dt { width: auto; }
-.h-aside-stacked dd { max-width: 46ch; }
+.h-flow-node:last-child { padding-bottom: 0; }
+
+.h-flow-node::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1.1rem;
+  bottom: 0;
+  width: 1.5px;
+  background: #d8d8dd;
+}
+
+.h-flow-node:last-child::before { content: none; }
+
+.h-flow-dot {
+  position: absolute;
+  left: 0;
+  top: 0.28rem;
+  width: 11px;
+  height: 11px;
+  border-radius: 9999px;
+  background: #d8d8dd;
+  transition: background-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.h-flow-label {
+  grid-column: 1;
+  font-size: 12.5px;
+  color: var(--color-resume-muted);
+}
+
+.h-flow-value {
+  grid-column: 2;
+  text-align: right;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-resume-muted);
+}
+
+.h-flow-meta {
+  grid-column: 1 / -1;
+  margin-top: 0.15rem;
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--color-resume-muted);
+}
+
+/* An empty meta line must not open a gap under an idle node. */
+.h-flow-meta:empty { display: none; }
+
+.h-flow-node[data-fstate="live"] .h-flow-dot {
+  background: transparent;
+  box-shadow: inset 0 0 0 2px #d97706;
+}
+
+.h-flow-node[data-fstate="done"] .h-flow-dot { background: #059669; }
+
+.h-flow-node[data-fstate="live"] .h-flow-label,
+.h-flow-node[data-fstate="done"] .h-flow-label { color: var(--color-resume-ink); }
+
+.h-flow-node[data-fstate="live"] .h-flow-value,
+.h-flow-node[data-fstate="done"] .h-flow-value {
+  font-weight: 700;
+  color: var(--color-resume-ink);
+}
+
+.h-flow-note {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-resume-line);
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--color-resume-muted);
+}
+
+/* The payout has landed while the debit is still in flight — the one fact the
+   phone cannot show on any single screen. */
+.h-flow[data-fnote="settling"] .h-flow-note { color: var(--color-resume-ink); }
 
 
 @keyframes h-sheet-up {
@@ -1095,6 +1175,486 @@ li[data-sum]:not([hidden]) { display: flex; }
 .h-input-boxed:focus-visible {
   outline: none;
   border-color: #131316;
+}
+
+/* --- simulation 04: Fan-out on write -------------------------------------- */
+
+/* The phone is the product and stays on the resume's light palette. The board
+   is the mechanism and is deliberately a different surface: what a user sees
+   versus what the system did. Accents are one, thin, and only ever on the part
+   that is working right now. A board where everything glows says nothing.
+
+   Hallmark · component: fan-out board · genre: system-diagram
+   theme: dark board inside the project's light frame
+   states: idle · active · done · present · absent · clearing */
+
+[data-sim="fanout"] {
+  --f-bg: #0c0f14;
+  --f-node: #161b23;
+  --f-line: #232b36;
+  --f-text: #e7eaef;
+  --f-muted: #8a93a2;
+  --f-dim: #6d7686;
+  --f-write: #34d399;
+  --f-warn: #f87171;
+}
+
+/* Phone ------------------------------------------------------------------ */
+
+/* The frame itself is the phone — same shell, status bar and 48px app header
+   as Haloki, so the two native-app simulations read as the same device. The
+   shell is Tailwind on the element; nothing here needs to restate it.
+
+   The composer is the idle state; once a post exists it is replaced by the
+   post itself, exactly as the real product does. */
+[data-sim="fanout"] .f-post { display: none; }
+[data-sim="fanout"]:not([data-phase="idle"]) .f-post { display: block; }
+[data-sim="fanout"]:not([data-phase="idle"]) .f-composer { display: none; }
+
+.f-composer, .f-post {
+  border-radius: 12px;
+  border: 1px solid #d8d8dd;
+  padding: 12px;
+}
+
+.f-avatar {
+  display: grid;
+  height: 28px;
+  width: 28px;
+  flex: none;
+  place-items: center;
+  border-radius: 9999px;
+  background: #131316;
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.f-input {
+  margin-top: 10px;
+  width: 100%;
+  resize: none;
+  border-radius: 8px;
+  border: 1px solid #d8d8dd;
+  padding: 8px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #131316;
+}
+
+.f-input:focus, .f-input:focus-visible { outline: none; border-color: #131316; }
+
+.f-post-body {
+  margin-top: 8px;
+  overflow-wrap: anywhere;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #131316;
+  white-space: pre-wrap;
+}
+
+.f-strong { font-weight: 700; color: #131316; }
+
+.f-tag {
+  border-radius: 9999px;
+  border: 1px solid #d8d8dd;
+  padding: 1px 7px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #6b6b76;
+}
+
+[data-sim="fanout"] .f-tag > span { display: none; }
+[data-sim="fanout"][data-phase="live"] .f-tag-live { display: inline; }
+[data-sim="fanout"][data-phase="publishing"] .f-tag-run { display: inline; }
+[data-sim="fanout"][data-phase="clearing"] .f-tag-del { display: inline; }
+[data-sim="fanout"][data-phase="live"] .f-tag { border-color: #10b981; color: #047857; }
+[data-sim="fanout"][data-phase="clearing"] .f-tag { border-color: #fca5a5; color: #b91c1c; }
+
+.f-primary {
+  border-radius: 9999px;
+  background: #131316;
+  padding: 8px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #fff;
+  transition: opacity 0.15s ease, transform 0.1s ease;
+}
+
+.f-primary:hover { opacity: 0.9; }
+.f-primary:active { transform: translateY(1px); }
+.f-primary:disabled { opacity: 0.4; pointer-events: none; }
+
+.f-danger {
+  border-radius: 9999px;
+  border: 1px solid #d8d8dd;
+  padding: 7px 14px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #b91c1c;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.f-danger:hover { border-color: #fca5a5; background: #fef2f2; }
+
+/* Anything that would start a second run is inert while one is in flight. */
+[data-sim="fanout"][data-running="1"] .f-primary,
+[data-sim="fanout"][data-running="1"] .f-danger {
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+/* Board ------------------------------------------------------------------ */
+
+.f-sys { background: var(--f-bg); }
+
+.f-sys-top {
+  display: flex;
+  height: 44px;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid var(--f-line);
+  padding: 0 16px;
+}
+
+.f-sys-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--f-text);
+}
+
+.f-summary {
+  display: none;
+  margin-left: auto;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+  color: var(--f-muted);
+}
+
+[data-sim="fanout"][data-hasrows="1"] .f-summary { display: inline; }
+.f-summary-n { font-weight: 700; color: var(--f-write); }
+
+.f-boards { position: relative; min-height: 0; flex: 1; padding: 18px 20px; }
+.f-board { position: absolute; inset: 18px 20px; }
+
+/* The chain runs left to right along the top and the followers spread out
+   underneath it, so the fan-out has the full width of the board to open into.
+   The row gap is deliberately large: it is where the fan lives. */
+.f-nodes {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  height: 100%;
+  /* No padding of its own: the board is already inset 18px inside .f-boards,
+     which is the air above the chain and below the follower grid. Anything
+     here would be taken out of the gap between them instead. */
+  padding-top: 0;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-rows: auto auto;
+  /* space-between rather than space-evenly: all the slack belongs between the
+     chain and the follower grid, not split three ways with the board's own
+     edges, which already have the board inset for air. In the 380px console
+     that is the difference between a 14px gap and a 60px one. */
+  align-content: space-between;
+  column-gap: 34px;
+  row-gap: 0;
+}
+
+.f-nodes [data-node="post"] { grid-column: 1; grid-row: 1; }
+.f-nodes [data-node="feed"] { grid-column: 2; grid-row: 1; }
+.f-nodes [data-node="kafka"] { grid-column: 3; grid-row: 1; }
+.f-nodes [data-node="consumer"] { grid-column: 4; grid-row: 1; }
+/* The grid of followers hugs its dots instead of stretching, so the empty
+   space around it reads as the board rather than as an empty container. */
+.f-nodes [data-node="cloud"] { grid-column: 1 / -1; grid-row: 2; }
+
+.f-node {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+  border-radius: 10px;
+  border: 1px solid var(--f-line);
+  background: var(--f-node);
+  padding: 8px 12px;
+  transition: border-color 0.25s ease, background-color 0.25s ease,
+    box-shadow 0.25s ease, opacity 0.35s ease, transform 0.35s ease;
+}
+
+/* The board starts empty. Every node, the follower grid included, is put there
+   by the run and taken away by the delete, which is what makes it read as
+   something happening rather than a diagram being coloured in. */
+[data-sim="fanout"] [data-life="1"] { opacity: 0; transform: scale(0.94); }
+[data-sim="fanout"] [data-life="1"].is-present { opacity: 1; transform: none; }
+
+.f-node-tag {
+  overflow: hidden;
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--f-dim);
+}
+
+.f-node-label {
+  overflow: hidden;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--f-text);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Engagement on the feed record. Deliberately not green: green on this board
+   means "this is the part working right now", and a counter that ticks is
+   already telling you that by moving. */
+.f-node-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 5px;
+}
+
+.f-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  color: var(--f-text);
+}
+
+.f-meta svg { color: var(--f-dim); flex: none; }
+
+/* Nothing has been written yet, so the counters read as placeholders until
+   the feed record exists. */
+[data-sim="fanout"] [data-node="feed"]:not(.is-present) .f-node-meta { visibility: hidden; }
+
+@keyframes f-breathe {
+  0%, 100% { box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.3), 0 0 16px -6px rgba(52, 211, 153, 0.8); }
+  50% { box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.5), 0 0 26px -6px rgba(52, 211, 153, 1); }
+}
+
+.f-node.is-done { border-color: rgba(52, 211, 153, 0.4); }
+
+.f-node.is-active {
+  border-color: var(--f-write);
+  background: #141d1e;
+  animation: f-breathe 2.4s ease-in-out infinite;
+}
+
+/* A delete travels the same chain, so a node it has reached stays marked, the
+   way it does on the way in. Red rather than green, and no breathing: this one
+   is not working, it is going. */
+[data-sim="fanout"][data-phase="clearing"] .f-node.is-done {
+  border-color: rgba(248, 113, 113, 0.45);
+  background: var(--f-node);
+}
+
+[data-sim="fanout"][data-phase="clearing"] .f-node.is-active {
+  border-color: var(--f-warn);
+  background: #1d1618;
+  animation: none;
+  box-shadow: 0 0 0 1px rgba(248, 113, 113, 0.35), 0 0 20px -6px rgba(248, 113, 113, 0.9);
+}
+
+[data-sim="fanout"] .f-node-tag-del { display: none; }
+[data-sim="fanout"][data-phase="clearing"] .f-node-tag-del { display: block; color: var(--f-warn); }
+[data-sim="fanout"][data-phase="clearing"] [data-node="post"] .f-node-tag:not(.f-node-tag-del) { display: none; }
+
+/* The follower grid. Thirty dots for the whole list, lit in three waves so the
+   batches are visible. */
+
+.f-cloud {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  border-radius: 12px;
+  border: 1px dashed var(--f-line);
+  padding: 14px;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.f-dots { display: grid; grid-template-columns: repeat(10, 1fr); gap: 14px; place-items: center; }
+
+.f-dot {
+  height: 11px;
+  width: 11px;
+  border-radius: 9999px;
+  background: #171d26;
+  box-shadow: inset 0 0 0 1px #262f3b;
+  transition: background-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.f-dot.is-lit { background: var(--f-write); box-shadow: 0 0 10px -1px rgba(52, 211, 153, 0.75); }
+
+.f-cloud-label {
+  text-align: center;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--f-dim);
+}
+
+/* Edges and pulses. Both are drawn from the nodes' measured positions, so no
+   coordinate appears in this file or in the markup. */
+
+.f-edges { position: absolute; inset: 0; overflow: visible; pointer-events: none; }
+
+.f-edge {
+  fill: none;
+  stroke: #2f3a48;
+  stroke-width: 1.25;
+  opacity: 0;
+  transition: stroke 0.3s ease, opacity 0.3s ease;
+}
+
+.f-edge.is-on { opacity: 1; }
+.f-edge.is-lit { stroke: var(--f-write); opacity: 1; }
+[data-sim="fanout"][data-phase="clearing"] .f-edge.is-lit { stroke: var(--f-warn); }
+
+.f-pulses { position: absolute; inset: 0; pointer-events: none; }
+
+@keyframes f-travel {
+  from { offset-distance: 0%; opacity: 0; }
+  12% { opacity: 1; }
+  88% { opacity: 1; }
+  to { offset-distance: 100%; opacity: 0; }
+}
+
+.f-pulse {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 7px;
+  width: 7px;
+  border-radius: 9999px;
+  background: #6ee7b7;
+  box-shadow: 0 0 10px 2px rgba(52, 211, 153, 0.6);
+  offset-rotate: 0deg;
+  animation: f-travel var(--f-dur, 620ms) linear forwards;
+}
+
+[data-sim="fanout"][data-phase="clearing"] .f-pulse {
+  background: #fca5a5;
+  box-shadow: 0 0 10px 2px rgba(248, 113, 113, 0.6);
+}
+
+/* Caption ---------------------------------------------------------------- */
+
+.f-caption {
+  display: flex;
+  min-height: 64px;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 14px;
+  border-top: 1px solid var(--f-line);
+  padding: 12px 16px;
+}
+
+.f-caption-text { min-width: 0; flex: 1; }
+
+/* Two arrows and nothing else. The stepper only exists once a run has fully
+   settled, so it is never competing with the caption it is there to re-read,
+   and its ends never move under the reader. */
+.f-capnav { display: flex; flex: none; align-items: center; gap: 6px; }
+.f-capnav[hidden] { display: none; }
+
+.f-capbtn {
+  display: inline-flex;
+  height: 24px;
+  width: 24px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 1px solid var(--f-line);
+  color: var(--f-muted);
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.f-capbtn:hover { color: var(--f-text); border-color: var(--f-muted); }
+.f-capbtn:disabled { opacity: 0.35; pointer-events: none; }
+
+/* The board is dark, so the phone's ink outline would be invisible here. */
+.f-capbtn:focus-visible {
+  outline: 2px solid var(--f-text);
+  outline-offset: 2px;
+}
+
+[data-sim="fanout"] .f-cap { display: none; font-size: 12px; line-height: 1.45; color: var(--f-muted); }
+[data-sim="fanout"][data-cap="idle"] .f-cap[data-cap="idle"],
+[data-sim="fanout"][data-cap="p1"] .f-cap[data-cap="p1"],
+[data-sim="fanout"][data-cap="p2"] .f-cap[data-cap="p2"],
+[data-sim="fanout"][data-cap="p3"] .f-cap[data-cap="p3"],
+[data-sim="fanout"][data-cap="p4"] .f-cap[data-cap="p4"],
+[data-sim="fanout"][data-cap="p5"] .f-cap[data-cap="p5"],
+[data-sim="fanout"][data-cap="p6"] .f-cap[data-cap="p6"],
+[data-sim="fanout"][data-cap="d1"] .f-cap[data-cap="d1"],
+[data-sim="fanout"][data-cap="d2"] .f-cap[data-cap="d2"],
+[data-sim="fanout"][data-cap="d3"] .f-cap[data-cap="d3"],
+[data-sim="fanout"][data-cap="d4"] .f-cap[data-cap="d4"] { display: block; }
+
+[data-sim="fanout"][data-cap="idle"] .f-cap[data-cap="idle"] { color: var(--f-dim); }
+
+/* Mobile ----------------------------------------------------------------- */
+
+/* Below lg the board becomes a single stack. It is sized to fit the pane
+   rather than scroll: a pipeline you have to scroll through is a pipeline you
+   cannot watch, and the whole point is seeing one end reach the other. The
+   nodes lose a little padding, the follower grid goes wide and shallow, and
+   the edges redraw themselves because they are measured, not written down. */
+@media (max-width: 1023px) {
+  .f-boards { padding: 14px 16px; }
+  .f-board { position: relative; inset: auto; height: 100%; }
+
+  .f-nodes {
+    height: 100%;
+    align-content: space-between;
+    padding-left: 26px;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: repeat(4, auto) minmax(0, auto);
+    column-gap: 0;
+    row-gap: 0;
+  }
+
+  .f-nodes [data-node="post"] { grid-column: 1; grid-row: 1; }
+  .f-nodes [data-node="feed"] { grid-column: 1; grid-row: 2; }
+  .f-nodes [data-node="kafka"] { grid-column: 1; grid-row: 3; }
+  .f-nodes [data-node="consumer"] { grid-column: 1; grid-row: 4; }
+  .f-nodes [data-node="cloud"] { grid-column: 1; grid-row: 5; }
+
+  /* On a tablet the chain would otherwise stretch to absurd widths while the
+     follower grid stays the interesting part, so the four nodes are capped and
+     centred and only the grid runs full width. */
+  .f-nodes .f-node { justify-self: center; width: min(100%, 460px); }
+  .f-node { padding: 6px 10px; }
+  .f-node-tag { font-size: 8px; }
+  .f-node-label { font-size: 12px; }
+
+  .f-cloud { gap: 8px; padding: 10px; }
+  .f-dots { gap: 7px; }
+  .f-dot { height: 9px; width: 9px; }
+
+  .f-caption { min-height: 0; padding: 10px 16px; }
+  [data-sim="fanout"] .f-cap { font-size: 11.5px; }
+}
+
+.f-danger:focus-visible,
+.f-primary:focus-visible {
+  outline: 2px solid #131316;
+  outline-offset: 2px;
 }
 
 /* Reduced motion: interactions jump straight to their end state; the
