@@ -29,7 +29,7 @@ data/profile.json           # Shared resume data
 locales/vi.json             # Vietnamese content
 locales/en.json             # English content
 layout/                     # Master page, Pug partials, and page entry
-scripts/build-html.js       # Pug renderer for index.html and en.html
+scripts/build-html.js       # Pug renderer for index.html and vi.html
 tests/                      # Node test suite
 ```
 
@@ -44,14 +44,14 @@ npm run dev
 
 The `dev` command performs an initial build, then runs these processes together:
 
-1. A Pug/JSON watcher that regenerates `index.html` and `en.html`.
+1. A Pug/JSON watcher that regenerates `index.html` and `vi.html`.
 2. A Tailwind watcher that regenerates `assets/css/style.css`.
 3. A BrowserSync server with live reload.
 
 BrowserSync serves the project at `http://localhost:3000/` by default.
 
-- Vietnamese: `http://localhost:3000/`
-- English: `http://localhost:3000/en.html`
+- English: `http://localhost:3000/`
+- Vietnamese: `http://localhost:3000/vi.html`
 
 Press `Ctrl+C` in the terminal to stop all development processes.
 
@@ -78,4 +78,4 @@ npm run build
 npm test
 ```
 
-`index.html`, `en.html`, and `assets/css/style.css` are generated files that must be committed to preserve compatibility with the current GitHub Pages deployment flow.
+`index.html`, `vi.html`, and `assets/css/style.css` are generated files that must be committed to preserve compatibility with the current GitHub Pages deployment flow.

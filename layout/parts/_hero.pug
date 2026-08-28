@@ -1,0 +1,31 @@
+//- Chapter 0 · The Answer.
+//- The first thing an employer sees: who this is, what he does, and the two
+//- actions worth taking. Typography only — the four simulations below are the
+//- page's imagery, so a hero graphic would only compete with them.
+//-
+//- The skills chips live here rather than in the résumé (D6). They are the
+//- highest keyword-density, lowest-effort block on the page, and at 90% scroll
+//- depth both human and automated screeners have already left.
+
+section#top(class="scroll-mt-20 px-4 pb-12 pt-14 sm:px-6 sm:pb-16 sm:pt-20 print:hidden")
+  div(class="mx-auto max-w-6xl")
+    h1(class="max-w-4xl text-[2.5rem] font-extrabold leading-[1.05] tracking-tight text-resume-ink [overflow-wrap:anywhere] sm:text-6xl lg:text-7xl")= t('identity.name')
+
+    p(class="mt-6 max-w-[62ch] text-base leading-relaxed text-resume-body sm:mt-8 sm:text-lg")= t('hero.positioning')
+
+    ul(class="mt-6 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] font-semibold uppercase tracking-wide text-resume-muted sm:text-xs")
+      each item, i in tl('hero.meta')
+        li(class="flex items-center gap-2")
+          if i > 0
+            span(aria-hidden="true", class="text-resume-line") ·
+          span= item
+
+    div(class="mt-8 flex flex-wrap items-center gap-3")
+      a.btn-primary(href="#work")= t('hero.ctaWork')
+      button.btn-secondary.js-print-button(type="button")= t('hero.ctaCv')
+
+    div(class="mt-10 border-t border-resume-line pt-6 sm:mt-12")
+      h2(class="text-[10px] font-bold uppercase tracking-widest text-resume-muted")= t('hero.skillsLabel')
+      ul(class="mt-3 flex flex-wrap gap-1.5")
+        each skill in tl('hero.skills')
+          li(class="rounded-full border border-resume-line bg-white px-2.5 py-1 text-xs font-medium text-resume-ink")= skill

@@ -1,12 +1,26 @@
 include _sim_shared.pug
 
-section#projects(class="scroll-mt-20 px-4 pb-16 pt-10 sm:px-6 print:hidden")
+//- Chapters 1 and 2, merged (D15). One heading, one intro: the capability cards
+//- were already this section's table of contents, so a second header above them
+//- was announcing the same thing twice.
+//-
+//- Simulation order matches the pill order. Both were set together and neither
+//- can move without the other — see _capabilities.pug.
+
+section#work(class="scroll-mt-20 px-4 pb-16 sm:px-6 print:hidden")
   div(class="mx-auto max-w-6xl")
-    header(class="mb-10 max-w-3xl")
-      p(class="text-xs font-bold uppercase tracking-widest text-resume-muted")= t('projects.kicker')
-      h2(class="mt-1 text-3xl font-extrabold tracking-tight text-resume-ink")= t('projects.title')
+    header(class="max-w-3xl")
+      h2(class="text-2xl font-extrabold tracking-tight text-resume-ink sm:text-3xl")= t('projects.title')
       p(class="mt-3 text-sm leading-relaxed text-resume-body")= t('projects.intro')
-    include _sim_learning.pug
-    include _sim_meeting.pug
-    include _sim_haloki.pug
-    include _sim_fanout.pug
+
+    include _capabilities.pug
+
+    //- The gap between simulations is the container's job. It used to be
+    //- ad-hoc mt-20/mb-20 on three of the four articles, which happened to work
+    //- for one specific order — reordering them left no gap at all between the
+    //- fan-out and Meeting. Now the order can change freely.
+    div(class="mt-16 space-y-20")
+      include _sim_learning.pug
+      include _sim_meeting.pug
+      include _sim_haloki.pug
+      include _sim_fanout.pug

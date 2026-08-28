@@ -1,0 +1,30 @@
+//- Chapter 4 · The exit.
+//- The page used to end on "Cao Thang Technical College · 2015–2018" — the
+//- weakest fact about him as the last thing an employer read, with no address
+//- to reply to anywhere in the markup. The email is the largest interactive
+//- element on the page for that reason. No availability status (D10): this
+//- section opens the door, it does not claim to be looking.
+
+section#contact(class="scroll-mt-20 border-t border-resume-line px-4 py-14 sm:px-6 sm:py-20 print:hidden")
+  div(class="mx-auto max-w-6xl")
+    h2(class="text-2xl font-extrabold tracking-tight text-resume-ink sm:text-3xl")= t('contact.title')
+    p(class="mt-3 max-w-[52ch] text-sm leading-relaxed text-resume-body sm:text-base")= t('contact.line')
+
+    a.contact-email(href=`mailto:${profile.email}`)= profile.email
+
+    ul(class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm")
+      li
+        a.contact-link(href=profile.github, rel="noopener noreferrer", target="_blank")
+          span(class="text-[10px] font-bold uppercase tracking-widest text-resume-muted")= t('contact.githubLabel')
+          span(class="font-semibold text-resume-ink")= profile.githubHandle
+      li
+        a.contact-link(href=profile.linkedin, rel="noopener noreferrer", target="_blank")
+          span(class="text-[10px] font-bold uppercase tracking-widest text-resume-muted")= t('contact.linkedinLabel')
+          span(class="font-semibold text-resume-ink")= profile.linkedinHandle
+      li
+        a.contact-link(href=`tel:${profile.phone.replace(/\s/g, '')}`)
+          span(class="text-[10px] font-bold uppercase tracking-widest text-resume-muted")= t('contact.phoneLabel')
+          span(class="font-semibold text-resume-ink")= profile.phone
+
+    div(class="mt-10 border-t border-resume-line pt-6")
+      button.btn-primary.js-print-button(type="button")= t('resume.download')

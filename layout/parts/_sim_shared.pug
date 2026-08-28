@@ -1,4 +1,10 @@
 //- Shared building blocks for UI simulations.
+//-
+//- The aside runs Role · Stack · The hard part · Outcome. "Scale" used to sit
+//- in the third slot holding prose rather than figures, which read as a metric
+//- slot that could not be filled; it was removed rather than renamed. "The hard
+//- part" names the actual engineering problem and its trade-off, which is the
+//- one thing on the page a CV bullet cannot carry.
 
 mixin simChrome(url)
   div(class="flex items-center gap-2 border-b border-resume-line bg-[#f6f6f8] px-3 py-2")
@@ -45,8 +51,8 @@ mixin simAside(simKey, extraClass)
         dt(class="w-24 shrink-0 text-[10px] font-bold uppercase tracking-widest text-resume-muted")= t('sims.common.stackLabel')
         dd(class="leading-snug")= t(`sims.${simKey}.stack`)
       div(class="flex flex-col gap-1 py-3 sm:flex-row sm:items-baseline sm:gap-4")
-        dt(class="w-24 shrink-0 text-[10px] font-bold uppercase tracking-widest text-resume-muted")= t('sims.common.scaleLabel')
-        dd(class="leading-snug")= t(`sims.${simKey}.scale`)
+        dt(class="w-24 shrink-0 text-[10px] font-bold uppercase tracking-widest text-resume-muted")= t('sims.common.hardPartLabel')
+        dd(class="leading-snug text-resume-ink")= t(`sims.${simKey}.hardPart`)
       div(class="flex flex-col gap-1 pt-3 sm:flex-row sm:items-baseline sm:gap-4")
         dt(class="w-24 shrink-0 text-[10px] font-bold uppercase tracking-widest text-resume-muted")= t('sims.common.outcomeLabel')
         dd(class="leading-snug")= t(`sims.${simKey}.outcome`)

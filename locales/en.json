@@ -6,13 +6,18 @@
     "label": "Choose language"
   },
   "identity": {
+    "name": "Luan Vu Minh",
     "career": "Software Engineer"
   },
   "contact": {
     "phoneLabel": "Phone",
     "emailLabel": "Email",
     "addressLabel": "Address",
-    "address": "Tan Ky Tan Quy St., Tan Son Nhi Ward, HCMC"
+    "address": "Tan Ky Tan Quy St., Tan Son Nhi Ward, HCMC",
+    "title": "Get in touch",
+    "line": "If you would like to talk, email is the fastest way to reach me.",
+    "githubLabel": "GitHub",
+    "linkedinLabel": "LinkedIn"
   },
   "summary": {
     "title": "Professional Summary",
@@ -31,7 +36,7 @@
         "bullets": [
           "Designed and developed full-stack workflows for an AI-powered platform providing Software Development, Data Analysis, and Test Analysis programs. Built browser-based practice applications, including a VS Code-style coding environment, SQL Playground, Jira simulation, and Excel exercises, allowing learners to complete hands-on tasks without installing external software. Integrated LLM APIs to generate tasks, evaluate learner submissions, and provide contextual guidance through an AI Facilitator; integrated HeyGen to deliver lessons through an AI Tutor.",
           "Designed the data model and end-to-end workflows for a talent assessment platform serving both candidates and recruiters. Integrated LLM APIs to generate job-specific simulations, evaluate candidate performance against predefined criteria, and provide AI-generated feedback. The platform allows recruiters to assess practical capabilities beyond CVs and filter candidates based on simulation results.",
-          "Developed BitMeet, an internal meeting platform, integrating LiveKit, Deepgram, and LLM APIs for real-time meetings, translation, transcription, and AI-generated summaries."
+          "Developed BitMeet, an internal meeting platform, integrating LiveKit, Deepgram, and LLM APIs for real-time meetings with near-real-time transcription and translation, plus AI-generated summaries."
         ]
       },
       "hahaloloBackend": {
@@ -125,34 +130,28 @@
     "communicationValue": "Strong communication skills in the workplace."
   },
   "nav": {
-    "projects": "Projects",
-    "cv": "CV"
+    "work": "Work",
+    "resume": "Résumé",
+    "contact": "Contact",
+    "downloadCv": "CV (PDF)"
   },
   "projects": {
-    "kicker": "Part 1",
     "title": "Projects I Worked On",
-    "intro": "These are products I helped build as part of a team, not personal side projects. Each one is recreated here as an interactive simulation you can click through yourself. My role, stack and what I actually built are listed below each demo."
-  },
-  "cvSection": {
-    "kicker": "Part 2",
-    "title": "Curriculum Vitae",
-    "hint": "The PDF is generated through your browser's print dialog, optimised for A4.",
-    "download": "Download CV (PDF)"
+    "intro": "These are products I helped build as part of a team, not personal side projects. Each one is recreated here as an interactive simulation. My role, stack and what I actually built are listed below each demo.",
+    "pillsLabel": "Jump to a project"
   },
   "sims": {
     "common": {
-      "simTag": "Interactive simulation",
       "roleLabel": "Role",
       "stackLabel": "Stack",
-      "scaleLabel": "Scale",
-      "outcomeLabel": "Outcome"
+      "outcomeLabel": "Outcome",
+      "hardPartLabel": "The hard part"
     },
     "learning": {
       "name": "Interactive Learning",
       "productType": "Browser-based learning platform",
-      "role": "Database design · built the hands-on practice applications, including a browser-based simulated IDE",
+      "role": "Database design · built the hands-on practice applications",
       "stack": "TypeScript, React, NestJS, MongoDB, Redis, BullMQ, LLM APIs",
-      "scale": "Multiple training programs · all hands-on practice happens in the browser",
       "outcome": "Learners complete hands-on tasks without installing any software",
       "ui": {
         "outlineTitle": "Course outline",
@@ -247,19 +246,19 @@
         "submitSuccess": "All 3 checks passed. Lesson complete!",
         "submitFail": "Not yet. Fix the lines that are still underlined and submit again.",
         "captionBtnLabel": "Toggle captions"
-      }
+      },
+      "hardPart": "Grading hands-on work without a real toolchain. Moving the environment into the browser removes the install barrier, but it also removes the compiler that would normally decide whether an answer is right, so evaluation moves to LLM APIs scoring against predefined criteria."
     },
     "meeting": {
       "name": "Meeting",
       "productType": "Browser-based meeting platform with an AI layer",
-      "role": "Database design · AI features (live captions, translation, summaries) · UI/UX",
+      "role": "Database design · AI features (near-realtime captions, translation, summaries) · UI/UX",
       "stack": "TypeScript, NestJS, React, LiveKit, Deepgram, LLM APIs, MongoDB",
-      "scale": "Internal meeting platform, used daily for remote meetings",
       "outcome": "Leave every meeting with captions, translations and an AI-generated summary. No manual notes.",
       "ui": {
         "lobbyTitle": "Ready to join?",
         "cameraOff": "Camera is off",
-        "aiHint": "AI is ready: live captions · translation · meeting summary",
+        "aiHint": "AI is ready: near-realtime captions · translation · meeting summary",
         "joinBtn": "Join now",
         "you": "You",
         "micBtn": "Mic",
@@ -297,15 +296,15 @@
           "Follow-up meeting on Monday to review beta feedback."
         ],
         "dataNote": "Meeting data is processed only to generate the summary and is deleted when the meeting ends."
-      }
+      },
+      "hardPart": "Captions cannot be instant and accurate at the same time. Speech-to-text, translation and rendering each add latency, and waiting for more audio buys accuracy at the cost of lag, so the pipeline is tuned for near-realtime rather than realtime."
     },
     "haloki": {
       "name": "Haloki",
       "productType": "Cross-border money transfer app",
-      "role": "Initial product and technical design · database schema design · APIs integrating Plaid for bank-account connectivity and financial workflows",
+      "role": "Contributed to the initial product and technical design · database schema design · APIs integrating Plaid for bank-account connectivity and financial workflows",
       "stack": "Java, Spring, MongoDB, Plaid, Stripe",
-      "scale": "US bank funding by ACH, domestic payout in the recipient's country",
-      "outcome": "Designed so funds collected in the US are paid out from local VND liquidity, leaving the recipient nothing to wait on while the ACH debit settles",
+      "outcome": "Funds collected in the US are paid out from local VND liquidity, so recipients don't have to wait for the ACH debit to settle.",
       "ui": {
         "appName": "Haloki",
         "back": "Back",
@@ -335,11 +334,11 @@
         "fromLabel": "From",
         "amountLabel": "Amount",
         "feeLabel": "Service fee",
-    "feeInfoLabel": "Show the service fee breakdown",
-    "feeHaloki": "Haloki fee",
-    "feeHalokiNote": "Covers bank verification, balance checks, and ledger.",
-    "feeAch": "ACH fee",
-    "feeAchNote": "Cost of the bank transfer network.",
+        "feeInfoLabel": "Show the service fee breakdown",
+        "feeHaloki": "Haloki fee",
+        "feeHalokiNote": "Covers bank verification, balance checks, and ledger.",
+        "feeAch": "ACH fee",
+        "feeAchNote": "Cost of the bank transfer network.",
         "feeShort": "Fee",
         "feeFree": "Free",
         "creditedLabel": "Credited to your balance",
@@ -349,9 +348,9 @@
         "errMin": "Minimum is {min}",
         "errMax": "Daily ACH limit is {max}",
         "errBalance": "You only have {available} available",
-    "errBankBalance": "Your bank account has {available} available",
-    "balanceChecking": "Checking balance with Plaid",
-    "balanceAvailable": "Available balance · {amount}",
+        "errBankBalance": "Your bank account has {available} available",
+        "balanceChecking": "Checking balance with Plaid",
+        "balanceAvailable": "Available balance · {amount}",
         "youSendLabel": "You send",
         "rateLabel": "Rate",
         "rateNote": "indicative demo rate",
@@ -404,14 +403,14 @@
         "flowPayoutMeta": "From local VND liquidity",
         "flowNoteIdle": "Fund the wallet, then send, to watch the money move leg by leg.",
         "flowNoteSettling": "The recipient has been paid from local VND liquidity. The ACH debit still has {days} business days to settle."
-      }
+      },
+      "hardPart": "An ACH debit takes days to settle, but the recipient should not wait days for the money. Paying out from local VND liquidity decouples the payout leg from the funding leg, and moves the settlement risk onto the platform."
     },
     "fanout": {
-      "name": "Hahalolo",
+      "name": "Hahalolo Social Network",
       "productType": "Social network news feed",
-      "role": "Implemented the fan-out-on-write mechanism for the news feed: the Kafka consumer that expands one feed record into a distribution record per follower, the batched writes, the idempotency key, and the delete path",
+      "role": "Implemented the fan-out-on-write mechanism for the news feed: the Kafka consumer that expands one feed record into a distribution record per follower",
       "stack": "Java, Spring, Apache Kafka, Kafka Connect, MongoDB",
-      "scale": "Every new post is expanded into one distribution record per follower and written in batches, serving the feed on web and mobile clients",
       "outcome": "A timeline is one indexed read per user, and a post's like count is one record to update rather than one per follower",
       "ui": {
         "appName": "Hahalolo",
@@ -458,7 +457,65 @@
           "d3": "Then the feed record.",
           "d4": "And last the post itself."
         }
+      },
+      "hardPart": "Fan-out on write trades write amplification for read simplicity. The alternative, fan-out on read, turns every timeline into N queries."
+    }
+  },
+  "hero": {
+    "positioning": "I am a Software Engineer with experience in frontend and backend development. I have worked on microservice systems, transaction flows, and message queues that keep data in sync across services. I am currently on an international team, integrating AI into products in the education domain, and using AI in my daily work to be more productive.",
+    "meta": [
+      "Software Engineer",
+      "Ho Chi Minh City",
+      "Vietnamese native · English intermediate"
+    ],
+    "ctaWork": "See what I built",
+    "ctaCv": "Download CV (PDF)",
+    "skillsLabel": "Experience with",
+    "skills": [
+      "Java",
+      "Spring",
+      "TypeScript",
+      "NestJS",
+      "React",
+      "Node.js",
+      "Apache Kafka",
+      "Redis",
+      "BullMQ",
+      "MongoDB",
+      "PostgreSQL",
+      "Elasticsearch",
+      "WebSocket",
+      "LLM APIs",
+      "Docker"
+    ]
+  },
+  "capabilities": {
+    "items": {
+      "fullstack": {
+        "label": "Full-stack product",
+        "detail": "A web-based learning platform for several different training programs, with the simulated apps each one needs — coding, SQL, spreadsheet — plus built-in AI Q&A.",
+        "project": "Interactive Learning"
+      },
+      "events": {
+        "label": "Event-driven systems",
+        "detail": "Fan-out on write for a social feed, and a Kafka pipeline indexing MongoDB into Elasticsearch.",
+        "project": "Hahalolo Social Network"
+      },
+      "realtime": {
+        "label": "Near-realtime AI",
+        "detail": "Near-realtime captions and translation over LiveKit and Deepgram, with an AI summary on demand at any point in the call.",
+        "project": "Meeting"
+      },
+      "fintech": {
+        "label": "Financial integrations",
+        "detail": "Plaid bank connectivity, plus building and maintaining the ACH funding and payout flows.",
+        "project": "Haloki"
       }
     }
+  },
+  "resume": {
+    "title": "Résumé",
+    "hint": "The PDF is generated through your browser's print dialog, optimised for A4.",
+    "download": "Download CV (PDF)"
   }
 }

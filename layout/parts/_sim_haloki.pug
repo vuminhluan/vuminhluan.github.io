@@ -49,13 +49,11 @@ article#sim-haloki(
   data-settle-days=hk.achSettleDays,
   data-lock-secs=hk.rateLockSeconds,
   data-reference=hk.reference,
-  class="mt-20"
 )
   //- The header spans the article, the same as the other three simulations.
   header(class="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1")
     h3(class="text-xl font-extrabold tracking-tight text-resume-ink")= t('sims.haloki.name')
     span(class="text-sm text-resume-muted")= t('sims.haloki.productType')
-    span(class="rounded-full border border-resume-line bg-white px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-resume-muted")= t('sims.common.simTag')
 
   //- Source order is the mobile order: phone, rail, role block. The grid rows
   //- stretch rather than start, and the rail inside the right column takes the

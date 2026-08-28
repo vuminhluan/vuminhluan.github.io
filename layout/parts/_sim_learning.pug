@@ -4,11 +4,10 @@
 mixin leoAvatar(cls)
   img(class=`l-leo ${cls || ''}`, src="assets/img/ai_facilitator.jpg", alt="Leo", loading="lazy")
 
-article#sim-learning(data-sim="learning", data-lesson="intro", data-left="open", data-right="open", data-mpane="learn", class="mb-20")
+article#sim-learning(data-sim="learning", data-lesson="intro", data-left="open", data-right="open", data-mpane="learn")
   header(class="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1")
     h3(class="text-xl font-extrabold tracking-tight text-resume-ink")= t('sims.learning.name')
     span(class="text-sm text-resume-muted")= t('sims.learning.productType')
-    span(class="rounded-full border border-resume-line bg-white px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-resume-muted")= t('sims.common.simTag')
   div(class="grid")
     div(class="min-w-0")
       div(class="sim-frame overflow-hidden rounded-xl border border-resume-line bg-white shadow-lg")

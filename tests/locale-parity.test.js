@@ -28,5 +28,5 @@ test('Vietnamese and English locale files have identical non-empty leaves', () =
 test('locale outputs remain stable', () => {
   const { localeOutputs } = require('../scripts/build-html');
 
-  assert.deepEqual(localeOutputs, { vi: 'index.html', en: 'en.html' });
+  assert.deepEqual(localeOutputs, { en: 'index.html', vi: 'vi.html' });
 });

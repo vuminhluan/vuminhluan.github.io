@@ -5,26 +5,41 @@ html(lang=lang)
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     meta(http-equiv="X-UA-Compatible", content="ie=edge")
     title= t('meta.title')
+    meta(name="description", content=t('hero.positioning'))
     include includes/_head.pug
   body(class="bg-resume-surface font-sans text-resume-body antialiased print:bg-white")
     header.site-header(class="sticky top-0 z-30 border-b border-resume-line bg-resume-surface/90 backdrop-blur print:hidden")
       div(class="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 sm:px-6")
-        a(href="#top", class="text-sm font-extrabold tracking-tight text-resume-ink")= profile.name
-        nav(class="flex items-center gap-4 text-xs font-semibold uppercase tracking-wide sm:gap-6")
-          a(href="#projects", class="text-resume-muted transition hover:text-resume-ink")= t('nav.projects')
-          a(href="#cv", class="text-resume-muted transition hover:text-resume-ink")= t('nav.cv')
+        a(href="#top", class="rounded text-sm font-extrabold tracking-tight text-resume-ink focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-resume-ink")= t('identity.name')
+        div(class="flex items-center gap-4 sm:gap-6")
+          //- Section links are desktop-only: at 320px the wordmark, three links,
+          //- the CV action and VI/EN cannot share a row without wrapping a
+          //- clickable label onto two lines. The hero carries both actions.
+          nav(class="hidden items-center gap-5 text-xs font-semibold uppercase tracking-wide sm:flex")
+            a.nav-link(href="#work")= t('nav.work')
+            a.nav-link(href="#resume")= t('nav.resume')
+            a.nav-link(href="#contact")= t('nav.contact')
+          button.btn-nav.js-print-button(type="button", class="hidden sm:inline-flex")= t('nav.downloadCv')
           include parts/_language_switcher.pug
-    main#top
+    main
+      include parts/_hero.pug
       include parts/_projects.pug
-      section#cv(class="scroll-mt-20 px-4 pb-20 sm:px-6 print:p-0")
-        div(class="mx-auto max-w-[860px] print:max-w-none")
-          div(class="mb-6 flex flex-wrap items-end justify-between gap-4 print:hidden")
-            div
-              p(class="text-xs font-bold uppercase tracking-widest text-resume-muted")= t('cvSection.kicker')
-              h2(class="mt-1 text-3xl font-extrabold tracking-tight text-resume-ink")= t('cvSection.title')
-              p(class="mt-1 text-xs text-resume-muted")= t('cvSection.hint')
-            button.js-print-button(type="button", class="rounded-full bg-resume-ink px-5 py-2.5 text-xs font-semibold uppercase tracking-wide text-white shadow-lg transition hover:opacity-90")= t('cvSection.download')
-          .resume(class="relative mx-auto min-h-screen max-w-[860px] bg-white px-8 py-12 shadow-sm sm:px-14 sm:py-16 print:min-h-0 print:max-w-none print:p-0 print:shadow-none")
-            block main_view
+
+      section#resume(class="scroll-mt-20 border-t border-resume-line px-4 py-14 sm:px-6 sm:py-20 print:hidden")
+        div(class="mx-auto max-w-6xl")
+          div(class="mb-10 flex flex-wrap items-end justify-between gap-4")
+            div(class="min-w-0")
+              h2(class="text-2xl font-extrabold tracking-tight text-resume-ink sm:text-3xl")= t('resume.title')
+              p(class="mt-2 max-w-[52ch] text-xs text-resume-muted")= t('resume.hint')
+            button.btn-primary.js-print-button(type="button")= t('resume.download')
+          include parts/_resume_screen.pug
+
+      include parts/_contact.pug
+
+      //- The printed artefact. Hidden on screen — the timeline above is the
+      //- same data at screen density — and the only thing @media print emits.
+      div(class="hidden print:block")
+        .resume(class="print:max-w-none print:p-0")
+          block main_view
     script#sim-config(type="application/json")!= JSON.stringify({ locale: locale })
     include includes/_javascript.pug

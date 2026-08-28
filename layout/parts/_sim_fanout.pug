@@ -52,12 +52,10 @@ article#sim-fanout(
   data-read-per-char=fo.reading.perCharMs,
   data-read-min=fo.reading.minMs,
   data-read-max=fo.reading.maxMs,
-  class="mt-20"
 )
   header(class="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1")
     h3(class="text-xl font-extrabold tracking-tight text-resume-ink")= t('sims.fanout.name')
     span(class="text-sm text-resume-muted")= t('sims.fanout.productType')
-    span(class="rounded-full border border-resume-line bg-white px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-resume-muted")= t('sims.common.simTag')
   //- Left is the artefact, right is the mechanism and then the write-up. The
   //- grid rows stretch and the console is flex-1, so the console absorbs the
   //- slack and the two columns end level.

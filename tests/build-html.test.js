@@ -21,10 +21,10 @@ test('buildAll renders the stable Vietnamese and English outputs', () => {
   buildAll({ outputDir });
 
   const outputFiles = fs.readdirSync(outputDir).sort();
-  assert.deepEqual(outputFiles, ['en.html', 'index.html']);
+  assert.deepEqual(outputFiles, ['index.html', 'vi.html']);
 
-  const vi = fs.readFileSync(path.join(outputDir, 'index.html'), 'utf8');
-  const en = fs.readFileSync(path.join(outputDir, 'en.html'), 'utf8');
+  const en = fs.readFileSync(path.join(outputDir, 'index.html'), 'utf8');
+  const vi = fs.readFileSync(path.join(outputDir, 'vi.html'), 'utf8');
   assert.match(vi, /<html lang="vi">/);
   assert.match(en, /<html lang="en">/);
   assert.match(vi, /assets\/css\/style\.css/);
@@ -32,14 +32,14 @@ test('buildAll renders the stable Vietnamese and English outputs', () => {
   assert.doesNotMatch(`${vi}\n${en}`, /assets\/plugins\/(css|js)\/bootstrap/i);
 
   for (const [html, currentLocale] of [[vi, 'vi'], [en, 'en']]) {
-    assert.match(html, /href="\/"[^>]*>VI</);
-    assert.match(html, /href="\/en\.html"[^>]*>EN</);
+    assert.match(html, /href="\/vi\.html"[^>]*>VI</);
+    assert.match(html, /href="\/"[^>]*>EN</);
     assert.equal((html.match(/aria-current="page"/g) || []).length, 1);
     assert.match(
       html,
       currentLocale === 'vi'
-        ? /href="\/"[^>]*aria-current="page"/
-        : /href="\/en\.html"[^>]*aria-current="page"/,
+        ? /href="\/vi\.html"[^>]*aria-current="page"/
+        : /href="\/"[^>]*aria-current="page"/,
     );
   }
 });
@@ -65,7 +65,11 @@ test('Tailwind CSS output is generated for utilities used in Pug', () => {
 
   const css = fs.readFileSync(path.join(projectRoot, 'assets', 'css', 'style.css'), 'utf8');
   assert.notEqual(css.trim(), '');
-  assert.match(css, /\.min-h-screen\{min-height:100vh\}/);
+  // Canary proving Tailwind scanned the Pug tree rather than emitting only its
+  // preflight. .max-w-6xl is the page container shared by every chapter, so it
+  // is stable across layout changes. It replaced .min-h-screen, which existed
+  // only for the on-screen A4 CV block that the resume timeline superseded.
+  assert.match(css, /\.max-w-6xl\{max-width:var\(--container-6xl\)\}/);
   assert.doesNotMatch(css, /bootstrap/i);
   assert.doesNotMatch(css, /sourceMappingURL/i);
 });
@@ -75,7 +79,7 @@ test('legacy Sass and runtime translation artifacts are absent', () => {
   assert.equal(fs.existsSync(path.join(projectRoot, 'assets', 'css', 'style.css.map')), false);
   assert.equal(fs.existsSync(path.join(projectRoot, 'assets', 'js', 'dict.js')), false);
 
-  for (const outputFile of ['index.html', 'en.html']) {
+  for (const outputFile of ['index.html', 'vi.html']) {
     const html = fs.readFileSync(path.join(projectRoot, outputFile), 'utf8');
     assert.doesNotMatch(html, /\.scss|dict\.js|assets\/plugins\/(css|js)\/bootstrap/i);
   }

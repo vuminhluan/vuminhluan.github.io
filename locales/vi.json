@@ -6,13 +6,18 @@
     "label": "Chọn ngôn ngữ"
   },
   "identity": {
+    "name": "Vũ Minh Luân",
     "career": "Kỹ sư phần mềm"
   },
   "contact": {
     "phoneLabel": "Điện thoại",
     "emailLabel": "Email",
     "addressLabel": "Địa chỉ",
-    "address": "Đường Tân Kỳ Tân Quý, Phường Tân Sơn Nhì, TP.HCM"
+    "address": "Đường Tân Kỳ Tân Quý, Phường Tân Sơn Nhì, TP.HCM",
+    "title": "Liên hệ",
+    "line": "Nếu anh/chị muốn trao đổi, email là cách nhanh nhất để liên hệ với tôi.",
+    "githubLabel": "GitHub",
+    "linkedinLabel": "LinkedIn"
   },
   "summary": {
     "title": "Tóm tắt chuyên môn",
@@ -31,7 +36,7 @@
         "bullets": [
           "Thiết kế và phát triển các luồng xử lý full-stack cho nền tảng học tập ứng dụng AI, cung cấp các chương trình Software Development, Data Analysis và Test Analysis. Xây dựng các ứng dụng thực hành trên trình duyệt, bao gồm môi trường lập trình dạng VS Code, SQL Playground, mô phỏng Jira và bài tập Excel, giúp học viên thực hành mà không cần cài đặt phần mềm ngoài. Tích hợp LLM API để tạo đề bài, đánh giá bài nộp của học viên và hướng dẫn theo ngữ cảnh thông qua AI Facilitator; tích hợp HeyGen để truyền tải bài giảng qua AI Tutor.",
           "Thiết kế mô hình dữ liệu và luồng xử lý end-to-end cho nền tảng đánh giá năng lực ứng viên, phục vụ cả ứng viên và nhà tuyển dụng. Tích hợp LLM API để tạo mô phỏng theo từng vị trí công việc, đánh giá năng lực ứng viên theo tiêu chí định sẵn và đưa ra phản hồi do AI tạo. Nền tảng giúp nhà tuyển dụng đánh giá năng lực thực tế vượt ngoài CV và lọc ứng viên dựa trên kết quả mô phỏng.",
-          "Phát triển BitMeet, nền tảng họp trực tuyến nội bộ, tích hợp LiveKit, Deepgram và LLM API cho các cuộc họp thời gian thực, dịch thuật, phiên âm và tóm tắt nội dung do AI tạo."
+          "Phát triển BitMeet, nền tảng họp trực tuyến nội bộ, tích hợp LiveKit, Deepgram và LLM API cho các cuộc họp thời gian thực, với phiên âm và dịch gần thời gian thực, cùng tóm tắt nội dung do AI tạo."
         ]
       },
       "hahaloloBackend": {
@@ -44,7 +49,7 @@
           "Thiết kế mô hình dữ liệu, luồng giao dịch và REST API cho dịch vụ Coin, cho phép người dùng nhận thưởng, quản lý số dư xu và đổi xu để giảm giá đơn hàng.",
           "Tham gia thiết kế sản phẩm và kỹ thuật ban đầu cho Haloki; thiết kế schema cơ sở dữ liệu và phát triển API tích hợp Plaid để kết nối tài khoản ngân hàng và xử lý các luồng tài chính.",
           "Triển khai cơ chế fan-out-on-write cho news feed mạng xã hội, phân phối bài đăng mới đến người theo dõi trên cả nền tảng web và mobile.",
-          "Xây dựng pipeline đồng bộ dữ liệu bằng Apache Kafka để di chuyển và lập chỉ mục dữ liệu MongoDB sang Elasticsearch, hỗ trợ tìm kiếm toàn văn.",
+          "Xây dựng pipeline đồng bộ dữ liệu bằng Apache Kafka để di chuyển và lập chỉ mục dữ liệu MongoDB sang Elasticsearch, hỗ trợ tìm kiếm toàn văn bản.",
           "Thiết kế và phát triển REST API, xây dựng tài liệu kỹ thuật, phối hợp với Business Analyst và frontend developer để hoàn thiện yêu cầu và luồng người dùng.",
           "Hướng dẫn và hỗ trợ các developer mới trong quá trình onboarding và triển khai dự án."
         ]
@@ -125,34 +130,28 @@
     "communicationValue": "Kỹ năng giao tiếp tốt trong môi trường làm việc."
   },
   "nav": {
-    "projects": "Dự án",
-    "cv": "CV"
+    "work": "Công việc",
+    "resume": "Hồ sơ",
+    "contact": "Liên hệ",
+    "downloadCv": "CV (PDF)"
   },
   "projects": {
-    "kicker": "Phần 1",
     "title": "Dự án đã tham gia",
-    "intro": "Đây là các sản phẩm tôi tham gia xây dựng cùng đội ngũ, không phải dự án cá nhân. Mỗi dự án được tái hiện dưới dạng mô phỏng tương tác mà bạn có thể tự bấm trải nghiệm. Vai trò, công nghệ và phần việc tôi đảm nhận được liệt kê ngay bên dưới mỗi demo."
-  },
-  "cvSection": {
-    "kicker": "Phần 2",
-    "title": "Sơ yếu lý lịch",
-    "hint": "Bản PDF được tạo qua hộp thoại in của trình duyệt, tối ưu cho khổ A4.",
-    "download": "Tải CV (PDF)"
+    "intro": "Đây là các sản phẩm tôi tham gia xây dựng cùng đội ngũ, không phải dự án cá nhân. Mỗi dự án được tái hiện dưới dạng mô phỏng tương tác. Vai trò, công nghệ và phần việc tôi đảm nhận được liệt kê ngay bên dưới mỗi demo.",
+    "pillsLabel": "Chuyển nhanh tới một dự án"
   },
   "sims": {
     "common": {
-      "simTag": "Mô phỏng tương tác",
       "roleLabel": "Vai trò",
       "stackLabel": "Công nghệ",
-      "scaleLabel": "Quy mô",
-      "outcomeLabel": "Kết quả"
+      "outcomeLabel": "Kết quả",
+      "hardPartLabel": "Phần khó"
     },
     "learning": {
       "name": "Interactive Learning",
       "productType": "Nền tảng học tập trên trình duyệt",
-      "role": "Thiết kế cơ sở dữ liệu · xây dựng các ứng dụng thực hành, bao gồm IDE mô phỏng chạy trên trình duyệt",
+      "role": "Thiết kế cơ sở dữ liệu · xây dựng các ứng dụng thực hành",
       "stack": "TypeScript, React, NestJS, MongoDB, Redis, BullMQ, LLM APIs",
-      "scale": "Nhiều chương trình đào tạo · toàn bộ thực hành diễn ra trên trình duyệt",
       "outcome": "Học viên hoàn thành bài thực hành mà không phải cài đặt bất kỳ phần mềm nào",
       "ui": {
         "outlineTitle": "Nội dung khoá học",
@@ -247,19 +246,19 @@
         "submitSuccess": "Cả 3 kiểm tra đều đạt. Bài học hoàn thành!",
         "submitFail": "Chưa đạt. Hãy sửa những dòng còn gạch đỏ rồi nộp lại.",
         "captionBtnLabel": "Bật/tắt phụ đề"
-      }
+      },
+      "hardPart": "Chấm bài thực hành khi không có toolchain thật. Đưa môi trường lên trình duyệt gỡ được rào cản cài đặt, nhưng cũng mất luôn trình biên dịch — thứ bình thường quyết định đáp án đúng hay sai. Việc đánh giá vì thế chuyển sang LLM API, chấm theo bộ tiêu chí định sẵn."
     },
     "meeting": {
       "name": "Meeting",
       "productType": "Nền tảng họp trực tuyến với lớp AI",
-      "role": "Thiết kế cơ sở dữ liệu · tính năng AI (phụ đề trực tiếp, dịch, tóm tắt) · UI/UX",
+      "role": "Thiết kế cơ sở dữ liệu · tính năng AI (phụ đề gần thời gian thực, dịch, tóm tắt) · UI/UX",
       "stack": "TypeScript, NestJS, React, LiveKit, Deepgram, LLM APIs, MongoDB",
-      "scale": "Nền tảng họp nội bộ, phục vụ các cuộc họp từ xa hằng ngày",
       "outcome": "Rời cuộc họp với phụ đề, bản dịch và tóm tắt do AI tạo. Không cần ghi chú tay.",
       "ui": {
         "lobbyTitle": "Sẵn sàng tham gia?",
         "cameraOff": "Camera đang tắt",
-        "aiHint": "AI sẵn sàng: phụ đề trực tiếp · dịch · tóm tắt cuộc họp",
+        "aiHint": "AI sẵn sàng: phụ đề gần thời gian thực · dịch · tóm tắt cuộc họp",
         "joinBtn": "Tham gia ngay",
         "you": "Bạn",
         "micBtn": "Micro",
@@ -297,15 +296,15 @@
           "Thứ Hai họp lại để rà soát phản hồi beta."
         ],
         "dataNote": "Dữ liệu cuộc họp chỉ được xử lý để tạo tóm tắt và sẽ bị xoá khi cuộc họp kết thúc."
-      }
+      },
+      "hardPart": "Phụ đề không thể vừa tức thì vừa chính xác. Speech-to-text, dịch và render đều cộng thêm độ trễ, mà chờ thêm audio là đổi độ trễ lấy độ chính xác — nên pipeline được chỉnh theo hướng gần thời gian thực, không phải thời gian thực."
     },
     "haloki": {
       "name": "Haloki",
       "productType": "Ứng dụng chuyển tiền xuyên biên giới",
-      "role": "Thiết kế sản phẩm và kỹ thuật ban đầu · thiết kế lược đồ cơ sở dữ liệu · API tích hợp Plaid cho kết nối tài khoản ngân hàng và các luồng tài chính",
+      "role": "Tham gia thiết kế sản phẩm và kỹ thuật ban đầu · thiết kế lược đồ cơ sở dữ liệu · API tích hợp Plaid cho kết nối tài khoản ngân hàng và các luồng tài chính",
       "stack": "Java, Spring, MongoDB, Plaid, Stripe",
-      "scale": "Nạp tiền từ ngân hàng Mỹ qua ACH, chi trả nội địa tại nước người nhận",
-      "outcome": "Thiết kế để tiền thu tại Mỹ được chi trả từ nguồn VND nội địa, nên người nhận không phải chờ lệnh ghi nợ ACH tất toán",
+      "outcome": "Tiền thu tại Mỹ được chi trả từ nguồn VND nội địa, nên người nhận không phải chờ lệnh ghi nợ ACH tất toán.",
       "ui": {
         "appName": "Haloki",
         "back": "Quay lại",
@@ -335,11 +334,11 @@
         "fromLabel": "Từ",
         "amountLabel": "Số tiền",
         "feeLabel": "Phí dịch vụ",
-    "feeInfoLabel": "Xem chi tiết phí dịch vụ",
-    "feeHaloki": "Phí Haloki",
-    "feeHalokiNote": "Bao gồm xác thực ngân hàng, kiểm tra số dư và ghi sổ.",
-    "feeAch": "Phí ACH",
-    "feeAchNote": "Chi phí của mạng lưới chuyển khoản ngân hàng.",
+        "feeInfoLabel": "Xem chi tiết phí dịch vụ",
+        "feeHaloki": "Phí Haloki",
+        "feeHalokiNote": "Bao gồm xác thực ngân hàng, kiểm tra số dư và ghi sổ.",
+        "feeAch": "Phí ACH",
+        "feeAchNote": "Chi phí của mạng lưới chuyển khoản ngân hàng.",
         "feeShort": "Phí",
         "feeFree": "Miễn phí",
         "creditedLabel": "Ghi có vào số dư",
@@ -349,9 +348,9 @@
         "errMin": "Tối thiểu là {min}",
         "errMax": "Hạn mức ACH mỗi ngày là {max}",
         "errBalance": "Bạn chỉ có {available} khả dụng",
-    "errBankBalance": "Tài khoản ngân hàng của bạn còn {available}",
-    "balanceChecking": "Đang kiểm tra số dư qua Plaid",
-    "balanceAvailable": "Số dư khả dụng · {amount}",
+        "errBankBalance": "Tài khoản ngân hàng của bạn còn {available}",
+        "balanceChecking": "Đang kiểm tra số dư qua Plaid",
+        "balanceAvailable": "Số dư khả dụng · {amount}",
         "youSendLabel": "Bạn gửi",
         "rateLabel": "Tỷ giá",
         "rateNote": "tỷ giá minh hoạ",
@@ -404,14 +403,14 @@
         "flowPayoutMeta": "Từ nguồn VND nội địa",
         "flowNoteIdle": "Nạp tiền rồi gửi đi để xem tiền đi qua từng chặng.",
         "flowNoteSettling": "Người nhận đã nhận tiền từ nguồn VND nội địa. Lệnh ghi nợ ACH còn {days} ngày làm việc nữa mới tất toán."
-      }
+      },
+      "hardPart": "Một lệnh ghi nợ ACH mất vài ngày để tất toán, nhưng không nên để người nhận chờ vài ngày mới nhận được tiền. Chi trả từ nguồn tiền tại ngân hàng địa phương, tách luồng chi trả khỏi luồng nạp tiền, và dời rủi ro tất toán về phía nền tảng."
     },
     "fanout": {
-      "name": "Hahalolo",
+      "name": "Hahalolo Social Network",
       "productType": "News feed mạng xã hội",
-      "role": "Triển khai cơ chế fan-out-on-write cho news feed: consumer Kafka mở rộng một bản ghi feed thành một bản phân phối cho mỗi người theo dõi, ghi theo lô, khóa idempotency và luồng xóa bài",
+      "role": "Triển khai cơ chế fan-out-on-write cho news feed: consumer Kafka mở rộng một bản ghi feed thành một bản phân phối cho mỗi người theo dõi",
       "stack": "Java, Spring, Apache Kafka, Kafka Connect, MongoDB",
-      "scale": "Mỗi bài viết mới được mở rộng thành một bản phân phối cho từng người theo dõi và ghi theo lô, phục vụ feed trên cả web và mobile",
       "outcome": "Một timeline chỉ là một truy vấn có index cho mỗi user, và số lượt thích của bài viết chỉ cần cập nhật một bản ghi thay vì một bản cho mỗi người theo dõi",
       "ui": {
         "appName": "Hahalolo",
@@ -458,7 +457,65 @@
           "d3": "Rồi tới bản feed.",
           "d4": "Cuối cùng là chính bài viết."
         }
+      },
+      "hardPart": "Fan-out on write đánh đổi write amplification lấy sự đơn giản khi đọc. Lựa chọn còn lại là fan-out on read, khiến mỗi timeline thành N truy vấn."
+    }
+  },
+  "hero": {
+    "positioning": "Tôi là một Software Engineer, có kinh nghiệm ở cả frontend và backend. Tôi đã làm việc với hệ thống microservice, các luồng giao dịch và message queue để đồng bộ dữ liệu giữa các service. Hiện tại tôi làm trong một team quốc tế, tích hợp AI vào sản phẩm thuộc lĩnh vực giáo dục, và sử dụng AI trong công việc hằng ngày để tăng năng suất.",
+    "meta": [
+      "Software Engineer",
+      "TP. Hồ Chí Minh",
+      "Tiếng Việt bản ngữ · Tiếng Anh trung cấp"
+    ],
+    "ctaWork": "Xem tôi đã làm gì",
+    "ctaCv": "Tải CV (PDF)",
+    "skillsLabel": "Kinh nghiệm với",
+    "skills": [
+      "Java",
+      "Spring",
+      "TypeScript",
+      "NestJS",
+      "React",
+      "Node.js",
+      "Apache Kafka",
+      "Redis",
+      "BullMQ",
+      "MongoDB",
+      "PostgreSQL",
+      "Elasticsearch",
+      "WebSocket",
+      "LLM APIs",
+      "Docker"
+    ]
+  },
+  "capabilities": {
+    "items": {
+      "fullstack": {
+        "label": "Sản phẩm full-stack",
+        "detail": "Nền tảng học tập trên web phục vụ nhiều chương trình đào tạo khác nhau, với các app giả lập cần cho từng chương trình — coding, SQL, spreadsheet — cùng hỏi đáp AI tích hợp.",
+        "project": "Interactive Learning"
+      },
+      "events": {
+        "label": "Hệ thống hướng sự kiện",
+        "detail": "Fan-out on write cho news feed, và pipeline Kafka index dữ liệu MongoDB sang Elasticsearch.",
+        "project": "Hahalolo Social Network"
+      },
+      "realtime": {
+        "label": "AI gần thời gian thực",
+        "detail": "Phụ đề và bản dịch gần thời gian thực trên nền LiveKit và Deepgram, tóm tắt cuộc họp bằng AI ở bất kỳ thời điểm nào.",
+        "project": "Meeting"
+      },
+      "fintech": {
+        "label": "Tích hợp tài chính",
+        "detail": "Kết nối ngân hàng qua Plaid, cùng việc xây dựng và bảo trì luồng nạp ACH và chi trả.",
+        "project": "Haloki"
       }
     }
+  },
+  "resume": {
+    "title": "Sơ yếu lý lịch",
+    "hint": "Bản PDF được tạo qua hộp thoại in của trình duyệt, tối ưu cho khổ A4.",
+    "download": "Tải CV (PDF)"
   }
 }

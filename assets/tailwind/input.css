@@ -21,6 +21,317 @@
   }
 }
 
+:root {
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 120ms;
+  --dur-base: 180ms;
+}
+
+/* ---------------------------------------------------------------------------
+   Page chrome — the hero, capability strip, résumé timeline and contact block
+   added by the employer-journey restructure. See
+   docs/employer-journey-concept.md.
+
+   Every clickable label here sets white-space: nowrap. A button or link that
+   wraps onto two lines is the most common mobile failure on this kind of page,
+   and the labels are all short enough that nowrap costs nothing.
+
+   These live in @layer components on purpose. Unlayered CSS outranks every
+   @layer, so an unlayered `.btn-nav { display: inline-flex }` would beat
+   Tailwind's `hidden` and the header's CV action would stay visible on mobile.
+   Inside the components layer, utilities win, which is what the markup expects.
+--------------------------------------------------------------------------- */
+
+@layer components {
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-nav {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    transition:
+      background-color var(--dur-base) var(--ease-out),
+      border-color var(--dur-base) var(--ease-out),
+      color var(--dur-base) var(--ease-out),
+      opacity var(--dur-base) var(--ease-out),
+      transform var(--dur-fast) var(--ease-out);
+  }
+
+  .btn-primary:focus-visible,
+  .btn-secondary:focus-visible,
+  .btn-nav:focus-visible,
+  .nav-link:focus-visible,
+  .cap-card:focus-visible,
+  .contact-email:focus-visible,
+  .contact-link:focus-visible {
+    outline: 2px solid var(--color-resume-ink);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  .btn-primary {
+    padding: 0.7rem 1.4rem;
+    background-color: var(--color-resume-ink);
+    color: #fff;
+    box-shadow: 0 8px 20px -12px rgb(19 19 22 / 0.7);
+  }
+
+  .btn-primary:hover { opacity: 0.88; }
+  .btn-primary:active { transform: translateY(1px); }
+
+  .btn-secondary {
+    padding: 0.7rem 1.4rem;
+    border: 1px solid var(--color-resume-line);
+    background-color: #fff;
+    color: var(--color-resume-ink);
+  }
+
+  .btn-secondary:hover { border-color: var(--color-resume-ink); }
+  .btn-secondary:active { transform: translateY(1px); }
+
+  .btn-nav {
+    padding: 0.4rem 0.85rem;
+    border: 1px solid var(--color-resume-line);
+    background-color: #fff;
+    color: var(--color-resume-ink);
+  }
+
+  .btn-nav:hover { border-color: var(--color-resume-ink); }
+  .btn-nav:active { transform: translateY(1px); }
+
+  .nav-link {
+    color: var(--color-resume-muted);
+    white-space: nowrap;
+    transition: color var(--dur-base) var(--ease-out);
+  }
+
+  .nav-link:hover { color: var(--color-resume-ink); }
+
+  /* Capability card — the whole card is the link, so the hover and focus
+     treatment has to read on the card, not on the label inside it. */
+  .cap-card {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    border-radius: 0.75rem;
+    border: 1px solid var(--color-resume-line);
+    background-color: #fff;
+    padding: 1.15rem 1.15rem 1rem;
+    transition:
+      border-color var(--dur-base) var(--ease-out),
+      box-shadow var(--dur-base) var(--ease-out),
+      transform var(--dur-fast) var(--ease-out);
+  }
+
+  .cap-card:hover {
+    border-color: var(--color-resume-ink);
+    box-shadow: 0 10px 24px -18px rgb(19 19 22 / 0.55);
+    transform: translateY(-2px);
+  }
+
+  .cap-card:active { transform: translateY(0); }
+
+  /* margin-top:auto bottom-aligns the rule across cards of unequal text
+     length. Keep the spacing here rather than as mt-4/pt-3 in the markup:
+     utilities outrank components, so a margin utility would silently kill the
+     auto and the rules would drift apart again. */
+  .cap-card-link {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--color-resume-line);
+  }
+
+  .cap-card-arrow {
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+
+  .cap-card:hover .cap-card-arrow { transform: translateY(2px); }
+
+  /* Work section pill bar -------------------------------------------------
+     The card grid's second form (D15, §13). Fixed, not sticky: a sticky bar
+     needs a row in the flow, and that row is dead space for the whole time the
+     bar is hidden. main.js owns .is-visible and the two height variables.
+
+     Sits below the site header on both axes — top: its height, and z-index 20
+     against the header's 30, so the header always wins an overlap. */
+  .work-pills {
+    position: fixed;
+    top: var(--site-header-h, 53px);
+    right: 0;
+    left: 0;
+    z-index: 20;
+    padding-block: 0.5rem;
+    background: transparent;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    pointer-events: none;
+    transition:
+      opacity var(--dur-base) var(--ease-out),
+      transform var(--dur-base) var(--ease-out),
+      visibility 0s linear var(--dur-base);
+  }
+
+  .work-pills.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    pointer-events: auto;
+    transition-delay: 0s;
+  }
+
+  /* Four pills do not fit one 320px row, so the row scrolls instead of
+     wrapping — a wrapped pill is a two-line clickable label. The scroll is
+     contained here; the page itself never scrolls sideways. */
+  .work-pills-row {
+    display: flex;
+    gap: 0.5rem;
+    max-width: 72rem;
+    margin-inline: auto;
+    padding-inline: 1rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .work-pills-row::-webkit-scrollbar { display: none; }
+
+  @media (min-width: 640px) {
+    .work-pills-row { padding-inline: 1.5rem; }
+  }
+
+  .work-pill {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    border-radius: 9999px;
+    border: 1px solid rgb(255 255 255 / 0.7);
+    background-color: rgb(255 255 255 / 0.55);
+    -webkit-backdrop-filter: blur(14px) saturate(1.6);
+    backdrop-filter: blur(14px) saturate(1.6);
+    padding: 0.4rem 0.85rem;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-resume-muted);
+    box-shadow: 0 8px 20px -14px rgb(19 19 22 / 0.55);
+    transition:
+      background-color var(--dur-base) var(--ease-out),
+      border-color var(--dur-base) var(--ease-out),
+      color var(--dur-base) var(--ease-out),
+      transform var(--dur-fast) var(--ease-out);
+  }
+
+  .work-pill:hover {
+    color: var(--color-resume-ink);
+    border-color: rgb(19 19 22 / 0.25);
+  }
+
+  .work-pill:active { transform: translateY(1px); }
+
+  .work-pill:focus-visible {
+    outline: 2px solid var(--color-resume-ink);
+    outline-offset: 3px;
+  }
+
+  .work-pill[aria-current="true"] {
+    border-color: var(--color-resume-ink);
+    background-color: var(--color-resume-ink);
+    color: #fff;
+  }
+
+  /* Without backdrop-filter the translucent fill would let simulation content
+     read straight through the label, so the glass falls back to near-solid. */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .work-pill {
+      border-color: var(--color-resume-line);
+      background-color: rgb(255 255 255 / 0.96);
+    }
+  }
+
+  /* Two stacked fixed layers sit above every simulation, so an anchor jump has
+     to clear both or it parks the heading underneath them. */
+  [data-sim] {
+    scroll-margin-top: calc(var(--site-header-h, 53px) + var(--work-pills-h, 52px) + 1.25rem);
+  }
+
+  .cap-card:hover .cap-card-link { color: var(--color-resume-ink); }
+
+  /* The email is the largest interactive element on the page on purpose: it is
+     the one action the whole journey has been building towards. */
+  .contact-email {
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--color-resume-ink);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 6px;
+    text-decoration-color: var(--color-resume-line);
+    overflow-wrap: anywhere;
+    transition: text-decoration-color var(--dur-base) var(--ease-out);
+  }
+
+  .contact-email:hover { text-decoration-color: var(--color-resume-ink); }
+
+  @media (min-width: 640px) {
+    .contact-email { font-size: 2.25rem; }
+  }
+
+  .contact-link {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    white-space: nowrap;
+  }
+
+  .contact-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+  /* Mobile-only marker for the experience timeline; from sm: up the period
+     column carries the same job and the rail is dropped. */
+  .tl-dot {
+    position: absolute;
+    left: -1.3125rem;
+    top: 0.4rem;
+    height: 0.5rem;
+    width: 0.5rem;
+    border-radius: 9999px;
+    border: 2px solid var(--color-resume-surface);
+    background-color: var(--color-resume-ink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn-primary,
+    .btn-secondary,
+    .btn-nav,
+    .cap-card,
+    .cap-card-arrow {
+      transition-duration: 100ms;
+    }
+
+    .btn-primary:active,
+    .btn-secondary:active,
+    .btn-nav:active,
+    .cap-card:hover,
+    .cap-card:active,
+    .cap-card:hover .cap-card-arrow {
+      transform: none;
+    }
+  }
+}
+
 /* ---------------------------------------------------------------------------
    UI simulations — state-driven styles for the controllers in
    assets/js/simulations.js. Static layout lives in the Pug templates as
@@ -1665,4 +1976,18 @@ li[data-sum]:not([hidden]) { display: flex; }
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
   }
+}
+
+/* The bar's entrance is spatial, so it collapses to a plain crossfade. */
+@media (prefers-reduced-motion: reduce) {
+  .work-pills {
+    transform: none;
+    transition:
+      opacity var(--dur-fast) linear,
+      visibility 0s linear var(--dur-fast);
+  }
+}
+
+@media print {
+  .work-pills { display: none; }
 }

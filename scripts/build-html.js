@@ -5,8 +5,8 @@ const pug = require('pug');
 const projectRoot = path.resolve(__dirname, '..');
 const templatePath = path.join(projectRoot, 'layout', 'pages', 'index.pug');
 const localeOutputs = {
-  vi: 'index.html',
-  en: 'en.html',
+  en: 'index.html',
+  vi: 'vi.html',
 };
 
 function readJson(filePath) {
