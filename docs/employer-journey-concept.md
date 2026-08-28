@@ -382,7 +382,9 @@ The three VI-only trims were mirrored into English, so the two locales say the s
 
 `data/profile.json` keeps only what genuinely does not change by language: phone, email, website, and the two profile URLs. `docs/product-overview.md` updated to match.
 
-Minor, unresolved: outcome rows now end with a full stop on Meeting and Haloki but not on Interactive Learning or Hahalolo.
+**Terminal punctuation dropped from every `outcome` and `hardPart` row**, in both locales — twelve strings. The four rows in a simulation's aside are table cells, not prose, so they now follow the convention for cell content and carry no closing full stop. `Role` and `Stack` never had one.
+
+Internal sentence breaks are untouched, so the multi-sentence rows read as e.g. *"Captions cannot be instant and accurate at the same time. … tuned for near-realtime rather than realtime"* — full stops between sentences, none at the end.
 
 ### Test change worth reviewing
 

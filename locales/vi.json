@@ -247,14 +247,14 @@
         "submitFail": "Chưa đạt. Hãy sửa những dòng còn gạch đỏ rồi nộp lại.",
         "captionBtnLabel": "Bật/tắt phụ đề"
       },
-      "hardPart": "Chấm bài thực hành khi không có toolchain thật. Đưa môi trường lên trình duyệt gỡ được rào cản cài đặt, nhưng cũng mất luôn trình biên dịch — thứ bình thường quyết định đáp án đúng hay sai. Việc đánh giá vì thế chuyển sang LLM API, chấm theo bộ tiêu chí định sẵn."
+      "hardPart": "Chấm bài thực hành khi không có toolchain thật. Đưa môi trường lên trình duyệt gỡ được rào cản cài đặt, nhưng cũng mất luôn trình biên dịch — thứ bình thường quyết định đáp án đúng hay sai. Việc đánh giá vì thế chuyển sang LLM API, chấm theo bộ tiêu chí định sẵn"
     },
     "meeting": {
       "name": "Meeting",
       "productType": "Nền tảng họp trực tuyến với lớp AI",
       "role": "Thiết kế cơ sở dữ liệu · tính năng AI (phụ đề gần thời gian thực, dịch, tóm tắt) · UI/UX",
       "stack": "TypeScript, NestJS, React, LiveKit, Deepgram, LLM APIs, MongoDB",
-      "outcome": "Rời cuộc họp với phụ đề, bản dịch và tóm tắt do AI tạo. Không cần ghi chú tay.",
+      "outcome": "Rời cuộc họp với phụ đề, bản dịch và tóm tắt do AI tạo. Không cần ghi chú tay",
       "ui": {
         "lobbyTitle": "Sẵn sàng tham gia?",
         "cameraOff": "Camera đang tắt",
@@ -297,14 +297,14 @@
         ],
         "dataNote": "Dữ liệu cuộc họp chỉ được xử lý để tạo tóm tắt và sẽ bị xoá khi cuộc họp kết thúc."
       },
-      "hardPart": "Phụ đề không thể vừa tức thì vừa chính xác. Speech-to-text, dịch và render đều cộng thêm độ trễ, mà chờ thêm audio là đổi độ trễ lấy độ chính xác — nên pipeline được chỉnh theo hướng gần thời gian thực, không phải thời gian thực."
+      "hardPart": "Phụ đề không thể vừa tức thì vừa chính xác. Speech-to-text, dịch và render đều cộng thêm độ trễ, mà chờ thêm audio là đổi độ trễ lấy độ chính xác — nên pipeline được chỉnh theo hướng gần thời gian thực, không phải thời gian thực"
     },
     "haloki": {
       "name": "Haloki",
       "productType": "Ứng dụng chuyển tiền xuyên biên giới",
       "role": "Tham gia thiết kế sản phẩm và kỹ thuật ban đầu · thiết kế lược đồ cơ sở dữ liệu · API tích hợp Plaid cho kết nối tài khoản ngân hàng và các luồng tài chính",
       "stack": "Java, Spring, MongoDB, Plaid, Stripe",
-      "outcome": "Tiền thu tại Mỹ được chi trả từ nguồn VND nội địa, nên người nhận không phải chờ lệnh ghi nợ ACH tất toán.",
+      "outcome": "Tiền thu tại Mỹ được chi trả từ nguồn VND nội địa, nên người nhận không phải chờ lệnh ghi nợ ACH tất toán",
       "ui": {
         "appName": "Haloki",
         "back": "Quay lại",
@@ -404,7 +404,7 @@
         "flowNoteIdle": "Nạp tiền rồi gửi đi để xem tiền đi qua từng chặng.",
         "flowNoteSettling": "Người nhận đã nhận tiền từ nguồn VND nội địa. Lệnh ghi nợ ACH còn {days} ngày làm việc nữa mới tất toán."
       },
-      "hardPart": "Một lệnh ghi nợ ACH mất vài ngày để tất toán, nhưng không nên để người nhận chờ vài ngày mới nhận được tiền. Chi trả từ nguồn tiền tại ngân hàng địa phương, tách luồng chi trả khỏi luồng nạp tiền, và dời rủi ro tất toán về phía nền tảng."
+      "hardPart": "Một lệnh ghi nợ ACH mất vài ngày để tất toán, nhưng không nên để người nhận chờ vài ngày mới nhận được tiền. Chi trả từ nguồn tiền tại ngân hàng địa phương, tách luồng chi trả khỏi luồng nạp tiền, và dời rủi ro tất toán về phía nền tảng"
     },
     "fanout": {
       "name": "Hahalolo Social Network",
@@ -458,7 +458,7 @@
           "d4": "Cuối cùng là chính bài viết."
         }
       },
-      "hardPart": "Fan-out on write đánh đổi write amplification lấy sự đơn giản khi đọc. Lựa chọn còn lại là fan-out on read, khiến mỗi timeline thành N truy vấn."
+      "hardPart": "Fan-out on write đánh đổi write amplification lấy sự đơn giản khi đọc. Lựa chọn còn lại là fan-out on read, khiến mỗi timeline thành N truy vấn"
     }
   },
   "hero": {

@@ -247,14 +247,14 @@
         "submitFail": "Not yet. Fix the lines that are still underlined and submit again.",
         "captionBtnLabel": "Toggle captions"
       },
-      "hardPart": "Grading hands-on work without a real toolchain. Moving the environment into the browser removes the install barrier, but it also removes the compiler that would normally decide whether an answer is right, so evaluation moves to LLM APIs scoring against predefined criteria."
+      "hardPart": "Grading hands-on work without a real toolchain. Moving the environment into the browser removes the install barrier, but it also removes the compiler that would normally decide whether an answer is right, so evaluation moves to LLM APIs scoring against predefined criteria"
     },
     "meeting": {
       "name": "Meeting",
       "productType": "Browser-based meeting platform with an AI layer",
       "role": "Database design · AI features (near-realtime captions, translation, summaries) · UI/UX",
       "stack": "TypeScript, NestJS, React, LiveKit, Deepgram, LLM APIs, MongoDB",
-      "outcome": "Leave every meeting with captions, translations and an AI-generated summary. No manual notes.",
+      "outcome": "Leave every meeting with captions, translations and an AI-generated summary. No manual notes",
       "ui": {
         "lobbyTitle": "Ready to join?",
         "cameraOff": "Camera is off",
@@ -297,14 +297,14 @@
         ],
         "dataNote": "Meeting data is processed only to generate the summary and is deleted when the meeting ends."
       },
-      "hardPart": "Captions cannot be instant and accurate at the same time. Speech-to-text, translation and rendering each add latency, and waiting for more audio buys accuracy at the cost of lag, so the pipeline is tuned for near-realtime rather than realtime."
+      "hardPart": "Captions cannot be instant and accurate at the same time. Speech-to-text, translation and rendering each add latency, and waiting for more audio buys accuracy at the cost of lag, so the pipeline is tuned for near-realtime rather than realtime"
     },
     "haloki": {
       "name": "Haloki",
       "productType": "Cross-border money transfer app",
       "role": "Contributed to the initial product and technical design · database schema design · APIs integrating Plaid for bank-account connectivity and financial workflows",
       "stack": "Java, Spring, MongoDB, Plaid, Stripe",
-      "outcome": "Funds collected in the US are paid out from local VND liquidity, so recipients don't have to wait for the ACH debit to settle.",
+      "outcome": "Funds collected in the US are paid out from local VND liquidity, so recipients don't have to wait for the ACH debit to settle",
       "ui": {
         "appName": "Haloki",
         "back": "Back",
@@ -404,7 +404,7 @@
         "flowNoteIdle": "Fund the wallet, then send, to watch the money move leg by leg.",
         "flowNoteSettling": "The recipient has been paid from local VND liquidity. The ACH debit still has {days} business days to settle."
       },
-      "hardPart": "An ACH debit takes days to settle, but the recipient should not wait days for the money. Paying out from local VND liquidity decouples the payout leg from the funding leg, and moves the settlement risk onto the platform."
+      "hardPart": "An ACH debit takes days to settle, but the recipient should not wait days for the money. Paying out from local VND liquidity decouples the payout leg from the funding leg, and moves the settlement risk onto the platform"
     },
     "fanout": {
       "name": "Hahalolo Social Network",
@@ -458,7 +458,7 @@
           "d4": "And last the post itself."
         }
       },
-      "hardPart": "Fan-out on write trades write amplification for read simplicity. The alternative, fan-out on read, turns every timeline into N queries."
+      "hardPart": "Fan-out on write trades write amplification for read simplicity. The alternative, fan-out on read, turns every timeline into N queries"
     }
   },
   "hero": {
