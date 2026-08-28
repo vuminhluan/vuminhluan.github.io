@@ -1,0 +1,398 @@
+//- Simulation 03: Haloki · cross-border money transfer.
+//- A native app, so no simChrome: the frame is the phone itself, with no
+//- bezel, no notch and no home indicator. Every number on every screen is
+//- recomputed by initHaloki from one state object, so there is no second
+//- source of truth.
+//-
+//- A phone is narrow where the other three simulations are wide, so the
+//- column beside it has to carry real weight or the row reads lopsided.
+//- It carries two blocks: the money-flow rail on top, the role block under
+//- it. The rail is the same state object rendered a second way — where the
+//- money physically is, leg by leg — and it is the only place the outcome
+//- claim becomes visible: the VND payout completes while the ACH debit is
+//- still days from settling. Nothing in the phone can show both at once.
+
+- const hk = sims.haloki
+
+mixin hkRow(label, hole, strong)
+  div(class="flex items-baseline justify-between gap-3 py-1.5")
+    span(class="text-[11px] text-resume-muted")= label
+    span(class=(strong ? 'text-[13px] font-bold text-resume-ink' : 'text-[13px] text-resume-ink'), data-h=hole)
+
+//- A row whose value never changes, so it needs no data-h hole.
+mixin hkFixedRow(label, value)
+  div(class="flex items-baseline justify-between gap-3 py-1.5")
+    span(class="text-[11px] text-resume-muted")= label
+    span(class="text-[13px] text-resume-ink")= value
+
+//- One leg of the money-flow rail. Every node is rendered idle; initHaloki
+//- writes the state, the value and the meta line from the same state object
+//- that drives the phone, so the rail can never drift from the screens.
+mixin hkFlowNode(key, label, idle)
+  li.h-flow-node(data-hflow=key, data-fstate="idle")
+    span.h-flow-dot(aria-hidden="true")
+    span.h-flow-label= label
+    span.h-flow-value(data-hflow-value=key)= idle
+    span.h-flow-meta(data-hflow-meta=key)
+
+article#sim-haloki(
+  data-sim="haloki",
+  data-screen="home",
+  data-min-transfer=hk.minTransfer,
+  data-max-transfer=hk.maxTransfer,
+  data-min-send=hk.minSend,
+  data-ach-fee=hk.achFeeFlat,
+  data-hk-fee-pct=hk.halokiFeePct,
+  data-hk-fee-cap=hk.halokiFeeCap,
+  data-bal-ms=hk.balanceCheckMs,
+  data-fx=hk.fxRate,
+  data-settle-days=hk.achSettleDays,
+  data-lock-secs=hk.rateLockSeconds,
+  data-reference=hk.reference,
+)
+  //- The header spans the article, the same as the other three simulations.
+  header(class="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1")
+    h3(class="text-xl font-extrabold tracking-tight text-resume-ink")= t('sims.haloki.name')
+    span(class="text-sm text-resume-muted")= t('sims.haloki.productType')
+
+  //- Source order is the mobile order: phone, rail, role block. The grid rows
+  //- stretch rather than start, and the rail inside the right column takes the
+  //- slack, so the two columns end level instead of leaving the phone beside a
+  //- run of white space.
+  div(class="grid gap-x-8 gap-y-6 lg:grid-cols-[minmax(0,360px)_minmax(0,1fr)]")
+    div(class="sim-frame relative mx-auto flex h-[640px] max-h-[80vh] w-full max-w-[390px] flex-col overflow-hidden rounded-[20px] border border-resume-line bg-white text-[13px] shadow-lg")
+      +simPhoneStatus()
+
+      //- App header
+      div(class="flex h-12 shrink-0 items-center border-b border-resume-line px-2")
+        button.h-iconbtn(type="button", data-h="back", aria-label=t('sims.haloki.ui.back'))
+          svg(viewBox="0 0 16 16", width="15", height="15", fill="none", stroke="currentColor", stroke-width="1.6", aria-hidden="true")
+            path(d="M10 3 5 8l5 5")
+        span(data-h="title", class="flex-1 text-center text-[13px] font-extrabold tracking-tight text-resume-ink")= t('sims.haloki.ui.appName')
+        span(class="h-8 w-8 shrink-0", aria-hidden="true")
+
+      //- Screens
+      div(class="relative min-h-0 flex-1")
+
+        //- --- Home -----------------------------------------------------
+        div.hk-screen.is-active(data-hscreen="home", data-title=t('sims.haloki.ui.appName'))
+          div(class="min-h-0 flex-1 overflow-y-auto p-4")
+            button.h-acctchip(type="button", data-h="acct-chip", hidden)
+              svg(viewBox="0 0 16 16", width="12", height="12", fill="none", stroke="currentColor", stroke-width="1.4", aria-hidden="true")
+                path(d="M2 6.2 8 3l6 3.2V13H2Z")
+                path(d="M5.5 8.6v2.6M8 8.6v2.6M10.5 8.6v2.6")
+              span.h-acctchip-text
+              svg(viewBox="0 0 16 16", width="11", height="11", fill="none", stroke="currentColor", stroke-width="1.5", aria-hidden="true")
+                path(d="m6.5 3 5 5-5 5")
+            p(class="mt-3 text-[11px] font-semibold uppercase tracking-wider text-resume-muted")= t('sims.haloki.ui.balanceLabel')
+            p(data-h="balance", class="mt-0.5 text-[34px] font-extrabold leading-none tracking-tight text-resume-ink") $0.00
+
+            div(class="mt-5 grid grid-cols-2 gap-3")
+              button.h-action(type="button", data-h="act-transfer")
+                span.h-action-ico
+                  svg(viewBox="0 0 20 20", width="17", height="17", fill="none", stroke="currentColor", stroke-width="1.5", aria-hidden="true")
+                    path(d="M10 1.5v7.5m0 0L7.2 6.2M10 9l2.8-2.8", stroke-linecap="round", stroke-linejoin="round")
+                    path(d="M2.5 9.5h15v7a1.5 1.5 0 0 1-1.5 1.5H4a1.5 1.5 0 0 1-1.5-1.5Z")
+                    path(d="M13.5 13.5h4")
+                span.h-action-title= t('sims.haloki.ui.transferTitle')
+                span.h-action-cap= t('sims.haloki.ui.transferCaption')
+              button.h-action(type="button", data-h="act-send")
+                span.h-action-ico
+                  svg(viewBox="0 0 20 20", width="17", height="17", fill="none", stroke="currentColor", stroke-width="1.5", aria-hidden="true")
+                    circle(cx="10", cy="12.5", r="5.8")
+                    path(d="M4.2 12.5h11.6M10 6.7c-3.2 3.4-3.2 8.2 0 11.6M10 6.7c3.2 3.4 3.2 8.2 0 11.6")
+                    path(d="M12.4 5.4 17.6 1m0 0h-4m4 0v4", stroke-linecap="round", stroke-linejoin="round")
+                span.h-action-title= t('sims.haloki.ui.sendTitle')
+                span.h-action-cap= t('sims.haloki.ui.sendCaption')
+
+            p(class="mt-6 text-[11px] font-semibold uppercase tracking-wider text-resume-muted")= t('sims.haloki.ui.activityTitle')
+            p(data-h="activity-empty", class="mt-2 text-[12px] text-resume-muted")= t('sims.haloki.ui.activityEmpty')
+            ul(data-h="activity", class="mt-2 space-y-2")
+
+        //- --- Linked accounts -----------------------------------------
+        div.hk-screen(data-hscreen="accounts", data-title=t('sims.haloki.ui.accountsTitle'))
+          div(class="min-h-0 flex-1 overflow-y-auto p-4")
+            ul(data-h="acct-list", class="space-y-2")
+            button.h-rowbtn(type="button", data-h="link-another")
+              span.h-plus +
+              span= t('sims.haloki.ui.linkAnother')
+
+        //- --- Transfer Money -------------------------------------------
+        div.hk-screen(data-hscreen="transfer", data-title=t('sims.haloki.ui.transferTitle'))
+          div(class="min-h-0 flex-1 overflow-y-auto p-4")
+            label(class="h-label", for="hk-from")= t('sims.haloki.ui.fromLabel')
+            select#hk-from.h-select(data-h="from", data-link-label=t('sims.haloki.ui.linkAnother'))
+            //- Plaid reports the account's available balance. The row spins
+            //- while the check runs, and every change of account re-runs it.
+            p.h-balrow(data-h="bal-row", role="status", aria-live="polite", hidden)
+              span.h-spin(data-h="bal-spin", aria-hidden="true")
+              span(data-h="bal-text")
+            label(class="h-label mt-4", for="hk-amount")= t('sims.haloki.ui.amountLabel')
+            div(class="flex items-center gap-1 rounded-lg border border-resume-line px-3 py-2.5 focus-within:border-resume-ink")
+              span(class="text-[15px] font-bold text-resume-muted") $
+              input#hk-amount.h-input(type="text", inputmode="decimal", autocomplete="off", data-h="transfer-amount", placeholder="0.00")
+            div(class="mt-2 flex flex-wrap gap-1.5")
+              each p in hk.presets
+                button.h-preset(type="button", data-h-preset=p, data-target="transfer")= '$' + p.toLocaleString('en-US')
+            p.h-err(data-h="transfer-err", hidden)
+            div(class="mt-4 rounded-lg border border-resume-line bg-resume-surface px-3 py-2")
+              //- The fee is two components. The label carries the control that
+              //- opens the breakdown; it sits outside the amount field's
+              //- wrapper, so focusing it never lights the input's border.
+              div(class="flex items-baseline justify-between gap-3 py-1.5")
+                span(class="flex items-center gap-1.5")
+                  span(class="text-[11px] text-resume-muted")= t('sims.haloki.ui.feeLabel')
+                  button.h-info(type="button", data-h="fee-info", aria-label=t('sims.haloki.ui.feeInfoLabel'))
+                    svg(viewBox="0 0 16 16", width="13", height="13", fill="none", stroke="currentColor", stroke-width="1.4", aria-hidden="true")
+                      circle(cx="8", cy="8", r="6.4")
+                      path(d="M8 7.3v4.1", stroke-linecap="round")
+                      circle(cx="8", cy="4.8", r="0.9", fill="currentColor", stroke="none")
+                span(class="text-[13px] text-resume-ink", data-h="transfer-fee")
+              +hkRow(t('sims.haloki.ui.creditedLabel'), 'transfer-credited', true)
+              div(class="flex items-baseline justify-between gap-3 border-t border-resume-line pt-1.5")
+                span(class="text-[11px] text-resume-muted")= t('sims.haloki.ui.arrivesLabel')
+                span(class="text-right text-[11px] text-resume-ink")= t('sims.haloki.ui.arrivesValue').replace('{days}', hk.achSettleDays)
+          div(class="shrink-0 border-t border-resume-line p-4")
+            button.h-primary(type="button", data-h="add-money", disabled)= t('sims.haloki.ui.addMoneyBtn')
+
+        //- --- Send · Recipient -----------------------------------------
+        //- First step. Nothing here is typed or picked: the payout details
+        //- are read-only, so the simulation never collects a bank detail.
+        div.hk-screen(data-hscreen="sendRecipient", data-title=t('sims.haloki.ui.recipientTitle'),
+          data-rcp-name=hk.recipient.name, data-rcp-bank=hk.recipient.bank, data-rcp-mask=hk.recipient.mask)
+          div(class="min-h-0 flex-1 overflow-y-auto p-4")
+            label(class="h-label", for="hk-rcp-bank")= t('sims.haloki.ui.bankLabel')
+            input#hk-rcp-bank.h-input.h-input-boxed.h-input-ro(type="text", readonly, value=hk.recipient.bank)
+            label(class="h-label mt-3", for="hk-rcp-acct")= t('sims.haloki.ui.accountNumberLabel')
+            input#hk-rcp-acct.h-input.h-input-boxed.h-input-ro(type="text", readonly, value=hk.recipient.account)
+            label(class="h-label mt-3", for="hk-rcp-holder")= t('sims.haloki.ui.accountHolderLabel')
+            input#hk-rcp-holder.h-input.h-input-boxed.h-input-ro(type="text", readonly, value=hk.recipient.name)
+          div(class="shrink-0 border-t border-resume-line p-4")
+            button.h-primary(type="button", data-h="rcp-continue")= t('sims.haloki.ui.continueBtn')
+
+        //- --- Send · Amount and purpose --------------------------------
+        div.hk-screen(data-hscreen="sendAmount", data-title=t('sims.haloki.ui.sendTitle'))
+          div(class="min-h-0 flex-1 overflow-y-auto p-4")
+            label(class="h-label", for="hk-send-amount")= t('sims.haloki.ui.amountLabel')
+            div(class="flex items-center gap-1 rounded-lg border border-resume-line px-3 py-2.5 focus-within:border-resume-ink")
+              span(class="text-[15px] font-bold text-resume-muted") $
+              input#hk-send-amount.h-input(type="text", inputmode="decimal", autocomplete="off", data-h="send-amount", placeholder="0.00")
+            div(class="mt-2 flex flex-wrap gap-1.5")
+              each p in hk.presets
+                button.h-preset(type="button", data-h-preset=p, data-target="send")= '$' + p.toLocaleString('en-US')
+            p.h-err(data-h="send-err", hidden)
+            label(class="h-label mt-4", for="hk-purpose")= t('sims.haloki.ui.purposeLabel')
+            input#hk-purpose.h-input.h-input-boxed.h-input-ro(type="text", readonly, data-h="purpose", value=t('sims.haloki.ui.purposeValue'))
+            div(class="mt-4 rounded-lg border border-resume-line bg-resume-surface px-3 py-2")
+              +hkRow(t('sims.haloki.ui.youSendLabel'), 'q-send')
+              +hkFixedRow(t('sims.haloki.ui.feeShort'), t('sims.haloki.ui.feeFree'))
+              div(class="flex items-baseline justify-between gap-3 py-1.5")
+                span(class="text-[11px] text-resume-muted")= t('sims.haloki.ui.rateLabel')
+                span(class="text-right")
+                  span(data-h="q-rate", class="text-[13px] text-resume-ink")
+                  span.h-ratenote= t('sims.haloki.ui.rateNote')
+              div(class="flex items-baseline justify-between gap-3 border-t border-resume-line pt-1.5")
+                span(class="text-[11px] text-resume-muted")= t('sims.haloki.ui.recipientGetsLabel')
+                span(data-h="q-gets", class="text-[13px] font-bold text-resume-ink")
+          div(class="shrink-0 border-t border-resume-line p-4")
+            button.h-primary(type="button", data-h="send-continue", disabled)= t('sims.haloki.ui.continueBtn')
+
+        //- --- Send · Review --------------------------------------------
+        div.hk-screen(data-hscreen="sendReview", data-title=t('sims.haloki.ui.reviewTitle'))
+          div(class="min-h-0 flex-1 overflow-y-auto p-4")
+            div(class="rounded-lg border border-resume-line px-3 py-2.5")
+              p(class="text-[11px] text-resume-muted")= t('sims.haloki.ui.toLabel')
+              p(data-h="rv-name", class="mt-0.5 text-[14px] font-bold text-resume-ink")
+              p(data-h="rv-bank", class="text-[11px] text-resume-muted")
+            div(class="mt-3 rounded-lg border border-resume-line bg-resume-surface px-3 py-2")
+              +hkRow(t('sims.haloki.ui.youSendLabel'), 'rv-send')
+              +hkFixedRow(t('sims.haloki.ui.feeShort'), t('sims.haloki.ui.feeFree'))
+              div(class="flex items-baseline justify-between gap-3 py-1.5")
+                span(class="text-[11px] text-resume-muted")= t('sims.haloki.ui.rateLabel')
+                span(class="text-right")
+                  span(data-h="rv-rate", class="text-[13px] text-resume-ink")
+                  span.h-ratenote= t('sims.haloki.ui.rateNote')
+              +hkRow(t('sims.haloki.ui.purposeLabel'), 'rv-purpose')
+              div(class="flex items-baseline justify-between gap-3 border-t border-resume-line pt-1.5")
+                span(class="text-[11px] text-resume-muted")= t('sims.haloki.ui.recipientGetsLabel')
+                span(data-h="rv-gets", class="text-[13px] font-bold text-resume-ink")
+            div(class="mt-3 flex items-center justify-between gap-3 rounded-lg border border-resume-line px-3 py-2")
+              span(class="text-[11px] text-resume-muted")= t('sims.haloki.ui.rateLockLabel')
+              span(data-h="lock", class="font-mono text-[13px] font-bold tabular-nums text-resume-ink") 30:00
+          div(class="shrink-0 border-t border-resume-line p-4")
+            button.h-primary(type="button", data-h="confirm")= t('sims.haloki.ui.confirmBtn')
+
+        //- --- Transaction status ---------------------------------------
+        div.hk-screen(data-hscreen="status", data-title=t('sims.haloki.ui.statusTitle'))
+          div(class="min-h-0 flex-1 overflow-y-auto p-4")
+            //- Added money
+            div(data-hstatus="fund", hidden)
+              p(data-h="st-f-head", class="text-[17px] font-extrabold tracking-tight text-resume-ink")
+              p(data-h="st-f-from", class="mt-0.5 text-[12px] text-resume-muted")
+              div(class="mt-3 rounded-lg border border-resume-line bg-resume-surface px-3 py-2")
+                +hkRow(t('sims.haloki.ui.feeLabel'), 'st-f-fee')
+                +hkRow(t('sims.haloki.ui.creditedLabel'), 'st-f-credited', true)
+              ol(class="mt-4 space-y-3")
+                li.h-step.is-done
+                  span.h-step-dot(aria-hidden="true")
+                  span.h-step-label= t('sims.haloki.ui.stepAuthorised')
+                  span.h-step-time= t('sims.haloki.ui.timeJustNow')
+                li.h-step.is-done
+                  span.h-step-dot(aria-hidden="true")
+                  span.h-step-label= t('sims.haloki.ui.stepCredited')
+                  span.h-step-time= t('sims.haloki.ui.timeJustNow')
+                li.h-step.is-pending
+                  span.h-step-dot(aria-hidden="true")
+                  span.h-step-label= t('sims.haloki.ui.stepSettles')
+                  span.h-step-time= t('sims.haloki.ui.timeInDays').replace('{days}', hk.achSettleDays)
+            //- Sent
+            div(data-hstatus="send", hidden)
+              p(data-h="st-s-head", class="text-[17px] font-extrabold tracking-tight text-resume-ink")
+              p(data-h="st-s-to", class="mt-0.5 text-[12px] text-resume-muted")
+              div(class="mt-3 rounded-lg border border-resume-line bg-resume-surface px-3 py-2")
+                +hkRow(t('sims.haloki.ui.recipientGotLabel'), 'st-s-got', true)
+                div(class="flex items-baseline justify-between gap-3 py-1.5")
+                  span(class="text-[11px] text-resume-muted")= t('sims.haloki.ui.rateLabel')
+                  span(class="text-right")
+                    span(data-h="st-s-rate", class="text-[13px] text-resume-ink")
+                    span.h-ratenote= t('sims.haloki.ui.rateNote')
+                +hkFixedRow(t('sims.haloki.ui.feeShort'), t('sims.haloki.ui.feeFree'))
+                +hkRow(t('sims.haloki.ui.purposeLabel'), 'st-s-purpose')
+                div(class="flex items-baseline justify-between gap-3 border-t border-resume-line pt-1.5")
+                  span(class="text-[11px] text-resume-muted")= t('sims.haloki.ui.referenceLabel')
+                  span(class="font-mono text-[12px] text-resume-ink")= hk.reference
+              ol(class="mt-4 space-y-3")
+                li.h-step.is-done
+                  span.h-step-dot(aria-hidden="true")
+                  span.h-step-label= t('sims.haloki.ui.stepSubmitted')
+                  span.h-step-time= t('sims.haloki.ui.timeJustNow')
+                li.h-step.is-done
+                  span.h-step-dot(aria-hidden="true")
+                  span.h-step-label= t('sims.haloki.ui.stepConverted')
+                  span.h-step-time= t('sims.haloki.ui.timeJustNow')
+                li.h-step(data-h="st-s-paid")
+                  span.h-step-dot(aria-hidden="true")
+                  span.h-step-label= t('sims.haloki.ui.stepPaidOut')
+                  span.h-step-time(data-h="st-s-paid-time")
+              div(data-h="st-s-notice", hidden, class="mt-4 rounded-lg border border-resume-line px-3 py-2.5")
+                p(class="text-[10px] font-semibold uppercase tracking-wider text-resume-muted")= t('sims.haloki.ui.recipientNoticeLabel')
+                p(data-h="st-s-notice-text", class="mt-0.5 text-[13px] font-bold text-emerald-700")
+
+      //- Strings the controller writes into rows it builds at runtime.
+      div(hidden, data-h="strings",
+        data-added-row=t('sims.haloki.ui.addedRow'),
+        data-sent-row=t('sims.haloki.ui.sentRow'),
+        data-completed=t('sims.haloki.ui.statusCompleted'),
+        data-pending=t('sims.haloki.ui.statusPending'),
+        data-sending=t('sims.haloki.ui.statusSending'),
+        data-settles-in=t('sims.haloki.ui.settlesIn'),
+        data-toast-linked=t('sims.haloki.ui.toastLinked'),
+        data-tx-added=t('sims.haloki.ui.txAdded'),
+        data-tx-sent=t('sims.haloki.ui.txSent'),
+        data-from-label=t('sims.haloki.ui.fromLabel'),
+        data-just-now=t('sims.haloki.ui.timeJustNow'),
+        data-notice=t('sims.haloki.ui.recipientNotice'),
+        data-err-min=t('sims.haloki.ui.errMin'),
+        data-err-max=t('sims.haloki.ui.errMax'),
+        data-err-balance=t('sims.haloki.ui.errBalance'),
+        data-err-bank-balance=t('sims.haloki.ui.errBankBalance'),
+        data-balance-checking=t('sims.haloki.ui.balanceChecking'),
+        data-balance-available=t('sims.haloki.ui.balanceAvailable'),
+        data-flow-bank-idle=t('sims.haloki.ui.flowBankIdle'),
+        data-flow-bank-meta=t('sims.haloki.ui.flowBankMeta'),
+        data-flow-ach-idle=t('sims.haloki.ui.flowAchIdle'),
+        data-flow-ach-meta=t('sims.haloki.ui.flowAchMeta'),
+        data-flow-wallet-idle=t('sims.haloki.ui.flowWalletIdle'),
+        data-flow-wallet-meta=t('sims.haloki.ui.flowWalletMeta'),
+        data-flow-payout-idle=t('sims.haloki.ui.flowPayoutIdle'),
+        data-flow-payout-meta=t('sims.haloki.ui.flowPayoutMeta'),
+        data-flow-payout-meta-sending=t('sims.haloki.ui.flowPayoutMetaSending'),
+        data-flow-note-idle=t('sims.haloki.ui.flowNoteIdle'),
+        data-flow-note-settling=t('sims.haloki.ui.flowNoteSettling'))
+
+      //- --- Toast: inside the frame, never over the page ----------------
+      div.h-toast(data-h="toast", hidden, role="status", aria-live="polite")
+        span.h-tick(aria-hidden="true")
+          svg(viewBox="0 0 12 12", width="9", height="9", fill="none", stroke="currentColor", stroke-width="2")
+            path(d="M2 6.5 4.8 9 10 3")
+        span(data-h="toast-text")
+
+      //- --- Overlays: sheets and modals, inside the frame ---------------
+      div.h-layer(data-hlayer="plaid")
+        div.h-scrim(data-h="plaid-scrim")
+        div.h-sheet
+          div(class="flex items-center gap-2 border-b border-resume-line px-4 py-3")
+            svg(viewBox="0 0 16 16", width="13", height="13", fill="none", stroke="currentColor", stroke-width="1.5", class="text-resume-ink", aria-hidden="true")
+              rect(x="3", y="7", width="10", height="7", rx="1.5")
+              path(d="M5 7V5a3 3 0 0 1 6 0v2")
+            span(class="text-[13px] font-extrabold tracking-tight text-resume-ink")= t('sims.haloki.ui.plaidBrand')
+            button.h-iconbtn(type="button", data-h="plaid-close", class="ml-auto", aria-label=t('sims.haloki.ui.close'))
+              svg(viewBox="0 0 16 16", width="13", height="13", fill="none", stroke="currentColor", stroke-width="1.6", aria-hidden="true")
+                path(d="m4 4 8 8M12 4l-8 8")
+          div(class="max-h-[62%] overflow-y-auto p-4")
+            div(data-hplaid="1")
+              p(class="text-[11px] leading-snug text-resume-muted")= t('sims.haloki.ui.plaidIntro')
+              p(class="mt-3 text-[13px] font-bold text-resume-ink")= t('sims.haloki.ui.plaidStep1')
+              ul(class="mt-2 space-y-2")
+                each b in hk.usBanks
+                  li
+                    button.h-usbank(type="button", data-h-usbank=b.id, data-name=b.name, data-mask=b.mask, data-subtype=t('sims.haloki.ui.' + b.subtype), data-available=b.availableBalance)
+                      span.h-rcp-dot
+                      span= b.name
+            div(data-hplaid="2", hidden)
+              p(class="text-[13px] font-bold text-resume-ink")= t('sims.haloki.ui.plaidStep2')
+              p(data-h="plaid-bank", class="mt-2 text-[12px] font-semibold text-resume-ink")
+              div(class="mt-2 flex items-center gap-2 rounded-lg border border-resume-ink px-3 py-2.5")
+                span.h-tick(aria-hidden="true")
+                  svg(viewBox="0 0 12 12", width="9", height="9", fill="none", stroke="currentColor", stroke-width="2")
+                    path(d="M2 6.5 4.8 9 10 3")
+                span(data-h="plaid-acct", class="text-[13px] text-resume-ink")
+              button.h-primary(type="button", data-h="plaid-connect", class="mt-4")= t('sims.haloki.ui.plaidConnect')
+
+      div.h-layer(data-hlayer="modal",
+        data-link-title=t('sims.haloki.ui.lockedLinkTitle'),
+        data-link-body=t('sims.haloki.ui.lockedLinkBody'),
+        data-link-btn=t('sims.haloki.ui.lockedLinkBtn'),
+        data-bal-title=t('sims.haloki.ui.lockedBalanceTitle'),
+        data-bal-body=t('sims.haloki.ui.lockedBalanceBody'),
+        data-bal-btn=t('sims.haloki.ui.lockedBalanceBtn'))
+        div.h-scrim(data-h="modal-scrim")
+        div.h-modal
+          p(data-h="modal-title", class="text-[15px] font-extrabold tracking-tight text-resume-ink")
+          p(data-h="modal-body", class="mt-1.5 text-[12px] leading-snug text-resume-body")
+          button.h-primary(type="button", data-h="modal-btn", class="mt-4")
+
+      //- --- Fee breakdown: what the single Service fee row is made of -----
+      div.h-layer(data-hlayer="fee")
+        div.h-scrim(data-h="fee-scrim")
+        div.h-modal
+          div(class="-mr-2 -mt-2 flex justify-end")
+            button.h-iconbtn(type="button", data-h="fee-close", aria-label=t('sims.haloki.ui.close'))
+              svg(viewBox="0 0 16 16", width="13", height="13", fill="none", stroke="currentColor", stroke-width="1.6", aria-hidden="true")
+                path(d="m4 4 8 8M12 4l-8 8")
+          div(class="flex items-baseline justify-between gap-3")
+            span(class="text-[13px] font-extrabold tracking-tight text-resume-ink")= t('sims.haloki.ui.feeLabel')
+            span(data-h="fee-total", class="text-[15px] font-extrabold text-resume-ink")
+          div(class="mt-3 border-t border-resume-line pt-3")
+            div(class="flex items-baseline justify-between gap-3")
+              span(class="text-[12px] font-bold text-resume-ink")= t('sims.haloki.ui.feeHaloki')
+              span(data-h="fee-haloki", class="text-[13px] font-bold text-resume-ink")
+            p(class="mt-0.5 text-[11px] leading-snug text-resume-muted")= t('sims.haloki.ui.feeHalokiNote')
+          div(class="mt-3")
+            div(class="flex items-baseline justify-between gap-3")
+              span(class="text-[12px] font-bold text-resume-ink")= t('sims.haloki.ui.feeAch')
+              span(data-h="fee-ach", class="text-[13px] font-bold text-resume-ink")
+            p(class="mt-0.5 text-[11px] leading-snug text-resume-muted")= t('sims.haloki.ui.feeAchNote')
+
+    //- Right column: where the money is, then who built it.
+    div(class="flex min-w-0 flex-col")
+      section(class="h-flow flex flex-1 flex-col rounded-xl border border-resume-line bg-white p-4", aria-labelledby="hk-flow-title")
+        h4#hk-flow-title(class="text-[10px] font-bold uppercase tracking-widest text-resume-muted")= t('sims.haloki.ui.flowTitle')
+        ol(class="mt-4")
+          +hkFlowNode('bank', t('sims.haloki.ui.flowBankLabel'), t('sims.haloki.ui.flowBankIdle'))
+          +hkFlowNode('ach', t('sims.haloki.ui.flowAchLabel'), t('sims.haloki.ui.flowAchIdle'))
+          +hkFlowNode('wallet', t('sims.haloki.ui.flowWalletLabel'), t('sims.haloki.ui.flowWalletIdle'))
+          +hkFlowNode('payout', t('sims.haloki.ui.flowPayoutLabel'), t('sims.haloki.ui.flowPayoutIdle'))
+        p.h-flow-note(data-h="flow-note", role="status", aria-live="polite")= t('sims.haloki.ui.flowNoteIdle')
+
+      +simAside('haloki')

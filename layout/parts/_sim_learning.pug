@@ -1,0 +1,188 @@
+//- Interactive Learning — free-exploration simulation.
+//- The outline drives navigation; each lesson type renders its own centre view.
+
+mixin leoAvatar(cls)
+  img(class=`l-leo ${cls || ''}`, src="assets/img/ai_facilitator.jpg", alt="Leo", loading="lazy")
+
+article#sim-learning(data-sim="learning", data-lesson="intro", data-left="open", data-right="open", data-mpane="learn")
+  header(class="mb-4 flex flex-wrap items-baseline gap-x-3 gap-y-1")
+    h3(class="text-xl font-extrabold tracking-tight text-resume-ink")= t('sims.learning.name')
+    span(class="text-sm text-resume-muted")= t('sims.learning.productType')
+  div(class="grid")
+    div(class="min-w-0")
+      div(class="sim-frame overflow-hidden rounded-xl border border-resume-line bg-white shadow-lg")
+        +simChrome('learn.example.app/course/csharp-basics')
+        div(class="sim-app relative flex h-[520px] flex-col bg-[#fafafc] text-[13px] sm:h-[540px]")
+          div(class="flex min-h-0 flex-1")
+            //- Left pane: interactive course outline
+            aside.l-left(class="w-60 shrink-0 flex-col border-r border-resume-line bg-white")
+              div(class="flex h-12 shrink-0 items-center border-b border-resume-line px-3")
+                span(class="text-[11px] font-bold uppercase tracking-wider text-resume-muted")= t('sims.learning.ui.outlineTitle')
+              div(class="px-3 py-3")
+                div(class="flex items-center justify-between text-[11px] font-semibold text-resume-muted")
+                  span= t('sims.learning.ui.progressLabel')
+                  span(data-l="progress-text", data-unit=t('sims.learning.ui.progressUnit'), data-total=sims.learning.lessons.length)= `0/${sims.learning.lessons.length} ${t('sims.learning.ui.progressUnit')}`
+                div(class="mt-1.5 h-1.5 overflow-hidden rounded-full bg-resume-line")
+                  div.l-progress-fill(data-l="progress-fill", class="h-full w-0 rounded-full bg-resume-ink")
+              p(class="px-3 text-[11px] font-bold text-resume-ink")= t('sims.learning.ui.moduleLabel')
+              ul(class="mt-2 flex-1 space-y-0.5 overflow-y-auto px-2 pb-3")
+                each l in sims.learning.lessons
+                  li
+                    button.l-lesson(type="button", data-lesson-btn=l.id, data-type=l.type, class=l.id === 'intro' ? 'is-current' : '')
+                      span.l-lesson-ico
+                        span.l-tickico(hidden)
+                          svg(viewBox="0 0 12 12", width="8", height="8", fill="none", stroke="currentColor", stroke-width="2", aria-hidden="true")
+                            path(d="M2 6.5 4.8 9 10 3")
+                      span(class="min-w-0")
+                        span.l-lesson-title= t(`sims.learning.ui.lessons.${l.id}.title`)
+                        span.l-lesson-meta= t(`sims.learning.ui.lessons.${l.id}.meta`)
+            //- Centre pane
+            div.l-center(class="flex min-w-0 flex-1 flex-col")
+              div(class="flex h-12 shrink-0 items-center gap-2 border-b border-resume-line bg-white px-3")
+                div(class="min-w-0")
+                  p(data-l="stage-title", class="truncate text-xs font-bold text-resume-ink")= t('sims.learning.ui.lessons.intro.title')
+                  p(data-l="stage-meta", class="text-[10px] text-resume-muted")= t('sims.learning.ui.lessons.intro.meta')
+                div(class="ml-auto flex items-center gap-1.5")
+                  span(class="rounded-full bg-amber-100 px-2 py-0.5 text-[10px] font-bold text-amber-700")
+                    span(data-l="points") 0
+                    |
+                    |
+                    span= t('sims.learning.ui.pointsSuffix')
+                  button(type="button", data-l="toggle-left", aria-label=t('sims.learning.ui.outlineTitle'), class="l-icon-btn hidden md:inline-flex")
+                    svg(viewBox="0 0 16 16", width="13", height="13", fill="none", stroke="currentColor", stroke-width="1.5", aria-hidden="true")
+                      path(d="M2 4h12M2 8h12M2 12h12")
+                  button(type="button", data-l="toggle-right", aria-label=t('sims.learning.ui.chatName'), class="l-icon-btn relative hidden lg:inline-flex")
+                    svg(viewBox="0 0 16 16", width="13", height="13", fill="none", stroke="currentColor", stroke-width="1.5", aria-hidden="true")
+                      path(d="M3 3h10a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H8l-3 3v-3H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z")
+                    span.l-unread(hidden)
+              div(class="l-stage relative flex min-h-0 flex-1 flex-col overflow-y-auto")
+                //- View: video lesson (slide + Leo teaching)
+                div(data-view="video", class="flex h-full min-h-0 flex-col")
+                  div(class="relative flex min-h-0 flex-1 flex-col overflow-y-auto bg-white")
+                    - const introLesson = sims.learning.lessons.find((x) => x.id === 'intro')
+                    - const introBullets = tl('sims.learning.ui.slides.intro.bullets')
+                    - const introNarration = tl('sims.learning.ui.slides.intro.narration')
+                    div.l-slideset(class="flex h-full min-h-0 flex-col", data-slide-for="intro", data-dur=introLesson.duration)
+                      div(class="flex h-full min-h-0 flex-col justify-center p-6 pr-24 sm:p-8 sm:pr-28")
+                        p(class="text-[10px] font-bold uppercase tracking-widest text-resume-ink")= t('sims.learning.ui.slideLabel')
+                        h4(class="mt-1 text-lg font-extrabold tracking-tight text-resume-ink sm:text-xl")= t('sims.learning.ui.slides.intro.title')
+                        ul(class="mt-4 space-y-2.5")
+                          each b, bi in introBullets
+                            li.l-bullet(data-narration=introNarration[bi])
+                              span.l-bdot(aria-hidden="true")
+                              span= b
+                    //- Leo teaching bubble
+                    div.l-tutor(aria-hidden="true")
+                      +leoAvatar('l-leo-lg')
+                      span.l-wave
+                        span
+                        span
+                        span
+                  div.l-caption(data-l="caption", hidden, class="border-t border-resume-line bg-[#fafafc] px-4 py-2 text-xs leading-snug text-resume-body")
+                  div(class="flex shrink-0 items-center gap-3 border-t border-resume-line bg-white px-4 py-3")
+                    button(type="button", data-l="vplay", aria-pressed="true", aria-label="Play / Pause", class="l-vplaybtn")
+                      svg.ico-play(viewBox="0 0 16 16", width="12", height="12", fill="currentColor", aria-hidden="true")
+                        path(d="M5 3.5v9l8-4.5-8-4.5Z")
+                      svg.ico-pause(viewBox="0 0 16 16", width="12", height="12", fill="currentColor", aria-hidden="true")
+                        path(d="M5 3.5h2.2v9H5Zm3.8 0H11v9H8.8Z")
+                    span(class="h-1 flex-1 overflow-hidden rounded-full bg-resume-line")
+                      span.l-vfill(data-l="vfill", class="block h-full w-0 rounded-full bg-resume-ink")
+                    span(data-l="vdur", class="text-[10px] font-semibold text-resume-muted") 6:24
+                    button(type="button", data-l="caption-toggle", aria-pressed="false", aria-label=t('sims.learning.ui.captionBtnLabel'), class="l-ccbtn")
+                      | CC
+                //- View: quiz
+                div(data-view="quiz", hidden, class="p-4")
+                  p(class="text-[11px] font-bold uppercase tracking-wider text-resume-muted")= t('sims.learning.ui.quizTitle')
+                  p(class="mt-3 rounded-lg border border-resume-line bg-white p-4 text-sm leading-loose text-resume-ink")
+                    - const quizParts = tl('sims.learning.ui.quizParts')
+                    each part, i in quizParts
+                      span= part
+                      if i < sims.learning.quiz.answers.length
+                        button.l-blank(type="button", data-quiz-blank, data-answer=sims.learning.quiz.answers[i])
+                  div(class="mt-3 flex flex-wrap gap-2")
+                    each chip in sims.learning.quiz.chips
+                      button.l-chip(type="button", data-quiz-chip, data-chip=chip)
+                        code= chip
+                  div(class="mt-4 flex flex-wrap items-center gap-3")
+                    button(type="button", data-l="answer", data-continue=t('sims.learning.ui.continueBtn'), data-answer-label=t('sims.learning.ui.answerBtn'), disabled, class="l-primary-btn")= t('sims.learning.ui.answerBtn')
+                    span(data-l="toast", hidden, class="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-700")= t('sims.learning.ui.correctToast')
+                //- View: hands-on editor
+                div(data-view="handson", hidden, class="p-4")
+                  div(class="mb-3 rounded-lg border border-resume-line bg-resume-surface px-3 py-2")
+                    p(class="text-[11px] font-bold uppercase tracking-wider text-resume-ink")= t('sims.learning.ui.taskTitle')
+                    p(class="mt-0.5 text-xs leading-snug text-resume-ink")= t('sims.learning.ui.taskDesc')
+                  div(class="overflow-hidden rounded-lg border border-[#1e1e1e] bg-[#1e1e1e] shadow-inner")
+                    div(class="flex items-center gap-2 border-b border-white/10 px-3 py-1.5")
+                      span(class="rounded-t bg-[#2d2d2d] px-2.5 py-1 text-[11px] font-semibold text-[#d4d4d4]") Program.cs
+                    pre(class="l-codepane overflow-x-auto px-0 py-2 font-mono text-[11.5px] leading-[1.7] sm:text-xs")
+                      each line, i in sims.learning.code
+                        div.l-line.is-typed(data-code-line=i, data-fix=line.fix, class=line.fix ? 'is-fixable has-err' : false, tabindex=line.fix ? '0' : false)
+                          span.l-ln= i + 1
+                          span.l-linebody(class="whitespace-pre")
+                            if line.ind
+                              span.tok-pln= ' '.repeat(line.ind)
+                            if line.fix
+                              span.l-broken
+                                each tok in line.tokens
+                                  span(class=`tok-${tok[0]}`)= tok[1]
+                              span.l-fixed
+                                each tok in line.fixedTokens
+                                  span(class=`tok-${tok[0]}`)= tok[1]
+                            else
+                              each tok in line.tokens
+                                span(class=`tok-${tok[0]}`)= tok[1]
+                              if !line.tokens.length
+                                span= ' '
+                          if line.fix
+                            span.l-linestat(aria-hidden="true")
+                  p(data-l="linemsg", data-ok=t('sims.learning.ui.lineOk'), data-bad=t('sims.learning.ui.lineBad'), hidden, class="mt-2 text-xs font-semibold")
+                  div(data-l="checks", hidden, class="mt-3 rounded-lg border border-resume-line bg-white p-3")
+                    p(class="text-[11px] font-bold uppercase tracking-wider text-resume-muted")= t('sims.learning.ui.checksTitle')
+                    ul(class="mt-2 space-y-1.5")
+                      each check, i in tl('sims.learning.ui.checks')
+                        li(data-check=i, class="flex items-center gap-2 text-xs text-resume-body")
+                          span.l-check-icon(class="flex h-4 w-4 items-center justify-center rounded-full border border-resume-line text-[9px] font-bold")
+                          span= check
+                    p(data-l="result", data-ok=t('sims.learning.ui.submitSuccess'), data-fail=t('sims.learning.ui.submitFail'), hidden, class="mt-2 text-xs font-semibold")
+                  div(class="mt-3 flex flex-wrap items-center gap-3")
+                    button(type="button", data-l="submit", class="l-primary-btn")= t('sims.learning.ui.submitBtn')
+                    span(class="text-[11px] italic text-resume-muted")= t('sims.learning.ui.editHint')
+            //- Right pane: Leo, the AI Facilitator
+            aside.l-right(class="w-64 shrink-0 flex-col border-l border-resume-line bg-white")
+              div(class="flex h-12 shrink-0 items-center gap-2.5 border-b border-resume-line px-3")
+                span(class="relative shrink-0")
+                  +leoAvatar('l-leo-md')
+                  span.l-online-dot(aria-hidden="true")
+                div(class="min-w-0 leading-tight")
+                  p
+                    span(class="text-xs font-extrabold text-resume-ink")= t('sims.learning.ui.chatName')
+                    span(class="ml-1.5 text-[10px] font-semibold uppercase tracking-wide text-resume-ink")= t('sims.learning.ui.chatRole')
+                  p(class="text-[10px] text-emerald-600")= t('sims.learning.ui.chatOnline')
+              div.l-chatlog(data-l="chatlog", class="min-h-0 flex-1 space-y-2.5 overflow-y-auto p-3")
+                div.l-msg.l-msg-leo
+                  span.l-msg-ava
+                    +leoAvatar('l-leo-xs')
+                  div.l-bubble.l-bubble-leo
+                    each line in tl('sims.learning.ui.chatGreeting')
+                      p= line
+              div(class="border-t border-resume-line px-3 pt-2")
+                p(class="text-[10px] font-bold uppercase tracking-wider text-resume-muted")= t('sims.learning.ui.suggestedLabel')
+                div(class="mt-1.5 flex flex-col items-start gap-1.5 pb-2")
+                  each qid in ['q1', 'q2', 'q3']
+                    button.l-sq(type="button", data-sq=qid, data-q=t(`sims.learning.ui.qa.${qid}.q`), data-a=t(`sims.learning.ui.qa.${qid}.a`))= t(`sims.learning.ui.qa.${qid}.q`)
+              div(class="border-t border-resume-line p-2")
+                div(class="flex items-center gap-2 rounded-full border border-resume-line bg-[#fafafc] px-3 py-1.5")
+                  span(class="flex-1 truncate text-[11px] text-resume-muted")= t('sims.learning.ui.chatPlaceholder')
+                  svg(viewBox="0 0 16 16", width="12", height="12", fill="currentColor", class="text-resume-ink", aria-hidden="true")
+                    path(d="m1.7 1.6 12.8 6.1a.35.35 0 0 1 0 .63L1.7 14.4a.35.35 0 0 1-.49-.4l1.5-5.32a.7.7 0 0 1 .5-.49L8.5 7 3.2 5.8a.7.7 0 0 1-.5-.48L1.2 2a.35.35 0 0 1 .5-.4Z")
+          //- Leo's contextual messages (data for the controller)
+          div(hidden, data-l="msgs")
+            span(data-msg="afterVideo")= t('sims.learning.ui.msgAfterVideo')
+            span(data-msg="afterQuiz")= t('sims.learning.ui.msgAfterQuiz')
+            span(data-msg="afterFix")= t('sims.learning.ui.msgAfterFix')
+          //- Mobile bottom nav
+          div.l-mnav(class="flex border-t border-resume-line bg-white md:hidden")
+            button(type="button", data-mnav="outline", class="l-mnav-btn")= t('sims.learning.ui.mnavOutline')
+            button(type="button", data-mnav="learn", class="l-mnav-btn")= t('sims.learning.ui.mnavLearn')
+            button(type="button", data-mnav="chat", class="l-mnav-btn")= t('sims.learning.ui.mnavChat')
+    +simAside('learning')

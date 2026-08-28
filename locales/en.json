@@ -1,0 +1,521 @@
+{
+  "meta": {
+    "title": "Luan Vu Minh | Software Engineer"
+  },
+  "languageSwitcher": {
+    "label": "Choose language"
+  },
+  "identity": {
+    "name": "Luan Vu Minh",
+    "career": "Software Engineer"
+  },
+  "contact": {
+    "phoneLabel": "Phone",
+    "emailLabel": "Email",
+    "addressLabel": "Address",
+    "address": "Tan Ky Tan Quy St., Tan Son Nhi Ward, HCMC",
+    "title": "Get in touch",
+    "line": "If you would like to talk, email is the fastest way to reach me.",
+    "githubLabel": "GitHub",
+    "linkedinLabel": "LinkedIn"
+  },
+  "summary": {
+    "title": "Professional Summary",
+    "paragraph": "Software Engineer with experience across backend, and frontend development in product-based environments. Experienced in designing APIs, data models, event-driven workflows, background jobs, and third-party integrations using Java/Spring and TypeScript/NestJS. Hands-on experience with Apache Kafka, Redis, BullMQ, MongoDB, and LLM integrations. Strong focus on building practical, reliable products and collaborating across product and engineering teams."
+  },
+  "experience": {
+    "title": "Work Experience",
+    "technologiesLabel": "Technologies",
+    "items": {
+      "mvp": {
+        "company": "MVP Studio",
+        "role": "Software Engineer",
+        "location": "Remote",
+        "period": "Jan 2024 - Present",
+        "technologies": "TypeScript, React, NestJS, MongoDB, Redis, BullMQ, WebSocket, Docker, LLM APIs",
+        "bullets": [
+          "Designed and developed full-stack workflows for an AI-powered platform providing Software Development, Data Analysis, and Test Analysis programs. Built browser-based practice applications, including a VS Code-style coding environment, SQL Playground, Jira simulation, and Excel exercises, allowing learners to complete hands-on tasks without installing external software. Integrated LLM APIs to generate tasks, evaluate learner submissions, and provide contextual guidance through an AI Facilitator; integrated HeyGen to deliver lessons through an AI Tutor.",
+          "Designed the data model and end-to-end workflows for a talent assessment platform serving both candidates and recruiters. Integrated LLM APIs to generate job-specific simulations, evaluate candidate performance against predefined criteria, and provide AI-generated feedback. The platform allows recruiters to assess practical capabilities beyond CVs and filter candidates based on simulation results.",
+          "Developed BitMeet, an internal meeting platform, integrating LiveKit, Deepgram, and LLM APIs for real-time meetings with near-real-time transcription and translation, plus AI-generated summaries."
+        ]
+      },
+      "hahaloloBackend": {
+        "company": "Hahalolo Travel Social Network Joint Stock Company",
+        "role": "Backend Developer",
+        "location": "Ho Chi Minh City, Vietnam",
+        "period": "Sep 2021 - Dec 2023",
+        "technologies": "Java, Spring, Apache Kafka, MongoDB, Elasticsearch",
+        "bullets": [
+          "Designed the data model, transaction flows, and REST APIs for a Coin Service, enabling users to claim rewards, manage coin balances, and redeem coins for order discounts.",
+          "Participated in the initial product and technical design of Haloki; designed database schemas and developed APIs integrating Plaid for bank-account connectivity and financial workflows.",
+          "Implemented the core fan-out-on-write mechanism for the social news feed, distributing newly created posts to followers across the web and mobile platforms.",
+          "Built a data synchronization pipeline using Apache Kafka to migrate and index MongoDB data in Elasticsearch, enabling full-text search capabilities.",
+          "Designed and developed REST APIs, created technical documentation, and collaborated with Business Analysts and frontend developers to refine requirements and user flows.",
+          "Mentored and supported new developers during project onboarding and implementation."
+        ]
+      },
+      "hahaloloFrontend": {
+        "company": "Hahalolo Travel Social Network Joint Stock Company",
+        "role": "Frontend Developer",
+        "location": "Ho Chi Minh City, Vietnam",
+        "period": "Sep 2019 - Sep 2021",
+        "technologies": "React, Node.js",
+        "bullets": [
+          "Joined in developing and maintaining the social network and services for Hahalolo.",
+          "Worked closely with the Tester team to complete test cases.",
+          "Collaborated with the API team in reviewing functionality and optimizing input/output.",
+          "Participated in designing and creating React components such as the in-app notification component and the user's private page component.",
+          "Built search and booking interfaces for tours, hotels, and airline tickets, collaborating closely with backend developers and QA teams on API contracts and test cases."
+        ]
+      },
+      "angel": {
+        "company": "Angel Media (AMX)",
+        "role": "Web Developer",
+        "location": "Ho Chi Minh City, Vietnam",
+        "period": "Oct 2018 - Sep 2019",
+        "technologies": "JavaScript, PHP, CodeIgniter, MySQL, HTML/CSS",
+        "bullets": [
+          "Designed commercial websites using HTML/CSS and JavaScript.",
+          "Built CMS functionality for article publishing, product management, and user administration."
+        ]
+      }
+    }
+  },
+  "education": {
+    "title": "Education",
+    "degree": "Associate Degree in Information Technology",
+    "school": "Cao Thang Technical College",
+    "location": "Ho Chi Minh City, Vietnam",
+    "period": "2015 - 2018"
+  },
+  "skills": {
+    "title": "Technical Skills",
+    "categories": {
+      "languages": {
+        "label": "Programming Languages",
+        "value": "Java, TypeScript, JavaScript"
+      },
+      "backend": {
+        "label": "Backend",
+        "value": "NestJS, Node.js, Spring, Spring Boot, REST APIs, WebSocket, Authentication & Authorization"
+      },
+      "frontend": {
+        "label": "Frontend",
+        "value": "React"
+      },
+      "database": {
+        "label": "Database Management Systems",
+        "value": "MongoDB, PostgreSQL, MySQL"
+      },
+      "messaging": {
+        "label": "Messaging & Background Processing",
+        "value": "Apache Kafka, Redis, BullMQ"
+      },
+      "tools": {
+        "label": "Tools",
+        "value": "Git, Docker"
+      }
+    }
+  },
+  "softSkills": {
+    "title": "Soft Skills",
+    "languagesLabel": "Languages",
+    "languagesValue": [
+      "Vietnamese: Native language",
+      "English: Intermediate"
+    ],
+    "teamworkLabel": "Teamwork",
+    "teamworkValue": "Capable of working independently or as part of a team.",
+    "communicationLabel": "Communication",
+    "communicationValue": "Strong communication skills in the workplace."
+  },
+  "nav": {
+    "work": "Work",
+    "resume": "Résumé",
+    "contact": "Contact",
+    "downloadCv": "CV (PDF)"
+  },
+  "projects": {
+    "title": "Projects I Worked On",
+    "intro": "These are products I helped build as part of a team, not personal side projects. Each one is recreated here as an interactive simulation. My role, stack and what I actually built are listed below each demo.",
+    "pillsLabel": "Jump to a project"
+  },
+  "sims": {
+    "common": {
+      "roleLabel": "Role",
+      "stackLabel": "Stack",
+      "outcomeLabel": "Outcome",
+      "hardPartLabel": "The hard part"
+    },
+    "learning": {
+      "name": "Interactive Learning",
+      "productType": "Browser-based learning platform",
+      "role": "Database design · built the hands-on practice applications",
+      "stack": "TypeScript, React, NestJS, MongoDB, Redis, BullMQ, LLM APIs",
+      "outcome": "Learners complete hands-on tasks without installing any software",
+      "ui": {
+        "outlineTitle": "Course outline",
+        "progressLabel": "Progress",
+        "progressUnit": "lessons",
+        "moduleLabel": "Module 1 · C# Fundamentals",
+        "lessons": {
+          "intro": {
+            "title": "Introducing C#",
+            "meta": "Video · 6:24"
+          },
+          "quiz": {
+            "title": "Core concepts",
+            "meta": "Quiz · 1 question"
+          },
+          "fix": {
+            "title": "Fix the Console App",
+            "meta": "Hands-on · 5 min"
+          }
+        },
+        "slides": {
+          "intro": {
+            "title": "Your first C# program",
+            "bullets": [
+              "C# runs on the .NET platform",
+              "Every program starts at the Main() method",
+              "Console.WriteLine() prints a line to the screen",
+              "Every statement ends with a semicolon ;"
+            ],
+            "narration": [
+              "C# is built for the .NET platform. That's the runtime that actually runs your code.",
+              "Every program needs a starting point. In C#, that's the Main() method.",
+              "Want to print something to the screen? Console.WriteLine() is your go-to.",
+              "And don't forget the semicolon. It tells the compiler where one statement ends."
+            ]
+          }
+        },
+        "slideLabel": "Slide",
+        "mnavOutline": "Outline",
+        "mnavLearn": "Learn",
+        "mnavChat": "Leo",
+        "chatName": "Leo",
+        "chatRole": "AI Facilitator",
+        "chatOnline": "Online",
+        "chatGreeting": [
+          "Hi Lucas!",
+          "Welcome to the start of your journey with C# basics.",
+          "I'm Leo. Let's set up your tools and get comfortable with the essentials.",
+          "If you have any questions along the way, just give me a shout."
+        ],
+        "suggestedLabel": "Suggested questions",
+        "qa": {
+          "q1": {
+            "q": "What does Main() do?",
+            "a": "Main() is where your program starts running. Think of it as the front door of a house: when you hit Run, .NET finds Main() and executes it line by line."
+          },
+          "q2": {
+            "q": "Why do lines end with a semicolon?",
+            "a": "The ; tells the compiler a statement is finished, like a full stop at the end of a sentence. Leave one out and the compiler gets confused right away. Try removing one in the hands-on task!"
+          },
+          "q3": {
+            "q": "How does string interpolation work?",
+            "a": "Put a $ before the string, then drop variables inside {curly braces}. For example, $\"Hello, {role}!\" prints the value of role. Much tidier than gluing strings together with +!"
+          }
+        },
+        "msgAfterVideo": "Theory done! Now try the quiz. I know you've got this.",
+        "msgAfterQuiz": "Spot on! Now for the best part: fixing real code in the hands-on task.",
+        "msgAfterFix": "All 3 bugs fixed! You just went through the whole loop: learn, practise and build, all in one tab.",
+        "chatPlaceholder": "Message Leo…",
+        "quizTitle": "Fill in the blanks",
+        "quizParts": [
+          "In C#, the ",
+          " method is the entry point of a program, and Console.",
+          " prints a line to the screen."
+        ],
+        "answerBtn": "Answer",
+        "continueBtn": "Continue",
+        "pointsSuffix": "pts",
+        "correctToast": "Correct! +50 pts",
+        "taskTitle": "Your task",
+        "taskDesc": "The program below has 3 bugs. Click a red-underlined line, type your fix and press Enter. You'll know right away.",
+        "editHint": "Click a red line to edit · Enter to check · Esc to cancel",
+        "lineOk": "Nailed it! That line is clean now.",
+        "lineBad": "Not quite. Check the hints in the check panel and try again.",
+        "submitBtn": "Submit task",
+        "checksTitle": "Check results",
+        "checks": [
+          "using System ends with ;",
+          "Variable declaration ends with ;",
+          "Interpolated string has the $ prefix"
+        ],
+        "submitSuccess": "All 3 checks passed. Lesson complete!",
+        "submitFail": "Not yet. Fix the lines that are still underlined and submit again.",
+        "captionBtnLabel": "Toggle captions"
+      },
+      "hardPart": "Grading hands-on work without a real toolchain. Moving the environment into the browser removes the install barrier, but it also removes the compiler that would normally decide whether an answer is right, so evaluation moves to LLM APIs scoring against predefined criteria"
+    },
+    "meeting": {
+      "name": "Meeting",
+      "productType": "Browser-based meeting platform with an AI layer",
+      "role": "Database design · AI features (near-realtime captions, translation, summaries) · UI/UX",
+      "stack": "TypeScript, NestJS, React, LiveKit, Deepgram, LLM APIs, MongoDB",
+      "outcome": "Leave every meeting with captions, translations and an AI-generated summary. No manual notes",
+      "ui": {
+        "lobbyTitle": "Ready to join?",
+        "cameraOff": "Camera is off",
+        "aiHint": "AI is ready: near-realtime captions · translation · meeting summary",
+        "joinBtn": "Join now",
+        "you": "You",
+        "micBtn": "Mic",
+        "camBtn": "Camera",
+        "translateBtn": "Translate",
+        "leaveBtn": "Leave",
+        "tabChat": "Chat",
+        "tabPeople": "People",
+        "tabSummary": "Summary",
+        "chatMessage": "Here's the beta link: app.example/beta-42",
+        "chatPlaceholder": "Type a message…",
+        "dialogue": {
+          "l1": {
+            "text": "Are we still on track to release the mobile beta this Friday?",
+            "from": "EN"
+          },
+          "l2": {
+            "text": "Yes, the build is stable. Only the sign-in bug is left.",
+            "from": "EN"
+          },
+          "l3": {
+            "text": "I'll fix the sign-in bug today.",
+            "from": "VI"
+          },
+          "l4": {
+            "text": "Great. Let's meet again on Monday to review the beta feedback.",
+            "from": "EN"
+          }
+        },
+        "summarizeBtn": "Summarize meeting",
+        "summaryTitle": "AI-generated summary",
+        "summaryBullets": [
+          "Mobile beta confirmed for release this Friday.",
+          "David will fix the remaining sign-in bug today.",
+          "Follow-up meeting on Monday to review beta feedback."
+        ],
+        "dataNote": "Meeting data is processed only to generate the summary and is deleted when the meeting ends."
+      },
+      "hardPart": "Captions cannot be instant and accurate at the same time. Speech-to-text, translation and rendering each add latency, and waiting for more audio buys accuracy at the cost of lag, so the pipeline is tuned for near-realtime rather than realtime"
+    },
+    "haloki": {
+      "name": "Haloki",
+      "productType": "Cross-border money transfer app",
+      "role": "Contributed to the initial product and technical design · database schema design · APIs integrating Plaid for bank-account connectivity and financial workflows",
+      "stack": "Java, Spring, MongoDB, Plaid, Stripe",
+      "outcome": "Funds collected in the US are paid out from local VND liquidity, so recipients don't have to wait for the ACH debit to settle",
+      "ui": {
+        "appName": "Haloki",
+        "back": "Back",
+        "close": "Close",
+        "balanceLabel": "Available balance",
+        "transferTitle": "Transfer Money",
+        "transferCaption": "From your bank",
+        "sendTitle": "Send Money",
+        "sendCaption": "To Vietnam",
+        "activityTitle": "Activity",
+        "activityEmpty": "Nothing here yet.",
+        "accountsTitle": "Linked accounts",
+        "linkAnother": "Link another bank",
+        "checking": "Checking",
+        "lockedLinkTitle": "Link a bank account",
+        "lockedLinkBody": "Connect a bank account with Plaid before you can add or send money.",
+        "lockedLinkBtn": "Link bank account",
+        "lockedBalanceTitle": "Not enough balance",
+        "lockedBalanceBody": "Your balance is {balance}. You need at least {min} to send.",
+        "lockedBalanceBtn": "Add money",
+        "plaidBrand": "Plaid",
+        "plaidStep1": "Select your bank",
+        "plaidStep2": "Confirm the account",
+        "plaidIntro": "Haloki uses Plaid to connect your bank account.",
+        "plaidConnect": "Connect",
+        "toastLinked": "Linked {account}",
+        "fromLabel": "From",
+        "amountLabel": "Amount",
+        "feeLabel": "Service fee",
+        "feeInfoLabel": "Show the service fee breakdown",
+        "feeHaloki": "Haloki fee",
+        "feeHalokiNote": "Covers bank verification, balance checks, and ledger.",
+        "feeAch": "ACH fee",
+        "feeAchNote": "Cost of the bank transfer network.",
+        "feeShort": "Fee",
+        "feeFree": "Free",
+        "creditedLabel": "Credited to your balance",
+        "arrivesLabel": "Arrives",
+        "arrivesValue": "Available now · ACH settles in {days} business days",
+        "addMoneyBtn": "Add money",
+        "errMin": "Minimum is {min}",
+        "errMax": "Daily ACH limit is {max}",
+        "errBalance": "You only have {available} available",
+        "errBankBalance": "Your bank account has {available} available",
+        "balanceChecking": "Checking balance with Plaid",
+        "balanceAvailable": "Available balance · {amount}",
+        "youSendLabel": "You send",
+        "rateLabel": "Rate",
+        "rateNote": "indicative demo rate",
+        "recipientGetsLabel": "Recipient gets",
+        "recipientGotLabel": "Recipient got",
+        "purposeLabel": "Purpose",
+        "purposeValue": "Family support",
+        "continueBtn": "Continue",
+        "recipientTitle": "Recipient",
+        "bankLabel": "Bank",
+        "accountNumberLabel": "Account number",
+        "accountHolderLabel": "Account holder",
+        "reviewTitle": "Review",
+        "toLabel": "To",
+        "rateLockLabel": "Rate locked for",
+        "confirmBtn": "Confirm and send",
+        "statusTitle": "Transaction",
+        "txAdded": "Added",
+        "txSent": "Sent",
+        "addedRow": "Added money",
+        "sentRow": "Sent to {name}",
+        "statusCompleted": "Completed",
+        "statusPending": "Pending",
+        "statusSending": "Sending",
+        "settlesIn": "settles in {days} business days",
+        "referenceLabel": "Reference",
+        "stepAuthorised": "Authorised via Plaid",
+        "stepCredited": "Balance credited",
+        "stepSettles": "ACH settles",
+        "stepSubmitted": "Submitted",
+        "stepConverted": "Converted USD to VND",
+        "stepPaidOut": "Paid out",
+        "timeJustNow": "just now",
+        "timeInDays": "in {days} business days",
+        "recipientNoticeLabel": "Recipient's notification",
+        "recipientNotice": "Đã nhận {amount}",
+        "flowTitle": "Money flow",
+        "flowBankLabel": "US bank",
+        "flowBankIdle": "Not linked",
+        "flowBankMeta": "Authorised through Plaid",
+        "flowAchLabel": "ACH debit",
+        "flowAchIdle": "No debit yet",
+        "flowAchMeta": "In flight · settles in {days} business days",
+        "flowWalletLabel": "Haloki balance",
+        "flowWalletIdle": "Not funded",
+        "flowWalletMeta": "Credited immediately, not on ACH",
+        "flowPayoutLabel": "VND payout",
+        "flowPayoutIdle": "No payout yet",
+        "flowPayoutMetaSending": "Paying out",
+        "flowPayoutMeta": "From local VND liquidity",
+        "flowNoteIdle": "Fund the wallet, then send, to watch the money move leg by leg.",
+        "flowNoteSettling": "The recipient has been paid from local VND liquidity. The ACH debit still has {days} business days to settle."
+      },
+      "hardPart": "An ACH debit takes days to settle, but the recipient should not wait days for the money. Paying out from local VND liquidity decouples the payout leg from the funding leg, and moves the settlement risk onto the platform"
+    },
+    "fanout": {
+      "name": "Hahalolo Social Network",
+      "productType": "Social network news feed",
+      "role": "Implemented the fan-out-on-write mechanism for the news feed: the Kafka consumer that expands one feed record into a distribution record per follower",
+      "stack": "Java, Spring, Apache Kafka, Kafka Connect, MongoDB",
+      "outcome": "A timeline is one indexed read per user, and a post's like count is one record to update rather than one per follower",
+      "ui": {
+        "appName": "Hahalolo",
+        "ownerName": "David",
+        "ownerHandle": "@david",
+        "followersLabel": "followers",
+        "composerLabel": "What's on your mind?",
+        "defaultPost": "Rebuilt the news feed pipeline this week. First post from the new composer.",
+        "publishBtn": "Publish",
+        "deleteBtn": "Delete post",
+        "timeJustNow": "just now",
+        "liveTag": "Distributed",
+        "distributingTag": "Distributing",
+        "clearingTag": "Deleting",
+        "boardTitle": "Fan-out on write",
+        "capPrev": "Previous note",
+        "capNext": "Next note",
+        "summaryFeed": "1 feed record",
+        "summaryRows": "distribution records",
+        "board": {
+          "post": "post",
+          "postTag": "what David wrote",
+          "feed": "feed",
+          "feedTag": "one per post",
+          "kafka": "Kafka",
+          "kafkaTag": "event stream",
+          "consumer": "fan-out consumer",
+          "consumerTag": "expands the follower list",
+          "cloud": "David's followers",
+          "postTagDel": "David deleted the post",
+          "feedLikes": "likes",
+          "feedComments": "comments"
+        },
+        "caps": {
+          "idle": "Publish David's post and watch it reach his followers.",
+          "p1": "The post is written. One record, holding what David wrote.",
+          "p2": "A feed record is created from it. One per post, and the only copy that ever changes, so the distribution records below never have to be rewritten.",
+          "p3": "The change becomes an event on Kafka.",
+          "p4": "A consumer picks the event up and loads David's follower list.",
+          "p5": "Every follower gets their own distribution record, written in batches of 500. That is fan-out on write: pay once here, so reading a timeline is cheap forever.",
+          "p6": "Likes and comments only update the feed record. The distribution records below are never rewritten.",
+          "d1": "David deletes the post. The delete is published as an event and travels the same pipeline.",
+          "d2": "The consumer removes every follower's distribution record first.",
+          "d3": "Then the feed record.",
+          "d4": "And last the post itself."
+        }
+      },
+      "hardPart": "Fan-out on write trades write amplification for read simplicity. The alternative, fan-out on read, turns every timeline into N queries"
+    }
+  },
+  "hero": {
+    "positioning": "I am a Software Engineer with experience in frontend and backend development. I have worked on microservice systems, transaction flows, and message queues that keep data in sync across services. I am currently on an international team, integrating AI into products in the education domain, and using AI in my daily work to be more productive.",
+    "meta": [
+      "Software Engineer",
+      "Ho Chi Minh City",
+      "Vietnamese native · English intermediate"
+    ],
+    "ctaWork": "See what I built",
+    "ctaCv": "Download CV (PDF)",
+    "skillsLabel": "Experience with",
+    "skills": [
+      "Java",
+      "Spring",
+      "TypeScript",
+      "NestJS",
+      "React",
+      "Node.js",
+      "Apache Kafka",
+      "Redis",
+      "BullMQ",
+      "MongoDB",
+      "PostgreSQL",
+      "Elasticsearch",
+      "WebSocket",
+      "LLM APIs",
+      "Docker"
+    ]
+  },
+  "capabilities": {
+    "items": {
+      "fullstack": {
+        "label": "Full-stack product",
+        "detail": "A web-based learning platform for several different training programs, with the simulated apps each one needs — coding, SQL, spreadsheet — plus built-in AI Q&A.",
+        "project": "Interactive Learning"
+      },
+      "events": {
+        "label": "Event-driven systems",
+        "detail": "Fan-out on write for a social feed, and a Kafka pipeline indexing MongoDB into Elasticsearch.",
+        "project": "Hahalolo Social Network"
+      },
+      "realtime": {
+        "label": "Near-realtime AI",
+        "detail": "Near-realtime captions and translation over LiveKit and Deepgram, with an AI summary on demand at any point in the call.",
+        "project": "Meeting"
+      },
+      "fintech": {
+        "label": "Financial integrations",
+        "detail": "Plaid bank connectivity, plus building and maintaining the ACH funding and payout flows.",
+        "project": "Haloki"
+      }
+    }
+  },
+  "resume": {
+    "title": "Résumé",
+    "hint": "The PDF is generated through your browser's print dialog, optimised for A4.",
+    "download": "Download CV (PDF)"
+  }
+}

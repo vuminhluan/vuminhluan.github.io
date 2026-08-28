@@ -1,0 +1,25 @@
+{
+  "name": "vu-minh-luan-resume",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build:html": "node scripts/build-html.js",
+    "build:css": "tailwindcss -i ./assets/tailwind/input.css -o ./assets/css/style.css --minify",
+    "build": "npm run build:html && npm run build:css",
+    "watch:html": "nodemon --watch layout --watch data --watch locales --ext pug,json --exec \"npm run build:html\"",
+    "watch:css": "tailwindcss -i ./assets/tailwind/input.css -o ./assets/css/style.css --watch",
+    "serve": "browser-sync start --server . --files \"index.html,vi.html,assets/css/style.css,assets/js/**/*.js,assets/img/**/*\" --no-ui --no-notify",
+    "dev": "npm run build && concurrently -k -n html,css,server \"npm:watch:html\" \"npm:watch:css\" \"npm:serve\"",
+    "test": "node --test tests/*.test.js"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "browser-sync": "^3.0.4",
+    "concurrently": "^10.0.5",
+    "nodemon": "^3.1.14",
+    "pug": "^3.0.4",
+    "tailwindcss": "^4.3.3"
+  }
+}

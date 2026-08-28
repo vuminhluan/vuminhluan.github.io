@@ -1,0 +1,36 @@
+//- The merged Work section's table of contents, rendered twice (D15, §13).
+//-
+//- Same four destinations, two forms: the card grid, which carries the claim,
+//- and the pill bar, which takes over once the grid has scrolled away so no
+//- simulation is ever more than one click from any other.
+//-
+//- Order matches the order the simulations render in. It has to: the pill bar
+//- is a scroll-spy, and a spy whose order disagrees with the document lights up
+//- 1 -> 4 -> 2 -> 3 on the way down, which reads as a bug.
+
+- const caps = [{ key: 'fullstack', href: '#sim-learning' }, { key: 'realtime', href: '#sim-meeting' }, { key: 'fintech', href: '#sim-haloki' }, { key: 'events', href: '#sim-fanout' }]
+
+ul#work-cards(class="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4")
+  each cap in caps
+    li(class="min-w-0")
+      a.cap-card(href=cap.href)
+        h3(class="text-sm font-bold text-resume-ink")= t(`capabilities.items.${cap.key}.label`)
+        p(class="mt-2 text-[13px] leading-relaxed text-resume-body")= t(`capabilities.items.${cap.key}.detail`)
+        //- No margin/padding utilities here: .cap-card-link needs
+        //- margin-top:auto to push itself to the bottom of every card, and a
+        //- utility like mt-4 would outrank it (utilities beat components).
+        span.cap-card-link(class="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-resume-muted")
+          span= t(`capabilities.items.${cap.key}.project`)
+          svg.cap-card-arrow(viewBox="0 0 12 12", width="10", height="10", fill="none", stroke="currentColor", stroke-width="1.8", aria-hidden="true")
+            path(d="M6 2v8M2.5 6.5 6 10l3.5-3.5", stroke-linecap="round", stroke-linejoin="round")
+
+//- Fixed rather than sticky. A sticky bar has to occupy a row in the flow, so
+//- while it is hidden that row is dead space between the cards and the first
+//- simulation. Fixed costs no layout, and main.js is what decides when it is
+//- on screen. With JS off it simply never appears and the grid above remains
+//- the way in — no broken affordance.
+nav#work-pills.work-pills(aria-label=t('projects.pillsLabel'))
+  ul.work-pills-row
+    each cap in caps
+      li
+        a.work-pill(href=cap.href, data-pill=cap.href)= t(`capabilities.items.${cap.key}.project`)

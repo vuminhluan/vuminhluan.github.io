@@ -1,0 +1,41 @@
+//- Chapter 3 · The record, at screen density.
+//- The full A4 CV still renders for print; this is the same locale data laid
+//- out for scanning. Three things are deliberately absent, because the page
+//- already carried them and repeating them is what made the old CV block read
+//- as duplication: the name and contact header (the hero), the professional
+//- summary (the hero positioning line), and the skills list (the hero chips).
+//- Nothing is dropped from the printed CV.
+
+- const jobs = ['mvp', 'hahaloloBackend', 'hahaloloFrontend', 'angel']
+
+div(class="space-y-10")
+  section
+    h3(class="text-[11px] font-bold uppercase tracking-widest text-resume-muted")= t('experience.title')
+    ol(class="mt-5 space-y-8 border-l border-resume-line pl-5 sm:mt-6 sm:space-y-10 sm:border-l-0 sm:pl-0")
+      each id in jobs
+        li(class="relative sm:grid sm:grid-cols-[minmax(0,10rem)_minmax(0,1fr)] sm:gap-8")
+          span.tl-dot(aria-hidden="true", class="sm:hidden")
+          div(class="text-xs text-resume-muted sm:pt-1")
+            p(class="font-bold text-resume-ink")= t(`experience.items.${id}.period`)
+            p(class="mt-0.5")= t(`experience.items.${id}.location`)
+          div(class="mt-3 min-w-0 sm:mt-0")
+            h4(class="text-base font-extrabold tracking-tight text-resume-ink")= t(`experience.items.${id}.role`)
+            p(class="mt-0.5 text-sm font-semibold text-resume-body")= t(`experience.items.${id}.company`)
+            p(class="mt-2 text-xs leading-relaxed text-resume-muted")
+              span(class="font-bold uppercase tracking-wider")= `${t('experience.technologiesLabel')} · `
+              span= t(`experience.items.${id}.technologies`)
+            ul(class="mt-3 space-y-2 text-[13px] leading-relaxed text-resume-body")
+              each bullet in tl(`experience.items.${id}.bullets`)
+                li(class="relative pl-4")
+                  span(aria-hidden="true", class="absolute left-0 top-[0.55em] h-1 w-1 rounded-full bg-resume-line")
+                  = bullet
+
+  section
+    h3(class="text-[11px] font-bold uppercase tracking-widest text-resume-muted")= t('education.title')
+    div(class="mt-5 sm:grid sm:grid-cols-[minmax(0,10rem)_minmax(0,1fr)] sm:gap-8")
+      div(class="text-xs text-resume-muted sm:pt-1")
+        p(class="font-bold text-resume-ink")= t('education.period')
+        p(class="mt-0.5")= t('education.location')
+      div(class="mt-2 min-w-0 sm:mt-0")
+        h4(class="text-base font-extrabold tracking-tight text-resume-ink")= t('education.degree')
+        p(class="mt-0.5 text-sm font-semibold text-resume-body")= t('education.school')

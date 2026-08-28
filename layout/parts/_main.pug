@@ -1,90 +1,61 @@
-.main-block.education
-  .title
-    i.main-block-title-icon.mdi.mdi-lightbulb-on
-    | Học vấn
-  .content
-    ul
-      li
-        p
-          span.item-title Cử nhân Cao đẳng CNTT
-          span Tốt nghiệp trường Cao đẳng Kỹ thuật Cao Thắng (2015 - 2018)
-          br
-          span Chuyên ngành: Công nghệ thông tin
-          br
-          span Loại Khá. Điểm trung bình 7.48
-.main-block.experience
-  .title
-    i.main-block-title-icon.mdi.mdi-briefcase
-    | Kinh nghiệm làm việc
-  .content
-    ul
-      li
-        p
-          span.item-title công ty cổ phần giải pháp công nghệ SIGNIN
-          span Thực tập sinh: Tháng 01/2018 - Tháng 03/2018
-          br
-          span Công việc:
-          br
-          span &nbsp; Thiết kế web (HTML/CSS, Javascript)
-          br
-          span &nbsp; Lập trình web PHP
-      li
-        p
-          span.item-title Công ty TNHH Truyền Thông ANGEL
-          span Nhân viên lập trình web: Tháng 10/2018 - Tháng 07/2019
-          br
-          span Công việc:
-          br
-          span &nbsp; Thiết kế web (HTML/CSS, Javascript)
-          br
-          span &nbsp; Lập trình website bán hàng PHP (framework Codeigniter)
-.main-block
-  .title
-    i.main-block-title-icon.mdi.mdi-cogs
-    | Kỹ năng
-  .content
-    ul
-      li
-        p
-          span.item-title
-            | Chuyên môn
-          span HTML/CSS, Javascript, PHP
-          br
-          span Bootstrap
-          br
-          span Codeigniter
-      li
-        p
-          span.item-title Ngoại ngữ
-          span Tiếng Anh (Đọc, Viết)
-      li
-        p
-          span.item-title Kỹ năng mềm
-          span Làm việc nhóm, làm việc độc lập
-.main-block.experience
-  .title
-    i.main-block-title-icon.mdi.mdi-run
-    | Hoạt động
-  .content
-    ul
-      li
-        p
-          span.item-title Tham gia cuộc thi olympic tin học cao thắng lần II
-          //- span Tham gia cuộc thi Olympic tin học Cao Thắng lần II
-      li
-        p
-          span.item-title Tham gia hyperspace Python Bootcamp Intek
-          span Tham gia khóa học miễn phí Hyperspace Python Bootcamp Intek
-          br
-          span Lập trình Python căn bản
-          br
-          span Học và làm việc nhóm
-.main-block.experience
-  .title
-    i.main-block-title-icon.mdi.mdi-thumb-up
-    | Sở thích
-  .content
-    ul
-      li
-        p
-          span Nghe nhạc, chơi game
+mixin section(title)
+  section.resume-section(class="mb-8 last:mb-0")
+    h2.section-title(class="mb-3 border-b border-resume-line pb-1 text-sm font-bold uppercase tracking-wider text-resume-ink")= title
+    block
+
+header.resume-header(class="mb-10 border-b border-resume-line pb-6")
+  h1.name(class="text-4xl font-extrabold tracking-tight text-resume-ink sm:text-5xl")= t('identity.name')
+  p.career(class="mt-1 text-lg text-resume-body")= t('identity.career')
+  dl.contact-list(class="mt-4 flex flex-wrap gap-x-6 gap-y-1 text-sm text-resume-body")
+    div
+      span.font-semibold.text-resume-ink= `${t('contact.phoneLabel')}: `
+      span= profile.phone
+    div
+      span.font-semibold.text-resume-ink= `${t('contact.emailLabel')}: `
+      span= profile.email
+    div
+      span.font-semibold.text-resume-ink= `${t('contact.addressLabel')}: `
+      span= t('contact.address')
+
++section(t('summary.title'))
+  p.text-sm.leading-relaxed.text-resume-body(class="text-justify")= t('summary.paragraph')
+
++section(t('experience.title'))
+  each id in ['mvp', 'hahaloloBackend', 'hahaloloFrontend', 'angel']
+    article.experience-item(class="mb-6 last:mb-0")
+      h3.font-bold.uppercase.text-resume-ink(class="text-sm")= t(`experience.items.${id}.company`)
+      p.text-sm.text-resume-body= t(`experience.items.${id}.role`)
+      p.text-sm.text-resume-body= `${t(`experience.items.${id}.location`)} · ${t(`experience.items.${id}.period`)}`
+      ul.mt-2.list-disc.space-y-1.pl-5.text-sm.leading-relaxed.text-resume-body(class="text-justify")
+        li
+          span.font-semibold= `${t('experience.technologiesLabel')}: `
+          span= t(`experience.items.${id}.technologies`)
+        each bullet in tl(`experience.items.${id}.bullets`)
+          li= bullet
+
++section(t('skills.title'))
+  .space-y-2.text-sm
+    each key in ['languages', 'backend', 'frontend', 'database', 'messaging', 'tools']
+      p.text-resume-body
+        span.font-semibold.text-resume-ink= `${t(`skills.categories.${key}.label`)}: `
+        span= t(`skills.categories.${key}.value`)
+
++section(t('softSkills.title'))
+  .space-y-2.text-sm
+    .flex.gap-1
+      span.shrink-0.font-semibold.text-resume-ink= `${t('softSkills.languagesLabel')}:`
+      div
+        each line in tl('softSkills.languagesValue')
+          span.block.text-resume-body= line
+    p.text-resume-body
+      span.font-semibold.text-resume-ink= `${t('softSkills.teamworkLabel')}: `
+      span= t('softSkills.teamworkValue')
+    p.text-resume-body
+      span.font-semibold.text-resume-ink= `${t('softSkills.communicationLabel')}: `
+      span= t('softSkills.communicationValue')
+
++section(t('education.title'))
+  article.education-item
+    h3.font-bold.uppercase.text-resume-ink(class="text-sm")= t('education.school')
+    p.text-sm.text-resume-body= `${t('education.location')} · ${t('education.period')}`
+    p.mt-1.text-sm.text-resume-body= t('education.degree')
