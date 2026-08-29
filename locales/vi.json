@@ -1,6 +1,8 @@
 {
   "meta": {
-    "title": "Vũ Minh Luân | Kỹ sư phần mềm"
+    "title": "Vũ Minh Luân | Kỹ sư phần mềm",
+    "description": "Software Engineer làm cả frontend và backend: microservice, message queue và AI trong sản phẩm. Bốn dự án được tái hiện thành mô phỏng tương tác.",
+    "ogImageAlt": "Vũ Minh Luân, Software Engineer, vuminhluan.github.io"
   },
   "languageSwitcher": {
     "label": "Chọn ngôn ngữ"

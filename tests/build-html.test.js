@@ -41,6 +41,28 @@ test('buildAll renders the stable Vietnamese and English outputs', () => {
         ? /href="\/vi\.html"[^>]*aria-current="page"/
         : /href="\/"[^>]*aria-current="page"/,
     );
+
+    // Link previews. A relative og:image is silently dropped by every scraper,
+    // so the absolute origin is the part worth asserting on.
+    const origin = 'https://vuminhluan.github.io';
+    const card = currentLocale === 'vi' ? 'og-vi.png' : 'og.png';
+    const page = currentLocale === 'vi' ? '/vi.html' : '/';
+    assert.match(html, new RegExp(`og:image" content="${origin}/assets/img/${card}"`));
+    assert.match(html, new RegExp(`twitter:image" content="${origin}/assets/img/${card}"`));
+    assert.match(html, new RegExp(`og:url" content="${origin}${page}"`));
+    assert.match(html, new RegExp(`rel="canonical" href="${origin}${page}"`));
+    assert.match(html, /twitter:card" content="summary_large_image"/);
+    assert.match(html, /og:image:width" content="1200"/);
+    assert.match(html, /og:image:height" content="630"/);
+    assert.match(
+      html,
+      currentLocale === 'vi' ? /og:locale" content="vi_VN"/ : /og:locale" content="en_US"/,
+    );
+  }
+
+  for (const card of ['og.png', 'og-vi.png']) {
+    const file = path.join(projectRoot, 'assets', 'img', card);
+    assert.equal(fs.existsSync(file), true, `${card} is referenced by og:image but missing`);
   }
 });
 

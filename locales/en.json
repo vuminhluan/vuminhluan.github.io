@@ -1,6 +1,8 @@
 {
   "meta": {
-    "title": "Luan Vu Minh | Software Engineer"
+    "title": "Luan Vu Minh | Software Engineer",
+    "description": "Software Engineer working across frontend and backend: microservices, message queues, and AI in products. Four projects rebuilt as interactive simulations.",
+    "ogImageAlt": "Luan Vu Minh, Software Engineer, vuminhluan.github.io"
   },
   "languageSwitcher": {
     "label": "Choose language"
