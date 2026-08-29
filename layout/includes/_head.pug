@@ -1,8 +1,48 @@
+//- Link previews.
+//-
+//- Facebook and LinkedIn read og:*; X reads twitter:* and falls back to og:*.
+//- Emitting both is what makes the three look identical.
+//-
+//- Every URL here is absolute. A relative og:image is silently ignored by all
+//- three scrapers, which is how a page ends up with no card at all — or, as
+//- happened here, with whatever <img> the crawler found first. Before these
+//- tags existed the only image on the page was the AI-facilitator avatar
+//- inside the Interactive Learning simulation, so the preview showed a stock
+//- portrait of someone who is not the author.
+
+- const pagePath = locale === 'vi' ? '/vi.html' : '/'
+- const pageUrl = profile.siteUrl + pagePath
+- const ogImage = profile.siteUrl + (locale === 'vi' ? '/assets/img/og-vi.png' : '/assets/img/og.png')
+
 link(rel="shortcut icon", href="assets/img/favicon/favicon-96x96.png", type="image/png")
+link(rel="canonical", href=pageUrl)
 link(rel="preconnect", href="https://fonts.googleapis.com")
 link(rel="preconnect", href="https://fonts.gstatic.com", crossorigin)
 link(rel="stylesheet", href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap")
-link(rel="alternate", hreflang="en", href="/")
-link(rel="alternate", hreflang="vi", href="/vi.html")
-link(rel="alternate", hreflang="x-default", href="/")
+link(rel="alternate", hreflang="en", href=profile.siteUrl + "/")
+link(rel="alternate", hreflang="vi", href=profile.siteUrl + "/vi.html")
+link(rel="alternate", hreflang="x-default", href=profile.siteUrl + "/")
+
+meta(property="og:type", content="website")
+meta(property="og:site_name", content=t('identity.name'))
+meta(property="og:title", content=t('meta.title'))
+meta(property="og:description", content=t('meta.description'))
+meta(property="og:url", content=pageUrl)
+meta(property="og:image", content=ogImage)
+meta(property="og:image:type", content="image/png")
+//- Declaring the dimensions lets a scraper lay the card out on first pass
+//- instead of waiting to fetch the file, which is the difference between a
+//- large card and a blank one on a cold share.
+meta(property="og:image:width", content="1200")
+meta(property="og:image:height", content="630")
+meta(property="og:image:alt", content=t('meta.ogImageAlt'))
+meta(property="og:locale", content=locale === 'vi' ? 'vi_VN' : 'en_US')
+meta(property="og:locale:alternate", content=locale === 'vi' ? 'en_US' : 'vi_VN')
+
+meta(name="twitter:card", content="summary_large_image")
+meta(name="twitter:title", content=t('meta.title'))
+meta(name="twitter:description", content=t('meta.description'))
+meta(name="twitter:image", content=ogImage)
+meta(name="twitter:image:alt", content=t('meta.ogImageAlt'))
+
 link(rel="stylesheet", href="assets/css/style.css")

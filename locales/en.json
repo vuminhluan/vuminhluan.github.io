@@ -1,6 +1,8 @@
 {
   "meta": {
-    "title": "Luan Vu Minh | Software Engineer"
+    "title": "Luan Vu Minh | Software Engineer",
+    "description": "Software Engineer working across frontend and backend: microservices, message queues, and AI in products. Four projects rebuilt as interactive simulations.",
+    "ogImageAlt": "Luan Vu Minh, Software Engineer, vuminhluan.github.io"
   },
   "languageSwitcher": {
     "label": "Choose language"
@@ -36,7 +38,7 @@
         "bullets": [
           "Designed and developed full-stack workflows for an AI-powered platform providing Software Development, Data Analysis, and Test Analysis programs. Built browser-based practice applications, including a VS Code-style coding environment, SQL Playground, Jira simulation, and Excel exercises, allowing learners to complete hands-on tasks without installing external software. Integrated LLM APIs to generate tasks, evaluate learner submissions, and provide contextual guidance through an AI Facilitator; integrated HeyGen to deliver lessons through an AI Tutor.",
           "Designed the data model and end-to-end workflows for a talent assessment platform serving both candidates and recruiters. Integrated LLM APIs to generate job-specific simulations, evaluate candidate performance against predefined criteria, and provide AI-generated feedback. The platform allows recruiters to assess practical capabilities beyond CVs and filter candidates based on simulation results.",
-          "Developed BitMeet, an internal meeting platform, integrating LiveKit, Deepgram, and LLM APIs for real-time meetings with near-real-time transcription and translation, plus AI-generated summaries."
+          "Developed BitMeet, an internal meeting platform, integrating LiveKit, Deepgram, and LLM APIs for realtime meetings with near-realtime transcription and translation, plus AI-generated summaries."
         ]
       },
       "hahaloloBackend": {
@@ -137,7 +139,7 @@
   },
   "projects": {
     "title": "Projects I Worked On",
-    "intro": "These are products I helped build as part of a team, not personal side projects. Each one is recreated here as an interactive simulation. My role, stack and what I actually built are listed below each demo.",
+    "intro": "These are products I helped build as part of a team, not personal side projects. Each one is recreated here as an interactive simulation. My role, stack, and what I actually built are listed below each demo.",
     "pillsLabel": "Jump to a project"
   },
   "sims": {
@@ -219,7 +221,7 @@
         },
         "msgAfterVideo": "Theory done! Now try the quiz. I know you've got this.",
         "msgAfterQuiz": "Spot on! Now for the best part: fixing real code in the hands-on task.",
-        "msgAfterFix": "All 3 bugs fixed! You just went through the whole loop: learn, practise and build, all in one tab.",
+        "msgAfterFix": "All 3 bugs fixed! You just went through the whole loop: learn, practise, and build, all in one tab.",
         "chatPlaceholder": "Message Leo…",
         "quizTitle": "Fill in the blanks",
         "quizParts": [
@@ -254,7 +256,7 @@
       "productType": "Browser-based meeting platform with an AI layer",
       "role": "Database design · AI features (near-realtime captions, translation, summaries) · UI/UX",
       "stack": "TypeScript, NestJS, React, LiveKit, Deepgram, LLM APIs, MongoDB",
-      "outcome": "Leave every meeting with captions, translations and an AI-generated summary. No manual notes",
+      "outcome": "Leave every meeting with captions, translations, and an AI-generated summary. No manual notes",
       "ui": {
         "lobbyTitle": "Ready to join?",
         "cameraOff": "Camera is off",
@@ -297,7 +299,7 @@
         ],
         "dataNote": "Meeting data is processed only to generate the summary and is deleted when the meeting ends."
       },
-      "hardPart": "Captions cannot be instant and accurate at the same time. Speech-to-text, translation and rendering each add latency, and waiting for more audio buys accuracy at the cost of lag, so the pipeline is tuned for near-realtime rather than realtime"
+      "hardPart": "Captions cannot be instant and accurate at the same time. Speech-to-text, translation, and rendering each add latency, and waiting for more audio buys accuracy at the cost of lag, so the pipeline is tuned for near-realtime rather than realtime"
     },
     "haloki": {
       "name": "Haloki",
@@ -493,7 +495,7 @@
     "items": {
       "fullstack": {
         "label": "Full-stack product",
-        "detail": "A web-based learning platform for several different training programs, with the simulated apps each one needs — coding, SQL, spreadsheet — plus built-in AI Q&A.",
+        "detail": "A web-based learning platform for several different training programs, with the simulated apps each one needs (coding, SQL, spreadsheet) and built-in AI Q&A.",
         "project": "Interactive Learning"
       },
       "events": {

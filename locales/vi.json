@@ -1,6 +1,8 @@
 {
   "meta": {
-    "title": "Vũ Minh Luân | Kỹ sư phần mềm"
+    "title": "Vũ Minh Luân | Kỹ sư phần mềm",
+    "description": "Software Engineer làm cả frontend và backend: microservice, message queue và AI trong sản phẩm. Bốn dự án được tái hiện thành mô phỏng tương tác.",
+    "ogImageAlt": "Vũ Minh Luân, Software Engineer, vuminhluan.github.io"
   },
   "languageSwitcher": {
     "label": "Chọn ngôn ngữ"
@@ -247,7 +249,7 @@
         "submitFail": "Chưa đạt. Hãy sửa những dòng còn gạch đỏ rồi nộp lại.",
         "captionBtnLabel": "Bật/tắt phụ đề"
       },
-      "hardPart": "Chấm bài thực hành khi không có toolchain thật. Đưa môi trường lên trình duyệt gỡ được rào cản cài đặt, nhưng cũng mất luôn trình biên dịch — thứ bình thường quyết định đáp án đúng hay sai. Việc đánh giá vì thế chuyển sang LLM API, chấm theo bộ tiêu chí định sẵn"
+      "hardPart": "Chấm bài thực hành khi không có toolchain thật. Đưa môi trường lên trình duyệt gỡ được rào cản cài đặt, nhưng cũng mất luôn trình biên dịch, thứ bình thường quyết định đáp án đúng hay sai. Việc đánh giá vì thế chuyển sang LLM API, chấm theo bộ tiêu chí định sẵn"
     },
     "meeting": {
       "name": "Meeting",
@@ -297,7 +299,7 @@
         ],
         "dataNote": "Dữ liệu cuộc họp chỉ được xử lý để tạo tóm tắt và sẽ bị xoá khi cuộc họp kết thúc."
       },
-      "hardPart": "Phụ đề không thể vừa tức thì vừa chính xác. Speech-to-text, dịch và render đều cộng thêm độ trễ, mà chờ thêm audio là đổi độ trễ lấy độ chính xác — nên pipeline được chỉnh theo hướng gần thời gian thực, không phải thời gian thực"
+      "hardPart": "Phụ đề không thể vừa tức thì vừa chính xác. Speech-to-text, dịch và render đều cộng thêm độ trễ, mà chờ thêm audio là đổi độ trễ lấy độ chính xác, nên pipeline được chỉnh theo hướng gần thời gian thực, không phải thời gian thực"
     },
     "haloki": {
       "name": "Haloki",
@@ -493,7 +495,7 @@
     "items": {
       "fullstack": {
         "label": "Sản phẩm full-stack",
-        "detail": "Nền tảng học tập trên web phục vụ nhiều chương trình đào tạo khác nhau, với các app giả lập cần cho từng chương trình — coding, SQL, spreadsheet — cùng hỏi đáp AI tích hợp.",
+        "detail": "Nền tảng học tập trên web phục vụ nhiều chương trình đào tạo khác nhau, với các app giả lập cần cho từng chương trình (coding, SQL, spreadsheet) cùng hỏi đáp AI tích hợp.",
         "project": "Interactive Learning"
       },
       "events": {
