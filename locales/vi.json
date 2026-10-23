@@ -19,7 +19,8 @@
     "title": "Liên hệ",
     "line": "Nếu anh/chị muốn trao đổi, email là cách nhanh nhất để liên hệ với tôi.",
     "githubLabel": "GitHub",
-    "linkedinLabel": "LinkedIn"
+    "linkedinLabel": "LinkedIn",
+    "websiteLabel": "Website"
   },
   "summary": {
     "title": "Tóm tắt chuyên môn",
@@ -33,7 +34,7 @@
         "company": "MVP Studio",
         "role": "Kỹ sư phần mềm",
         "location": "Làm việc từ xa",
-        "period": "01/2024 - Hiện tại",
+        "period": "01/2024 - 09/2026",
         "technologies": "TypeScript, React, NestJS, MongoDB, Redis, BullMQ, WebSocket, Docker, LLM APIs",
         "bullets": [
           "Thiết kế và phát triển các luồng xử lý full-stack cho nền tảng học tập ứng dụng AI, cung cấp các chương trình Software Development, Data Analysis và Test Analysis. Xây dựng các ứng dụng thực hành trên trình duyệt, bao gồm môi trường lập trình dạng VS Code, SQL Playground, mô phỏng Jira và bài tập Excel, giúp học viên thực hành mà không cần cài đặt phần mềm ngoài. Tích hợp LLM API để tạo đề bài, đánh giá bài nộp của học viên và hướng dẫn theo ngữ cảnh thông qua AI Facilitator; tích hợp HeyGen để truyền tải bài giảng qua AI Tutor.",
@@ -517,7 +518,6 @@
   },
   "resume": {
     "title": "Sơ yếu lý lịch",
-    "hint": "Bản PDF được tạo qua hộp thoại in của trình duyệt, tối ưu cho khổ A4.",
     "download": "Tải CV (PDF)"
   }
 }

@@ -19,7 +19,8 @@
     "title": "Get in touch",
     "line": "If you would like to talk, email is the fastest way to reach me.",
     "githubLabel": "GitHub",
-    "linkedinLabel": "LinkedIn"
+    "linkedinLabel": "LinkedIn",
+    "websiteLabel": "Website"
   },
   "summary": {
     "title": "Professional Summary",
@@ -33,7 +34,7 @@
         "company": "MVP Studio",
         "role": "Software Engineer",
         "location": "Remote",
-        "period": "Jan 2024 - Present",
+        "period": "Jan 2024 - Sep 2026",
         "technologies": "TypeScript, React, NestJS, MongoDB, Redis, BullMQ, WebSocket, Docker, LLM APIs",
         "bullets": [
           "Designed and developed full-stack workflows for an AI-powered platform providing Software Development, Data Analysis, and Test Analysis programs. Built browser-based practice applications, including a VS Code-style coding environment, SQL Playground, Jira simulation, and Excel exercises, allowing learners to complete hands-on tasks without installing external software. Integrated LLM APIs to generate tasks, evaluate learner submissions, and provide contextual guidance through an AI Facilitator; integrated HeyGen to deliver lessons through an AI Tutor.",
@@ -517,7 +518,6 @@
   },
   "resume": {
     "title": "Résumé",
-    "hint": "The PDF is generated through your browser's print dialog, optimised for A4.",
     "download": "Download CV (PDF)"
   }
 }

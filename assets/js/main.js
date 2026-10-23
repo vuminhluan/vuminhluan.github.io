@@ -1,7 +1,10 @@
 $(document).ready(function () {
 
   $('.js-print-button').on('click', function () {
-    window.print();
+    // Font metrics determine line wrapping and the two-page CV layout.
+    document.fonts.ready.then(function () {
+      window.print();
+    });
   });
 
 });
